@@ -1,0 +1,13 @@
+{
+  "display_name": "Cross-Session Event Relay",
+  "description": "Persistent daemon sidecar that tracks a deduplication cursor in $ANTIGRAVITY_EXECUTABLE_DATA_DIR/cursor.json and delivers follow-up notifications into an active Antigravity conversation via agentapi send-message.",
+  "command": "/usr/bin/python3",
+  "args": [
+    "/Users/<your-user>/.gemini/config/sidecars/cross-session-relay/relay.py"
+  ],
+  "restart_policy": "always",
+  "env": {
+    "PYTHONUNBUFFERED": "1",
+    "RELAY_CURSOR_FILE": "cursor.json"
+  }
+}

@@ -10,7 +10,7 @@ metadata:
 
 ## Purpose
 
-Provide a deterministic, fail-closed verification and cryptographic re-sealing runbook for the Google Antigravity (AGY) SOTA Convergence repository, covering its 17-gate manifest verifier, bounded 12-ADR MADR 4.0.0 ledger, `UPSTREAM.md`/`upstream-map.toml` provenance parity, unit and mutation tests, static security gates, SBOM vulnerability scans, and zero-secret host context scorecard.
+Provide a deterministic, fail-closed verification and cryptographic re-sealing runbook for the Google Antigravity (AGY) SOTA Convergence repository, covering its 18-gate manifest verifier, zero-wrapper AGY plugin pack, bounded 12-ADR MADR 4.0.0 ledger, `UPSTREAM.md`/`upstream-map.toml` provenance parity, unit and mutation tests, static security gates, SBOM vulnerability scans, and zero-secret host context scorecard.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ Provide a deterministic, fail-closed verification and cryptographic re-sealing r
 
 ## Instructions
 
-1. **Verify the sealed manifest twice for determinism (`17/17` `[PASS]`, `exit 0`):**
+1. **Verify the sealed manifest twice for determinism (`18/18` `[PASS]`, `exit 0`):**
    ```bash
    python3 scripts/verify_manifest.py --verify
    python3 scripts/verify_manifest.py --verify
@@ -29,7 +29,7 @@ Provide a deterministic, fail-closed verification and cryptographic re-sealing r
    ```bash
    python3 scripts/verify_manifest.py --seal
    ```
-2. **Run the complete stdlib `unittest` suite (hooks, handoff, host-shim contract, live manifest, 15 adversarial mutations, and scorecard):**
+2. **Run the complete stdlib `unittest` suite (hooks, handoff, host-shim contract, plugin pack contract, live manifest, 17 adversarial mutations, and scorecard):**
    ```bash
    python3 -m unittest discover -s tests -v
    ```
@@ -42,11 +42,12 @@ Provide a deterministic, fail-closed verification and cryptographic re-sealing r
    zizmor --offline .github/workflows/
    gitleaks git --redact . && gitleaks detect --no-git --redact --source .
    ```
-4. **Run keyless SkillEvaluator Tier 1, Syft CycloneDX SBOM -> OSV-Scanner, and read-only host context scorecard:**
+4. **Run keyless SkillEvaluator Tier 1, Syft CycloneDX SBOM -> OSV-Scanner, read-only host context scorecard, and native AGY plugin validation:**
    ```bash
    skillevaluator tier1 .agents/skills/sota-convergence-audit --no-llm --output-dir /tmp/se-tier1
    syft dir:. -o cyclonedx-json=/tmp/sbom.cdx.json && osv-scanner scan source -L /tmp/sbom.cdx.json
    python3 scripts/audit_ecosystem_hygiene.py --json --strict
+   agy plugin validate --strict --json plugins/agy-sota-practice
    ```
    Remove the temporary `/tmp/sbom.cdx.json` and `/tmp/se-tier1` artifacts once reviewed.
 5. **Validate and strictly build the Zensical MADR 4.0.0 documentation portal:**
@@ -61,7 +62,7 @@ Provide a deterministic, fail-closed verification and cryptographic re-sealing r
 ```bash
 python3 scripts/verify_manifest.py --seal
 python3 scripts/verify_manifest.py --verify
-# Expected: CHECKS : 17/17 passed | RESULT : VERIFIED PASS
+# Expected: CHECKS : 18/18 passed | RESULT : VERIFIED PASS
 ```
 
 ### Example 2: Inspecting the zero-secret startup context scorecard

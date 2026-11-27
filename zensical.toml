@@ -1,6 +1,6 @@
 [project]
 site_name = "AGY SOTA Convergence Portal"
-site_description = "Bounded 12-ADR MADR 4.0.0 architecture, disjoint L0-L10 upstream-only convergence stack, GitHub SOTA workflows, and SHA-256 sealed compounding manifest (v3.1.0)."
+site_description = "Bounded 12-ADR MADR 4.0.0 architecture, disjoint L0-L10 upstream-only convergence stack, zero-wrapper AGY plugin pack, GitHub SOTA workflows, and SHA-256 sealed compounding manifest (v3.2.0)."
 docs_dir = "docs"
 site_dir = "site"
 nav = [
@@ -10,12 +10,13 @@ nav = [
     { "AGY Surfaces & Changelogs" = "agy-surfaces-and-changelogs.md" },
     { "Cross-Session & AGY Operational Practice" = "cross-session-and-agy-practice.md" },
     { "Ecosystem & Frameworks Matrix" = "ecosystem-frameworks-matrix.md" },
+    { "AGY Harness Frameworks & Full Landscape" = "agy-harness-frameworks-and-full-landscape.md" },
     { "Disjoint L0-L10 Convergence Stack" = "convergence-stack.md" },
     { "Compounding Flywheel & KPIs" = "compounding-flywheel.md" },
     { "Clean Upstream Install Registry" = "clean-install-registry.md" },
     { "Context & Manifest Audit" = "context-manifest-audit.md" },
     { "GitHub SOTA Workflows" = "github-sota-workflows.md" },
-    { "Sealed Manifest v3.1 Guide" = "manifest-guide.md" },
+    { "Sealed Manifest v3.2 Guide" = "manifest-guide.md" },
   ] },
   { "Architecture Decision Records (ADRs)" = [
     { "ADR Catalog (12 Bounded ADRs)" = "adrs/CATALOG.md" },

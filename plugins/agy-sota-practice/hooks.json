@@ -1,0 +1,41 @@
+{
+  "sota-practice-fail-closed-opt-in": {
+    "enabled": false,
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ./scripts/pre_tool_fail_closed.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "sota-practice-continuity-opt-in": {
+    "enabled": false,
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "python3 ./scripts/cross_session_hooks.py session-start",
+        "timeout": 10
+      }
+    ],
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "python3 ./scripts/cross_session_hooks.py pre-invocation",
+        "timeout": 10
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python3 ./scripts/cross_session_hooks.py stop",
+        "timeout": 10
+      }
+    ]
+  }
+}

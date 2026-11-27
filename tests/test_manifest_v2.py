@@ -1,6 +1,6 @@
-"""Stdlib unittest suite for the 17-gate SOTA Convergence Manifest sealer & verifier.
+"""Stdlib unittest suite for the 18-gate SOTA Convergence Manifest sealer & verifier.
 
-Tests live 17/17 verification on the sealed repository manifest plus 15 isolated
+Tests live 18/18 verification on the sealed repository manifest plus 17 isolated
 temp-directory adversarial mutations that must all fail closed (exit code 1),
 and isolated zero-secret host ecosystem hygiene scorecard validation.
 """
@@ -44,7 +44,7 @@ def _run_quiet(fn: Any, *args: Any, **kwargs: Any) -> tuple[int, str]:
 
 
 class TestCompoundingManifestV2(unittest.TestCase):
-    """Verify live 17/17 pass, 15 isolated adversarial mutation rejections, and scorecard."""
+    """Verify live 18/18 pass, 17 isolated adversarial mutation rejections, and scorecard."""
 
     def _copy_repo_to_temp(self) -> tuple[tempfile.TemporaryDirectory[str], Path, Path, Path]:
         td = tempfile.TemporaryDirectory()
@@ -57,6 +57,8 @@ class TestCompoundingManifestV2(unittest.TestCase):
             ".gitignore",
             "orca.yaml",
             "Makefile",
+            "pyproject.toml",
+            "mise.toml",
             "UPSTREAM.md",
             "upstream-map.toml",
             "zensical.toml",
@@ -66,6 +68,7 @@ class TestCompoundingManifestV2(unittest.TestCase):
         shutil.copytree(REPO_ROOT / ".agents", troot / ".agents", ignore=ignore)
         shutil.copytree(REPO_ROOT / ".github", troot / ".github", ignore=ignore)
         shutil.copytree(REPO_ROOT / "docs", troot / "docs", ignore=ignore)
+        shutil.copytree(REPO_ROOT / "plugins", troot / "plugins", ignore=ignore)
         shutil.copytree(REPO_ROOT / "scripts", troot / "scripts", ignore=ignore)
         shutil.copytree(REPO_ROOT / "workflows", troot / "workflows", ignore=ignore)
         (troot / "manifest").mkdir(parents=True, exist_ok=True)
@@ -75,10 +78,10 @@ class TestCompoundingManifestV2(unittest.TestCase):
         shutil.copy2(vm.DEFAULT_SCHEMA, tmp_schema)
         return td, troot, tmp_manifest, tmp_schema
 
-    def test_00_live_manifest_passes_17_of_17_gates(self) -> None:
+    def test_00_live_manifest_passes_18_of_18_gates(self) -> None:
         rc, out = _run_quiet(vm.run_verify, vm.DEFAULT_MANIFEST, vm.DEFAULT_SCHEMA, REPO_ROOT)
         self.assertEqual(rc, 0, msg=out)
-        self.assertIn("CHECKS    : 17/17 passed", out)
+        self.assertIn("CHECKS    : 18/18 passed", out)
         self.assertIn("RESULT    : VERIFIED PASS", out)
 
     def test_01_tampered_manifest_sha256_fails(self) -> None:
@@ -380,6 +383,85 @@ class TestCompoundingManifestV2(unittest.TestCase):
             rc2, out2 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
             self.assertEqual(rc2, 1, msg=out2)
             self.assertIn("[17][FAIL] repo_scaffolding_and_portal_integrity", out2)
+        finally:
+            td.cleanup()
+
+    def test_17_plugin_contract_violations_fail_gate_18(self) -> None:
+        td, troot, tmp_manifest, tmp_schema = self._copy_repo_to_temp()
+        try:
+            plugin_root = troot / "plugins" / "agy-sota-practice"
+
+            # Mutation A: flip opt-in hooks.json group to enabled=true
+            hooks_path = plugin_root / "hooks.json"
+            orig_hooks = hooks_path.read_text(encoding="utf-8")
+            hooks_path.write_text(
+                orig_hooks.replace('"enabled": false', '"enabled": true', 1), encoding="utf-8"
+            )
+            rc1, out1 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc1, 1, msg=out1)
+            self.assertIn("[18][FAIL] agy_practice_plugin_and_zero_wrapper_contract", out1)
+            hooks_path.write_text(orig_hooks, encoding="utf-8")
+
+            # Mutation B: add forbidden shadow hooks/hooks.json
+            shadow_hooks = plugin_root / "hooks" / "hooks.json"
+            shadow_hooks.parent.mkdir(parents=True, exist_ok=True)
+            shadow_hooks.write_text("{}\n", encoding="utf-8")
+            rc2, out2 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc2, 1, msg=out2)
+            self.assertIn("[18][FAIL] agy_practice_plugin_and_zero_wrapper_contract", out2)
+            shutil.rmtree(shadow_hooks.parent)
+
+            # Mutation C: add forbidden always-on rules/AGENTS.md
+            always_on = plugin_root / "rules" / "AGENTS.md"
+            always_on.write_text("# Bloated always-on rule\n", encoding="utf-8")
+            rc3, out3 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc3, 1, msg=out3)
+            self.assertIn("[18][FAIL] agy_practice_plugin_and_zero_wrapper_contract", out3)
+            always_on.unlink()
+
+            # Mutation D: byte-drift packaged pre_tool_fail_closed.py
+            pkg_hook = plugin_root / "scripts" / "pre_tool_fail_closed.py"
+            orig_hook = pkg_hook.read_text(encoding="utf-8")
+            pkg_hook.write_text(orig_hook + "\n# drift\n", encoding="utf-8")
+            rc4, out4 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc4, 1, msg=out4)
+            self.assertIn("[18][FAIL] agy_practice_plugin_and_zero_wrapper_contract", out4)
+            pkg_hook.write_text(orig_hook, encoding="utf-8")
+
+            # Mutation E: grant write tool to read-only adr-steward subagent
+            steward = plugin_root / "agents" / "adr-steward.md"
+            orig_steward = steward.read_text(encoding="utf-8")
+            steward.write_text(
+                orig_steward.replace("  - send_message", "  - send_message\n  - write_file"),
+                encoding="utf-8",
+            )
+            rc5, out5 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc5, 1, msg=out5)
+            self.assertIn("[18][FAIL] agy_practice_plugin_and_zero_wrapper_contract", out5)
+        finally:
+            td.cleanup()
+
+    def test_18_meta_harness_wrapper_in_config_fails_gate_18(self) -> None:
+        td, troot, tmp_manifest, tmp_schema = self._copy_repo_to_temp()
+        try:
+            pyproj = troot / "pyproject.toml"
+            orig_pyproj = pyproj.read_text(encoding="utf-8")
+            pyproj.write_text(
+                orig_pyproj + "\n# forbidden wrapper: oh-my-claudecode\n", encoding="utf-8"
+            )
+            rc1, out1 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc1, 1, msg=out1)
+            self.assertIn("[18][FAIL] agy_practice_plugin_and_zero_wrapper_contract", out1)
+            pyproj.write_text(orig_pyproj, encoding="utf-8")
+
+            orca_yaml = troot / "orca.yaml"
+            orca_yaml.write_text(
+                orca_yaml.read_text(encoding="utf-8") + "\n# oh-my-antigravity\n",
+                encoding="utf-8",
+            )
+            rc2, out2 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc2, 1, msg=out2)
+            self.assertIn("[18][FAIL] agy_practice_plugin_and_zero_wrapper_contract", out2)
         finally:
             td.cleanup()
 

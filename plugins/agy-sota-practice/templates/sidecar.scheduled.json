@@ -1,0 +1,30 @@
+{
+  "display_name": "Weekday Cross-Session Triage",
+  "description": "Runs every weekday at 9:00 AM America/New_York to inspect failed checks since the last workspace-scoped watermark and write a typed handoff packet.",
+  "builtin": "schedule",
+  "restart_policy": "always",
+  "args": [
+    "CRON_TZ=America/New_York 0 9 * * 1-5",
+    "agentapi",
+    "new-conversation",
+    "--",
+    "In ${repo_dir}, read the prior watermark at ${repo_dir}/.agents/scratch/triage_watermark.json if present, list open pull requests with failing checks via `gh pr list` and `gh pr checks`, skip items already recorded in the watermark, write a schema-valid handoff_packet.json to ${repo_dir}/.agents/scratch/handoff_packet.json, and update ${repo_dir}/.agents/scratch/triage_watermark.json atomically."
+  ],
+  "arguments": [
+    {
+      "key": "repo_dir",
+      "description": "Local Git repository workspace to audit",
+      "workspace_arg": {}
+    }
+  ],
+  "agent_permissions": {
+    "workspace_uris": [
+      "${repo_dir}"
+    ],
+    "access_grants": [
+      "command(gh pr list)",
+      "command(gh pr checks)",
+      "command(git rev-parse)"
+    ]
+  }
+}

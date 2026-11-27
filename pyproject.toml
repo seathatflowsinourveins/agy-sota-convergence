@@ -1,6 +1,6 @@
 [project]
 name = "agy-sota-convergence"
-version = "3.1.0"
+version = "3.2.0"
 description = "Google Antigravity (AGY) SOTA Convergence Architecture, MADR 4.0.0 ADRs, Drop-In Harness Pack & Cryptographically Sealed Compounding Manifest"
 readme = "README.md"
 requires-python = ">=3.12"

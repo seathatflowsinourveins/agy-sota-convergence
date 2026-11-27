@@ -7,6 +7,7 @@ message: >-
   Charter Rule 4 and ADR-0010 strictly forbid live broker bindings in agent code.
 ignores:
   - .agents/scripts/pre_tool_fail_closed.py
+  - plugins/agy-sota-practice/scripts/pre_tool_fail_closed.py
   - tests/**
   - site/**
   - .git/**

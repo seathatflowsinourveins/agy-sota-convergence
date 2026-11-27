@@ -129,7 +129,7 @@ def build_core_gates() -> list[GateSpec]:
     return [
         GateSpec(
             gate_id="manifest_verify",
-            summary="Verify sealed compounding manifest (17 gates)",
+            summary="Verify sealed compounding manifest (18 gates)",
             command="python3 scripts/verify_manifest.py --verify",
         ),
         GateSpec(

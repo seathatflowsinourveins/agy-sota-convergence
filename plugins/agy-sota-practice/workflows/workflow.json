@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "sota-convergence-audit",
+  "description": "Reusable Google Antigravity /run-workflow programmatic audit pipeline for sealed manifest verification, ast-grep structural ban scans, host ecosystem hygiene, unit tests, and strict Zensical portal builds.",
+  "entry": "sota_convergence_audit.py",
+  "args": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "check_host_hygiene": {
+        "type": "boolean",
+        "default": true,
+        "description": "Run the read-only zero-secret local ecosystem hygiene auditor (scripts/audit_ecosystem_hygiene.py --json --strict)."
+      },
+      "run_tests": {
+        "type": "boolean",
+        "default": true,
+        "description": "Execute the full repository stdlib unittest suite (python3 -m unittest discover -s tests -v)."
+      },
+      "strict_portal": {
+        "type": "boolean",
+        "default": false,
+        "description": "Build the static MADR 4.0.0 ADR documentation portal with strict warning checks (zensical build --strict)."
+      }
+    }
+  }
+}

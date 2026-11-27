@@ -7,6 +7,7 @@ message: >-
   and exit 0 instead per ADR-0006 and ADR-0010.
 files:
   - .agents/scripts/*.py
+  - plugins/agy-sota-practice/scripts/*.py
 rule:
   any:
     - all:

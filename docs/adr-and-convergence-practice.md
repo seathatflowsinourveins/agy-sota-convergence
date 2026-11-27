@@ -26,7 +26,7 @@ This guide defines the Architectural Knowledge Management (AKM) doctrine, bounde
 | **AST & ADR MCP Server** | `codebase-memory-mcp==0.12.1` ([GitHub](https://github.com/DeusData/codebase-memory-mcp)) | Exposes tree-sitter call graphs plus `manage_adr` CRUD so coding agents read architectural constraints before editing. |
 | **Hybrid Local Search MCP** | `xerj` `v1.0.0-rc.105` ([GitHub](https://github.com/xerj-org/xerj)) | Single-binary Rust BM25 + kNN index over ADRs, specs, and corpus docs (`xerj autoindex`). |
 | **Bounded ADR Set (`N = 12`)** | `docs/adrs/ADR-0001..ADR-0012.md` | Strict bijection: `ADR-0001` (`META`) + `ADR-0002`..`ADR-0012` <-> `L0`..`L10`, eliminating ADR sprawl and conflicting retrieval noise. |
-| **Cryptographic Sealing** | `scripts/verify_manifest.py` (`17` gates) | Seals canonical manifest SHA-256 and `12/12` ADR file SHA-256 digests byte-for-byte into `manifest/compounding_manifest.v2.json`. |
+| **Cryptographic Sealing** | `scripts/verify_manifest.py` (`18` gates) | Seals canonical manifest SHA-256 and `12/12` ADR file SHA-256 digests byte-for-byte into `manifest/compounding_manifest.v2.json`. |
 
 ### 1.3 Bounded ADR Lifecycle & 5-Artifact Truth-Division Matrix
 
@@ -38,7 +38,7 @@ This guide defines the Architectural Knowledge Management (AKM) doctrine, bounde
 | **`.agents/rules/*.md`** | Path-scoped (`trigger: glob`) or conditional (`trigger: model_decision`) guardrails. | Conditional/hierarchical load. | **`<= 24,000 B`/file**; **`<= 20,000`** est. aggregate tokens. |
 | **`.agents/skills/*/SKILL.md`** | Multi-step procedures, runbooks, scripts & eval fixtures. | Progressive disclosure (`name` + `description <= 1,024` chars). | Gated by `SkillEvaluator` Tiers 1–3 (`skill_lift >= +0.05`). |
 | **`docs/adrs/ADR-0001..0012.md`** | Settled architectural *"why"*, rejected options, executable `### Confirmation`, pinned installs. | Zensical portal, `codebase-memory-mcp` (`manage_adr`), `XERJ`. | Exact `12` ADRs; 7-key frontmatter + 9 MADR 4.0 headings; SHA-256 sealed. |
-| **`manifest/compounding_manifest.v2.json`** | Machine-readable pins, disjoint `L0`–`L10` map, routing, flywheel ratchets, sunsets & seals. | Programmatic CI verification (`scripts/verify_manifest.py --verify`). | Strict Draft 2020-12 schema; `17/17` gates + `12/12` ADR hash parity. |
+| **`manifest/compounding_manifest.v2.json`** | Machine-readable pins, disjoint `L0`–`L10` map, routing, flywheel ratchets, sunsets & seals. | Programmatic CI verification (`scripts/verify_manifest.py --verify`). | Strict Draft 2020-12 schema; `18/18` gates + `12/12` ADR hash parity. |
 
 ---
 
@@ -53,7 +53,7 @@ Bridging **Kitchenham EBSE / PRISMA** systematic reviews ([prisma-statement.org]
 | **C3** | **Zero Unverified Claims / Placeholders** | `unverified_claims == 0`; zero `TBD`, `TODO`, or unpinned version strings in active artifacts. | Gate `[05]` & Gate `[13]` in `scripts/verify_manifest.py`. |
 | **C4** | **Strictly Disjoint Layer Bijection** | `11` layers (`L0`–`L10`), `0` overlaps, `0` gaps, mapped 1:1 to `12` bounded ADRs (`META` + `L0`–`L10`). | Gate `[03]` & Gate `[11]` in `scripts/verify_manifest.py`. |
 | **C5** | **Exhaustive Option Elimination** | Every ADR evaluates `>= 3` concrete options with falsification evidence for rejected alternatives. | MADR 4.0 `Considered Options` & `Pros and Cons` audit across `12/12` ADRs. |
-| **C6** | **Independent Adversarial Verification** | Double `--verify` (`exit 0`) PLUS isolated temp-dir negative-guard mutations (`15/15` exit `1`). | `python3 -m unittest discover -s tests -v`. |
+| **C6** | **Independent Adversarial Verification** | Double `--verify` (`exit 0`) PLUS isolated temp-dir negative-guard mutations (`17/17` exit `1`). | `python3 -m unittest discover -s tests -v`. |
 | **C7** | **Cryptographic Reproducibility** | Canonical UTF-8 sorted-key JSON SHA-256 + `12/12` ADR file SHA-256 parity verified byte-for-byte. | Gate `[10]`, `[12]`, `[14]` in `scripts/verify_manifest.py`. |
 
 ---

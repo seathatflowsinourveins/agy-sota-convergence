@@ -1,0 +1,24 @@
+id: no-wildcard-mcp-bridge-bind-python
+language: python
+severity: error
+message: >-
+  Unauthenticated wildcard network bind ('0.0.0.0') detected in Python server/socket code.
+  Bind local MCP bridges and hook helpers strictly to loopback ('127.0.0.1' or '::1')
+  to prevent CVE-2026-59726 ("RufRoot")-class unauthenticated RCE and secret exfiltration.
+ignores:
+  - tests/**
+  - rules/ast-grep/**
+  - site/**
+  - .git/**
+  - .venv/**
+  - .ruff_cache/**
+rule:
+  any:
+    - pattern: $SOCK.bind(("0.0.0.0", $PORT))
+    - pattern: $SOCK.bind(('0.0.0.0', $PORT))
+    - pattern: HTTPServer(("0.0.0.0", $PORT), $$$ARGS)
+    - pattern: ThreadingHTTPServer(("0.0.0.0", $PORT), $$$ARGS)
+    - pattern: uvicorn.run($$$PRE, host="0.0.0.0", $$$POST)
+    - pattern: uvicorn.run($$$PRE, host='0.0.0.0', $$$POST)
+    - pattern: $APP.run($$$PRE, host="0.0.0.0", $$$POST)
+    - pattern: $APP.run($$$PRE, host='0.0.0.0', $$$POST)

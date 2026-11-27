@@ -1,7 +1,7 @@
 {
   "metadata": {
     "manifest_id": "agy-sota-compounding-convergence-manifest",
-    "manifest_version": "3.1.0",
+    "manifest_version": "3.2.0",
     "schema_version": "2.1.0",
     "as_of_date": "2026-11-26",
     "architecture_doctrine": "upstream_only_zero_self_invention",
@@ -523,7 +523,7 @@
       "canonical_upstream_local": [
         "Antigravity Python SDK native OpenTelemetry GenAI semantic tracing (since `v0.1.5`) + `opentelemetry-sdk==1.45.2` / `opentelemetry-exporter-otlp==1.45.2` / `opentelemetry-semantic-conventions==0.66b2`",
         "AGY CLI `/context` token-category grid, `/usage` quota monitor, and App Project Customizations token breakdown",
-        "Bounded MADR 4.0.0 ADR portal (`zensical==0.1.3`, `zensical.toml`, `N=12` ADRs + `CATALOG.md` + 10 guides) + stdlib-only 17-gate SHA-256 Compounding Convergence Manifest verifier (`scripts/verify_manifest.py --verify`) + `UPSTREAM.md`/`upstream-map.toml` provenance parity + 3 hardened GitHub SOTA workflows + one-command verifier (`scripts/check.sh`) + read-only host hygiene auditor (`scripts/audit_ecosystem_hygiene.py --json`)"
+        "Bounded MADR 4.0.0 ADR portal (`zensical==0.1.3`, `zensical.toml`, `N=12` ADRs + `CATALOG.md` + 11 guides) + stdlib-only 18-gate SHA-256 Compounding Convergence Manifest verifier (`scripts/verify_manifest.py --verify`) + `UPSTREAM.md`/`upstream-map.toml` provenance parity + zero-wrapper AGY plugin pack (`plugins/agy-sota-practice/`) + 3 hardened GitHub SOTA workflows (`harden-runner v2.23.0`) + one-command verifier (`scripts/check.sh` 13/13) + read-only host hygiene auditor (`scripts/audit_ecosystem_hygiene.py --json`)"
       ],
       "canonical_upstream_cloud": [
         "OpenTelemetry GenAI Semantic Conventions (`open-telemetry/semantic-conventions-genai`: `invoke_agent`, `execute_tool`, `invoke_workflow`, W3C `traceparent` in MCP `params._meta`)",
@@ -538,7 +538,7 @@
         "Unsealed, unversioned architecture docs drifting silently from installed pins and model sunsets",
         "Raising token/LOC/rule caps to accommodate bloat instead of pruning or consolidating"
       ],
-      "verification_gate": "Run `bash scripts/check.sh` (12/12 checks PASS, including `python3 scripts/verify_manifest.py --verify` 17/17 PASS and `python3 -m unittest discover -s tests -v` 39/39 OK), verify OTel GenAI span emission on SDK/backend runs, and clear all imminent deprecation alerts."
+      "verification_gate": "Run `bash scripts/check.sh` (13/13 checks PASS, including `python3 scripts/verify_manifest.py --verify` 18/18 PASS, `python3 -m unittest discover -s tests -v` 44/44 OK, and `agy plugin validate --strict --json plugins/agy-sota-practice`), verify OTel GenAI span emission on SDK/backend runs, and clear all imminent deprecation alerts."
     }
   ],
   "cross_session_routing": {
@@ -841,7 +841,7 @@
         ],
         "upstream_complements": [
           "OpenAI Harness Engineering doc-gardening / entropy garbage-collection agents",
-          "Sealed manifest 17-gate CI check (`scripts/verify_manifest.py --verify`) and one-command harness (`scripts/check.sh`)"
+          "Sealed manifest 18-gate CI check (`scripts/verify_manifest.py --verify`) and one-command harness (`scripts/check.sh` 13/13)"
         ],
         "inputs": [
           "Token utilization metrics, sunset calendar, and unused/low-lift customization telemetry"
@@ -1145,7 +1145,7 @@
         "status": "accepted",
         "date": "2026-11-26",
         "owner_agent": "sota-ecosystem",
-        "sha256": "0b6083de609943b12cc3df99b53025ac91dba9b4d1ffeb1176db10bdd21360f3"
+        "sha256": "92e569386c80ff57e4b298da3bb67cb9c11c6c21363b269885f0a76220a5b1ff"
       },
       {
         "id": "ADR-0002",
@@ -1165,7 +1165,7 @@
         "status": "accepted",
         "date": "2026-11-26",
         "owner_agent": "changelogs",
-        "sha256": "c8843a07e6f3b44c5297a8ebbf6b0737ee2084cea7bcee45f2af344fe3c33c47"
+        "sha256": "fc20f780099fa831df8175f2c72701ff576948b8ac698d5b53f98b44cd54aede"
       },
       {
         "id": "ADR-0004",
@@ -1255,7 +1255,7 @@
         "status": "accepted",
         "date": "2026-11-26",
         "owner_agent": "best-practices",
-        "sha256": "97588e32063c145daabbc9fcf2b8ac9d3a5c53415b8951cc3bff54afab945aea"
+        "sha256": "dda89db808e99942cd21e63541b261d48a451eab92ffa4b7ecbf0721d8a22e00"
       }
     ]
   },
@@ -1957,10 +1957,10 @@
         "layer": "L10",
         "upstream_name": "scripts/verify_manifest.py (Python 3 Stdlib)",
         "registry_or_channel": "stdlib",
-        "pinned_version": "Python 3.12+ stdlib (Manifest v3.1.0, 17 gates)",
+        "pinned_version": "Python 3.12+ stdlib (Manifest v3.2.0, 18 gates)",
         "install_command": "Zero external install required; runs natively on standard Python 3 runtime",
         "verify_command": "python3 scripts/verify_manifest.py --verify",
-        "adapter_boundary": "Thin declarative Draft 2020-12 schema, 12-ADR SHA-256 parity, UPSTREAM.md and upstream-map.toml bijection, GitHub 40-char SHA + harden-runner workflow checks, repo scaffolding/portal integrity, anti-bloat hygiene ratchet, and canonical root SHA-256 CI gate",
+        "adapter_boundary": "Thin declarative Draft 2020-12 schema, 12-ADR SHA-256 parity, UPSTREAM.md and upstream-map.toml bijection, GitHub 40-char SHA + harden-runner workflow checks, zero-wrapper AGY plugin pack parity, repo scaffolding/portal integrity, anti-bloat hygiene ratchet, and canonical root SHA-256 CI gate",
         "official_url": "https://json-schema.org/draft/2020-12/schema"
       }
     ]
@@ -1977,13 +1977,16 @@
     "clean_install_layers_covered": 11,
     "independent_verifier_logs": [
       "UPSTREAM.md",
+      "docs/agy-harness-frameworks-and-full-landscape.md",
       "docs/github-sota-workflows.md",
       "docs/manifest-guide.md",
+      "plugins/agy-sota-practice/plugin.json",
       "scripts/audit_ecosystem_hygiene.py",
       "scripts/check.sh",
       "tests/test_hooks_and_handoff.py",
       "tests/test_host_shim_contract.py",
       "tests/test_manifest_v2.py",
+      "tests/test_plugin_pack_contract.py",
       "upstream-map.toml",
       "workflows/sota_convergence_audit.py"
     ],
@@ -2025,6 +2028,7 @@
       "docs/adrs/ADR-0011-L9-adversarial-evals-and-trace-optimization.md",
       "docs/adrs/ADR-0012-L10-telemetry-provenance-and-compounding-manifest.md",
       "docs/adrs/CATALOG.md",
+      "docs/agy-harness-frameworks-and-full-landscape.md",
       "docs/agy-surfaces-and-changelogs.md",
       "docs/clean-install-registry.md",
       "docs/compounding-flywheel.md",
@@ -2039,11 +2043,31 @@
       "manifest/compounding_manifest.v2.schema.json",
       "mise.toml",
       "orca.yaml",
+      "plugins/agy-sota-practice/README.md",
+      "plugins/agy-sota-practice/agents/adr-steward.md",
+      "plugins/agy-sota-practice/agents/sota-auditor.md",
+      "plugins/agy-sota-practice/assets/logo.svg",
+      "plugins/agy-sota-practice/hooks.json",
+      "plugins/agy-sota-practice/plugin.json",
+      "plugins/agy-sota-practice/rules/governance-files-guard.md",
+      "plugins/agy-sota-practice/rules/sota-harness-guardrails.md",
+      "plugins/agy-sota-practice/scripts/cross_session_hooks.py",
+      "plugins/agy-sota-practice/scripts/pre_tool_fail_closed.py",
+      "plugins/agy-sota-practice/skills/adr-madr4-review/SKILL.md",
+      "plugins/agy-sota-practice/skills/cross-session-handoff/SKILL.md",
+      "plugins/agy-sota-practice/skills/sota-practice-audit/SKILL.md",
+      "plugins/agy-sota-practice/templates/handoff_packet.schema.json",
+      "plugins/agy-sota-practice/templates/permissions.baseline.json",
+      "plugins/agy-sota-practice/templates/sidecar.relay.json",
+      "plugins/agy-sota-practice/templates/sidecar.scheduled.json",
+      "plugins/agy-sota-practice/workflows/sota_convergence_audit.py",
+      "plugins/agy-sota-practice/workflows/workflow.json",
       "pyproject.toml",
       "rules/ast-grep/no-deprecated-mcp-sse-or-autogen.yml",
       "rules/ast-grep/no-fail-open-hook-exit.yml",
       "rules/ast-grep/no-live-broker-ports.yml",
       "rules/ast-grep/no-retiring-nov30-models.yml",
+      "rules/ast-grep/no-wildcard-mcp-bridge-bind.yml",
       "scripts/audit_ecosystem_hygiene.py",
       "scripts/check.sh",
       "scripts/verify_manifest.py",
@@ -2051,22 +2075,23 @@
       "tests/test_hooks_and_handoff.py",
       "tests/test_host_shim_contract.py",
       "tests/test_manifest_v2.py",
+      "tests/test_plugin_pack_contract.py",
       "upstream-map.toml",
       "workflows/sota_convergence_audit.py",
       "workflows/workflow.json",
       "zensical.toml"
     ],
     "exit_gate_criteria": [
-      "C1 Live Primary-Source Triangulation: 100% of load-bearing claims, URLs, and 63 package pins verified live against primary specs, arXiv abstracts, and PyPI/npm/NuGet/GitHub registries",
-      "C2 Zero Unresolved Contradictions: unresolved_contradictions == 0 across all 67 tracked files, 12 MADR 4.0.0 ADRs, UPSTREAM.md, upstream-map.toml, GitHub SOTA workflow suite, clean-install registry, harness templates, ast-grep rules, workflows, and manifest blocks",
-      "C3 Zero Unverified Claims or Unpinned Tokens: unverified_claims == 0 and zero unpinned stub or floating-tag version strings across active manifest, UPSTREAM.md, GitHub Actions workflows, registry, and ADRs",
+      "C1 Live Primary-Source Triangulation: 100% of load-bearing claims, URLs, 19-project meta-harness audit, and 63 package pins verified live against primary specs, arXiv abstracts, CVE/GHSA advisories, and PyPI/npm/NuGet/GitHub registries",
+      "C2 Zero Unresolved Contradictions: unresolved_contradictions == 0 across all 89 tracked files, 12 MADR 4.0.0 ADRs, zero-wrapper plugins/agy-sota-practice/, UPSTREAM.md, upstream-map.toml, GitHub SOTA workflow suite, clean-install registry, harness templates, 5 ast-grep rules, workflows, and manifest blocks",
+      "C3 Zero Unverified Claims or Unpinned Tokens: unverified_claims == 0 and zero unpinned stub or floating-tag version strings across active manifest, UPSTREAM.md, GitHub Actions workflows, plugin pack, registry, and ADRs",
       "C4 Strictly Disjoint Layer Bijection: exact 11 layers (L0-L10) with 0 domain overlaps and 1:1 bijection to 12 bounded ADRs (ADR-0001 META + ADR-0002..0012 under docs/adrs/)",
       "C5 Exhaustive Option Elimination: >=3 concrete options per ADR with falsification evidence and 5-question Zero-Self-Invention proof",
-      "C6 Adversarial Verification & 12-Step Unified Harness Proof: bash scripts/check.sh 12/12 PASS covering live 17/17 --verify (double determinism run, incl. UPSTREAM.md 63/63 + upstream-map.toml 5/5 bijection + 3/3 40-char SHA-pinned harden-runner GitHub workflows + repo scaffolding/portal nav integrity) + 39/39 unittest suite (12 hook/handoff + 17 manifest/15-mutation/scorecard + 10 live host-shim contract) + live skillevaluator Tier-1 A 100.0/100 (9/9, 0 HIGH/CRIT) + live syft CycloneDX SBOM & osv-scanner (0 CVEs) + live codebase-memory-mcp AST index + live zensical 0.1.3 strict build (25 HTML pages) + live ast-grep scan + shellcheck 0 findings + 0-finding host hygiene & context_manifest_scorecard + ruff/ty/gitleaks/zizmor(.github/workflows/) 0 errors",
+      "C6 Adversarial Verification & 13-Step Unified Harness Proof: bash scripts/check.sh 13/13 PASS covering live 18/18 --verify (double determinism run, incl. UPSTREAM.md 63/63 + upstream-map.toml 5/5 bijection + 3/3 40-char SHA-pinned harden-runner v2.23.0 GitHub workflows + zero-wrapper plugins/agy-sota-practice/ 8/8 byte parity & zero-wrapper ban + repo scaffolding/portal nav integrity) + 44/44 unittest suite (12 hook/handoff + 19 manifest/17-mutation/scorecard + 3 plugin pack contract + 10 live host-shim contract) + live agy plugin validate --strict --json (0 findings) + live skillevaluator Tier-1 Grade A 100.0/100 across 4/4 skills (9/9, 0 HIGH/CRIT) + live syft CycloneDX SBOM & osv-scanner (0 CVEs) + live codebase-memory-mcp AST index + live zensical 0.1.3 strict build (26 HTML pages) + live ast-grep scan (5 rule files incl. CVE-2026-59726 wildcard-bind ban) + shellcheck 0 findings + 0-finding host hygiene & context_manifest_scorecard + ruff/ty/gitleaks/zizmor(.github/workflows/) 0 errors",
       "C7 Cryptographic Reproducibility & ADR Hash Parity: two consecutive --verify runs exit 0, independent canonical root SHA-256 matches byte-for-byte, and 12/12 docs/adrs/ADR-*.md SHA-256 digests match disk byte-for-byte"
     ],
     "residual_user_delegated_checks": [
-      "RESOLVED AND VERIFIED LIVE (2026-11-26 Phases 5–10): Definitive standalone agy-sota-convergence v3.1.0 repository materialized with 67 tracked files (full GitHub SOTA workflow & governance suite: CODEOWNERS, dependabot.yml, pull_request_template.md, sota-convergence-gates.yml, sota-docs-pages.yml, reusable-agy-sota-practice-gate.yml, docs/github-sota-workflows.md, LICENSE, SECURITY.md, .gitleaks.toml, orca.yaml, Makefile, scripts/check.sh, UPSTREAM.md 63/63, upstream-map.toml 5/5, docs/adrs/CATALOG.md, and 10 comprehensive guides); all 5 workstation security hardening gaps closed fail-closed; global charter trimmed of 4 editorial HTML comments (html_comment_chars=0, 6L/1,062c/~265 tok, -121 tok/turn with all 4 rules verbatim intact); audit_ecosystem_hygiene.py v1.1.0 context_manifest_scorecard PASS (HIGH=0, MEDIUM=0, LOW=0, secrets_accessed=false); 16/17 host CLIs (9/9 mise.toml exact; 17/18 incl. Antigravity.app 2.35.2) at exact registry pins; safe ~/.gemini/antigravity-cli/settings.json model check verified 0 retiring Nov-30 slugs; bash scripts/check.sh 12/12 PASS (17/17 manifest verifier, 39/39 unittest, skillevaluator Grade A 100.0/100, syft+osv-scanner 0 CVEs, shellcheck 0, zensical 0.1.3 strict 25 HTML pages, ast-grep/ruff/ty/gitleaks/zizmor 0); codebase-memory-mcp AST/call-graph index ready",
+      "RESOLVED AND VERIFIED LIVE (2026-11-26 Phases 5–12): Public seathatflowsinourveins/agy-sota-convergence v3.2.0 repository materialized with 89 tracked files (zero-wrapper native AGY plugin pack plugins/agy-sota-practice/ passing agy plugin validate --strict --json with 0 findings, docs/agy-harness-frameworks-and-full-landscape.md, 5 ast-grep rule files incl. no-wildcard-mcp-bridge-bind.yml blocking CVE-2026-59726, full 3-workflow GitHub SOTA suite with harden-runner v2.23.0, UPSTREAM.md 63/63, upstream-map.toml 5/5, docs/adrs/CATALOG.md, and 11 comprehensive guides); all 5 workstation security hardening gaps closed fail-closed; global charter trimmed of 4 editorial HTML comments (html_comment_chars=0, 6L/1,062c/~265 tok); audit_ecosystem_hygiene.py v1.1.0 PASS (0 findings, secrets_accessed=false); bash scripts/check.sh 13/13 PASS (18/18 manifest verifier, 44/44 unittest, 4/4 skillevaluator Grade A 100.0/100, agy plugin validate 0 findings, syft+osv-scanner 0 CVEs, shellcheck 0, zensical 0.1.3 strict 26 HTML pages, ast-grep/ruff/ty/gitleaks/zizmor 0); codebase-memory-mcp AST/call-graph index ready",
       "Private `.env*` / secret config Nov-30 check (strictly user-owned under Charter Rule 4): verify private `.env*` files outside agent read boundaries contain zero Nov-30 retiring model slugs",
       "Orca Desktop app-managed hold (user-owned): `orca` 1.4.277 symlinks to actively running `/Applications/Orca.app/Contents/Resources/bin/orca` and `v1.4.278` ships macOS desktop `.dmg`/`.zip` bundles only; apply via Orca Desktop's in-app updater on next restart"
     ]
@@ -2075,6 +2100,6 @@
     "algorithm": "sha256",
     "canonicalization": "json-utf8-sort-keys-compact",
     "payload_scope": "root_excluding_integrity_sha256",
-    "sha256": "f2efcedfca7c7a14d71f92079a4f3adf3932a684298958fe628aaaf80307c92c"
+    "sha256": "fbd32ced01e0db0e9aebb36a0957a6b7951072512c8e9780de5149d4b8afdbfc"
   }
 }

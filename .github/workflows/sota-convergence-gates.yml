@@ -16,14 +16,14 @@ concurrency:
 
 jobs:
   verify:
-    name: 17-Gate Manifest, Unit Tests, Static & Security Checks
+    name: 18-Gate Manifest, Unit Tests, Static & Security Checks
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: read
     steps:
       - name: Harden runner egress telemetry
-        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
         with:
           egress-policy: audit
 
@@ -50,7 +50,7 @@ jobs:
         with:
           install: true
 
-      - name: Verify sealed manifest (17/17 gates, double determinism run)
+      - name: Verify sealed manifest (18/18 gates, double determinism run)
         run: |
           python3 scripts/verify_manifest.py --verify
           python3 scripts/verify_manifest.py --verify
@@ -79,11 +79,17 @@ jobs:
           gitleaks git --redact .
           gitleaks detect --no-git --redact --source .
 
-      - name: Run SkillEvaluator Tier 1 keyless skill quality & security gate
+      - name: Run SkillEvaluator Tier 1 keyless skill quality & security gate (4/4 skills)
         run: |
           tmp_dir="$(mktemp -d)"
           trap 'rm -rf "$tmp_dir"' EXIT
-          uvx --python 3.13 skillevaluator==1.2.1 tier1 .agents/skills/sota-convergence-audit --no-llm --output-dir "$tmp_dir"
+          for skill_dir in \
+            .agents/skills/sota-convergence-audit \
+            plugins/agy-sota-practice/skills/sota-practice-audit \
+            plugins/agy-sota-practice/skills/adr-madr4-review \
+            plugins/agy-sota-practice/skills/cross-session-handoff; do
+            uvx --python 3.13 skillevaluator==1.2.1 tier1 "$skill_dir" --no-llm --output-dir "$tmp_dir/$(basename "$skill_dir")"
+          done
 
       - name: Generate Syft CycloneDX SBOM and scan with OSV-Scanner
         run: |

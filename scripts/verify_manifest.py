@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Stdlib-only 17-gate sealer and verifier for the SOTA Convergence & Compounding Manifest.
+"""Stdlib-only 18-gate sealer and verifier for the SOTA Convergence & Compounding Manifest.
 
 Usage:
     python3 scripts/verify_manifest.py --seal
     python3 scripts/verify_manifest.py --verify
     python3 scripts/verify_manifest.py --verify --manifest <path> --schema <path> [--repo-root <dir>]
 
-Zero third-party dependencies (Python 3 stdlib only). Exits 0 on full 17/17 pass,
+Zero third-party dependencies (Python 3 stdlib only). Exits 0 on full 18/18 pass,
 and 1 on any schema, semantic, ADR MADR-4, ADR SHA-256 parity, clean-install coverage,
 saturation proof, repo hygiene/anti-bloat ratchet, upstream registry/map parity,
-repo scaffolding/portal integrity, security, sunset, placeholder, or root SHA-256 failure.
+repo scaffolding/portal integrity, native plugin pack/zero-wrapper contract,
+security, sunset, placeholder, or root SHA-256 failure.
 """
 
 from __future__ import annotations
@@ -125,6 +126,90 @@ REQUIRED_REPO_SCAFFOLDING_FILES = (
 WORKFLOW_USES_RE = re.compile(r"^\s*(?:-\s*)?uses:\s*([^\s#]+)")
 WORKFLOW_SHA_PIN_RE = re.compile(r"^[^@\s]+@[0-9a-f]{40}$")
 HARDEN_RUNNER_RE = re.compile(r"step-security/harden-runner@[0-9a-f]{40}\b")
+PLUGIN_ROOT_REL = "plugins/agy-sota-practice"
+PLUGIN_NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
+PLUGIN_ALLOWED_KEYS = {
+    "$schema",
+    "name",
+    "displayName",
+    "version",
+    "description",
+    "logo",
+    "suggestedPrompts",
+    "skills",
+    "disabled",
+    "author",
+    "homepage",
+    "repository",
+    "license",
+    "keywords",
+    "extensions",
+}
+PLUGIN_FORBIDDEN_BRAND_PREFIXES = ("antigravity", "gemini", "claude", "cursor")
+PLUGIN_FORBIDDEN_SHADOW_PATHS = (
+    "hooks/hooks.json",
+    "commands",
+    "AGENTS.md",
+    "GEMINI.md",
+    ".mcp.json",
+    "mcp.json",
+    "mcp_config.json",
+    "sidecars",
+    "rules/AGENTS.md",
+    "rules/GEMINI.md",
+)
+PLUGIN_ALLOWED_RULE_TRIGGERS = {"model_decision", "glob", "manual"}
+PLUGIN_ALLOWED_AGENT_TOOLS = {
+    "view_file",
+    "grep_search",
+    "find_by_name",
+    "list_dir",
+    "run_command",
+    "send_message",
+}
+PLUGIN_SYNC_PAIRS: tuple[tuple[str, str], ...] = (
+    (
+        ".agents/scripts/pre_tool_fail_closed.py",
+        "plugins/agy-sota-practice/scripts/pre_tool_fail_closed.py",
+    ),
+    (
+        ".agents/scripts/cross_session_hooks.py",
+        "plugins/agy-sota-practice/scripts/cross_session_hooks.py",
+    ),
+    (
+        ".agents/schemas/handoff_packet.schema.json",
+        "plugins/agy-sota-practice/templates/handoff_packet.schema.json",
+    ),
+    (
+        ".agents/templates/permissions.baseline.json",
+        "plugins/agy-sota-practice/templates/permissions.baseline.json",
+    ),
+    (
+        ".agents/templates/sidecar.scheduled.json",
+        "plugins/agy-sota-practice/templates/sidecar.scheduled.json",
+    ),
+    (
+        ".agents/templates/sidecar.relay.json",
+        "plugins/agy-sota-practice/templates/sidecar.relay.json",
+    ),
+    (
+        "workflows/workflow.json",
+        "plugins/agy-sota-practice/workflows/workflow.json",
+    ),
+    (
+        "workflows/sota_convergence_audit.py",
+        "plugins/agy-sota-practice/workflows/sota_convergence_audit.py",
+    ),
+)
+BANNED_WRAPPER_RE = re.compile(
+    r"(?i)\b(oh-my-claudecode|oh-my-codex|oh-my-opencode|oh-my-openagent|"
+    r"oh-my-pi|oh-my-antigravity|claude-flow|ruflo|bmad-method)\b"
+)
+HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+WORKSTATION_PATH_RE = re.compile(
+    r"(?:/Users/|/home/|C:\\Users\\)[A-Za-z0-9._-]+/|antigravity/brain/[0-9a-f-]{36}"
+)
+FULL_LANDSCAPE_DOC_TARGET = "agy-harness-frameworks-and-full-landscape.md"
 
 
 def compute_canonical_digest(manifest: dict[str, Any]) -> tuple[str, int]:
@@ -812,6 +897,272 @@ def check_repo_scaffolding_and_portal_integrity(repo_root: Path) -> tuple[str, b
     )
 
 
+def check_agy_practice_plugin_and_zero_wrapper_contract(
+    repo_root: Path,
+) -> tuple[str, bool, str]:
+    """Gate [18] agy_practice_plugin_and_zero_wrapper_contract."""
+    errors: list[str] = []
+    plugin_root = repo_root / PLUGIN_ROOT_REL
+
+    # 18.1 Plugin manifest schema & metadata contract
+    plugin_json_path = plugin_root / "plugin.json"
+    if not plugin_json_path.is_file():
+        errors.append(f"missing {PLUGIN_ROOT_REL}/plugin.json")
+        plugin_meta: dict[str, Any] = {}
+    else:
+        try:
+            raw_meta = json.loads(plugin_json_path.read_text(encoding="utf-8"))
+            if not isinstance(raw_meta, dict):
+                errors.append(f"{PLUGIN_ROOT_REL}/plugin.json must be a JSON object")
+                plugin_meta = {}
+            else:
+                plugin_meta = raw_meta
+        except json.JSONDecodeError as exc:
+            errors.append(f"{PLUGIN_ROOT_REL}/plugin.json invalid JSON: {exc}")
+            plugin_meta = {}
+
+    if plugin_meta:
+        unknown_keys = sorted(set(plugin_meta) - PLUGIN_ALLOWED_KEYS)
+        if unknown_keys:
+            errors.append(f"{PLUGIN_ROOT_REL}/plugin.json has unknown keys: {unknown_keys}")
+        if plugin_meta.get("$schema") != "https://antigravity.google/schemas/v1/plugin.json":
+            errors.append(
+                f"{PLUGIN_ROOT_REL}/plugin.json $schema must be "
+                "'https://antigravity.google/schemas/v1/plugin.json'"
+            )
+        pname = str(plugin_meta.get("name", ""))
+        if not PLUGIN_NAME_RE.match(pname):
+            errors.append(f"{PLUGIN_ROOT_REL}/plugin.json invalid kebab-case name {pname!r}")
+        if any(pname.startswith(prefix) for prefix in PLUGIN_FORBIDDEN_BRAND_PREFIXES):
+            errors.append(f"{PLUGIN_ROOT_REL}/plugin.json name {pname!r} uses forbidden prefix")
+        dname = str(plugin_meta.get("displayName", ""))
+        if not dname:
+            errors.append(f"{PLUGIN_ROOT_REL}/plugin.json missing displayName")
+        else:
+            dlow = dname.lower()
+            if any(dlow.startswith(prefix) for prefix in PLUGIN_FORBIDDEN_BRAND_PREFIXES):
+                errors.append(
+                    f"{PLUGIN_ROOT_REL}/plugin.json displayName {dname!r} uses forbidden prefix"
+                )
+            if dlow.endswith("plugin") or dlow.endswith("mcp"):
+                errors.append(
+                    f"{PLUGIN_ROOT_REL}/plugin.json displayName {dname!r} uses forbidden suffix"
+                )
+        repo_url = plugin_meta.get("repository")
+        if not isinstance(repo_url, str) or not HTTPS_RE.match(repo_url):
+            errors.append(f"{PLUGIN_ROOT_REL}/plugin.json repository must be a plain HTTPS string")
+        logo_rel = str(plugin_meta.get("logo", ""))
+        logo_path = resolve_safe_repo_path(plugin_root, logo_rel)
+        if not logo_rel or logo_path is None or not logo_path.is_file():
+            errors.append(f"{PLUGIN_ROOT_REL}/plugin.json missing bundled logo {logo_rel!r}")
+        prompts = plugin_meta.get("suggestedPrompts")
+        if (
+            not isinstance(prompts, list)
+            or not (1 <= len(prompts) <= 3)
+            or not all(isinstance(p, str) and p.strip() for p in prompts)
+        ):
+            errors.append(
+                f"{PLUGIN_ROOT_REL}/plugin.json suggestedPrompts must have 1..3 non-empty strings"
+            )
+
+    if not (plugin_root / "README.md").is_file():
+        errors.append(f"missing {PLUGIN_ROOT_REL}/README.md")
+
+    # 18.2 Strict native layout & zero shadow / always-on files
+    for forbidden_rel in PLUGIN_FORBIDDEN_SHADOW_PATHS:
+        if (plugin_root / forbidden_rel).exists():
+            errors.append(f"{PLUGIN_ROOT_REL}/{forbidden_rel} is forbidden in native AGY plugin")
+
+    # 18.3 Opt-in root hooks.json contract & executable ./scripts/*.py
+    hooks_path = plugin_root / "hooks.json"
+    hook_group_count = 0
+    if not hooks_path.is_file():
+        errors.append(f"missing root {PLUGIN_ROOT_REL}/hooks.json")
+    else:
+        try:
+            hooks_data = json.loads(hooks_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            errors.append(f"{PLUGIN_ROOT_REL}/hooks.json invalid JSON: {exc}")
+            hooks_data = {}
+        if not isinstance(hooks_data, dict) or not hooks_data:
+            errors.append(f"{PLUGIN_ROOT_REL}/hooks.json must be a non-empty JSON object")
+        else:
+            hook_group_count = len(hooks_data)
+            for gname, gbody in hooks_data.items():
+                if not isinstance(gbody, dict):
+                    errors.append(f"{PLUGIN_ROOT_REL}/hooks.json group {gname!r} must be an object")
+                    continue
+                if gbody.get("enabled") is not False:
+                    errors.append(
+                        f"{PLUGIN_ROOT_REL}/hooks.json group {gname!r} must ship opt-in "
+                        '("enabled": false) to avoid global hook collisions'
+                    )
+            for _path, text in _walk_strings(hooks_data, "hooks"):
+                for sm in re.finditer(r"\./(scripts/[A-Za-z0-9_.-]+\.py)\b", text):
+                    script_rel = sm.group(1)
+                    sp = resolve_safe_repo_path(plugin_root, script_rel)
+                    if sp is None or not sp.is_file():
+                        errors.append(
+                            f"{PLUGIN_ROOT_REL}/hooks.json references missing {script_rel!r}"
+                        )
+                    elif not os.access(sp, os.X_OK):
+                        errors.append(
+                            f"{PLUGIN_ROOT_REL}/{script_rel} must be executable (chmod 0755)"
+                        )
+
+    # 18.4 Progressive rules, Grade-A skills & least-privilege read-only subagents
+    plugin_rules = (
+        sorted((plugin_root / "rules").glob("*.md")) if (plugin_root / "rules").is_dir() else []
+    )
+    if not plugin_rules:
+        errors.append(f"no progressive rules found under {PLUGIN_ROOT_REL}/rules/*.md")
+    for rf in plugin_rules:
+        rtext = rf.read_text(encoding="utf-8")
+        if rf.stat().st_size > RULE_FILE_MAX_BYTES:
+            errors.append(f"{rf.relative_to(repo_root)}: exceeds {RULE_FILE_MAX_BYTES}B")
+        if HTML_COMMENT_RE.search(rtext):
+            errors.append(f"{rf.relative_to(repo_root)}: contains HTML comment")
+        fm, fm_err = parse_yaml_frontmatter(rtext)
+        if fm is None:
+            errors.append(f"{rf.relative_to(repo_root)}: {fm_err}")
+            continue
+        trig = fm.get("trigger")
+        if not isinstance(trig, str) or trig not in PLUGIN_ALLOWED_RULE_TRIGGERS:
+            errors.append(
+                f"{rf.relative_to(repo_root)}: invalid progressive trigger={trig!r} "
+                f"(expected {sorted(PLUGIN_ALLOWED_RULE_TRIGGERS)})"
+            )
+        if trig == "glob":
+            globs_val = fm.get("globs")
+            if not isinstance(globs_val, str) or not globs_val.strip():
+                errors.append(
+                    f"{rf.relative_to(repo_root)}: trigger=glob requires comma-separated "
+                    "string 'globs:', not a YAML array"
+                )
+
+    plugin_skills = (
+        sorted((plugin_root / "skills").glob("*/SKILL.md"))
+        if (plugin_root / "skills").is_dir()
+        else []
+    )
+    if not plugin_skills:
+        errors.append(f"no skills found under {PLUGIN_ROOT_REL}/skills/*/SKILL.md")
+    for sf in plugin_skills:
+        stext = sf.read_text(encoding="utf-8")
+        if sf.stat().st_size >= RULE_FILE_MAX_BYTES:
+            errors.append(f"{sf.relative_to(repo_root)}: exceeds 24,000B body cap")
+        if HTML_COMMENT_RE.search(stext):
+            errors.append(f"{sf.relative_to(repo_root)}: contains HTML comment")
+        fm, fm_err = parse_yaml_frontmatter(stext)
+        if fm is None:
+            errors.append(f"{sf.relative_to(repo_root)}: {fm_err}")
+            continue
+        if fm.get("name") != sf.parent.name:
+            errors.append(f"{sf.relative_to(repo_root)}: name != folder {sf.parent.name!r}")
+        desc = fm.get("description")
+        if not isinstance(desc, str) or not desc.strip() or len(desc) > SKILL_DESC_MAX_CHARS:
+            errors.append(f"{sf.relative_to(repo_root)}: description invalid or >1024c")
+
+    plugin_agents = (
+        sorted((plugin_root / "agents").glob("*.md")) if (plugin_root / "agents").is_dir() else []
+    )
+    if not plugin_agents:
+        errors.append(f"no subagents found under {PLUGIN_ROOT_REL}/agents/*.md")
+    for af in plugin_agents:
+        atext = af.read_text(encoding="utf-8")
+        fm, fm_err = parse_yaml_frontmatter(atext)
+        if fm is None:
+            errors.append(f"{af.relative_to(repo_root)}: {fm_err}")
+            continue
+        if str(fm.get("subagent", "")).lower() != "true":
+            errors.append(f"{af.relative_to(repo_root)}: must set subagent: true")
+        if str(fm.get("mainAgent", "")).lower() != "false":
+            errors.append(f"{af.relative_to(repo_root)}: must set mainAgent: false")
+        cep = str(fm.get("commandExecutionPolicy", ""))
+        if cep not in {"off", "sandbox"}:
+            errors.append(
+                f"{af.relative_to(repo_root)}: commandExecutionPolicy={cep!r} must be off|sandbox"
+            )
+        tools = fm.get("tools")
+        if not isinstance(tools, list) or not tools:
+            errors.append(f"{af.relative_to(repo_root)}: missing tools allowlist")
+        else:
+            bad_tools = sorted(set(str(t) for t in tools) - PLUGIN_ALLOWED_AGENT_TOOLS)
+            if bad_tools:
+                errors.append(
+                    f"{af.relative_to(repo_root)}: disallowed/write tools in read-only subagent: "
+                    f"{bad_tools}"
+                )
+
+    # 18.5 Zero-duplication byte-for-byte SHA-256 parity across all 8 synced pairs
+    parity_ok_count = 0
+    for src_rel, dst_rel in PLUGIN_SYNC_PAIRS:
+        src_p = resolve_safe_repo_path(repo_root, src_rel)
+        dst_p = resolve_safe_repo_path(repo_root, dst_rel)
+        if src_p is None or not src_p.is_file():
+            errors.append(f"missing canonical source for plugin sync: {src_rel!r}")
+            continue
+        if dst_p is None or not dst_p.is_file():
+            errors.append(f"missing synced plugin copy: {dst_rel!r}")
+            continue
+        if compute_file_sha256(src_p) != compute_file_sha256(dst_p):
+            errors.append(
+                f"byte-parity drift between {src_rel!r} and {dst_rel!r} (run 'make sync-plugin')"
+            )
+        else:
+            parity_ok_count += 1
+
+    # 18.6 Zero-wrapper daemon invariant & full-landscape guide wired in zensical.toml
+    wrapper_scan_paths: list[Path] = []
+    for rel_cfg in ("pyproject.toml", "mise.toml", "orca.yaml", ".agents/hooks.json"):
+        cp = repo_root / rel_cfg
+        if cp.is_file():
+            wrapper_scan_paths.append(cp)
+    for json_root in (repo_root / ".agents" / "templates", plugin_root):
+        if json_root.is_dir():
+            wrapper_scan_paths.extend(sorted(json_root.rglob("*.json")))
+    for wp in wrapper_scan_paths:
+        wmatch = BANNED_WRAPPER_RE.search(wp.read_text(encoding="utf-8", errors="ignore"))
+        if wmatch:
+            errors.append(
+                f"{wp.relative_to(repo_root)}: banned meta-harness wrapper reference "
+                f"{wmatch.group(0)!r}"
+            )
+
+    if plugin_root.is_dir():
+        for pf in sorted(plugin_root.rglob("*")):
+            if not pf.is_file():
+                continue
+            ptxt = pf.read_text(encoding="utf-8", errors="ignore")
+            if WORKSTATION_PATH_RE.search(ptxt):
+                errors.append(f"{pf.relative_to(repo_root)}: contains workstation/brain path leak")
+
+    landscape_doc = repo_root / "docs" / FULL_LANDSCAPE_DOC_TARGET
+    if not landscape_doc.is_file():
+        errors.append(f"missing docs/{FULL_LANDSCAPE_DOC_TARGET}")
+    zensical_toml = repo_root / "zensical.toml"
+    if zensical_toml.is_file():
+        try:
+            zdata = tomllib.loads(zensical_toml.read_text(encoding="utf-8"))
+            nav_targets = _collect_nav_targets(zdata.get("project", {}).get("nav", []))
+            if FULL_LANDSCAPE_DOC_TARGET not in nav_targets:
+                errors.append(f"zensical.toml nav missing {FULL_LANDSCAPE_DOC_TARGET!r}")
+        except tomllib.TOMLDecodeError:
+            pass  # Reported by Gate [17]
+
+    ok = len(errors) == 0
+    return (
+        "agy_practice_plugin_and_zero_wrapper_contract",
+        ok,
+        f"plugins/agy-sota-practice valid ({len(plugin_rules)} rules, {len(plugin_skills)} skills, "
+        f"{len(plugin_agents)} read-only agents, {hook_group_count} opt-in disabled hook groups, "
+        f"{parity_ok_count}/{len(PLUGIN_SYNC_PAIRS)} byte-parity synced files, 0 shadow files, "
+        "0 banned wrappers, full-landscape guide wired in zensical.toml)"
+        if ok
+        else "; ".join(errors),
+    )
+
+
 def check_semantic_and_saturation_invariants(
     manifest: dict[str, Any],
     repo_root: Path,
@@ -1088,6 +1439,9 @@ def check_semantic_and_saturation_invariants(
     # [17] First-class repo scaffolding & Zensical portal nav integrity
     checks.append(check_repo_scaffolding_and_portal_integrity(repo_root))
 
+    # [18] Zero-wrapper AGY practice plugin pack & full-landscape contract
+    checks.append(check_agy_practice_plugin_and_zero_wrapper_contract(repo_root))
+
     return checks
 
 
@@ -1116,7 +1470,7 @@ def run_verify(
         and recorded_digest == expected_digest
     )
 
-    # Order 17 gates: [01..02] schema, [03..09] v1 semantic, [10] root SHA-256, [11..17] ADR/registry/hygiene/provenance/portal gates
+    # Order 18 gates: [01..02] schema, [03..09] v1 semantic, [10] root SHA-256, [11..18] ADR/registry/hygiene/provenance/portal/plugin gates
     ordered_results: list[tuple[str, bool, str]] = [
         ("schema_draft_2020_12", schema_draft_ok, str(schema_draft)),
         (
@@ -1204,18 +1558,18 @@ def run_seal(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Seal and verify the SOTA Convergence & Compounding Manifest (stdlib-only, 17 gates)."
+        description="Seal and verify the SOTA Convergence & Compounding Manifest (stdlib-only, 18 gates)."
     )
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument(
         "--seal",
         action="store_true",
-        help="Embed live 12/12 ADR SHA-256 digests, compute canonical manifest SHA-256 seal, write manifest, and verify all 17 gates.",
+        help="Embed live 12/12 ADR SHA-256 digests, compute canonical manifest SHA-256 seal, write manifest, and verify all 18 gates.",
     )
     mode.add_argument(
         "--verify",
         action="store_true",
-        help="Validate schema, semantic invariants, 12/12 MADR 4.0 ADRs + SHA-256 parity, clean-install coverage, saturation proof, repo hygiene ratchet, upstream provenance map, repo scaffolding/portal integrity, and root SHA-256 seal.",
+        help="Validate schema, semantic invariants, 12/12 MADR 4.0 ADRs + SHA-256 parity, clean-install coverage, saturation proof, repo hygiene ratchet, upstream provenance map, repo scaffolding/portal integrity, native plugin pack/zero-wrapper contract, and root SHA-256 seal.",
     )
     parser.add_argument(
         "--manifest",

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "agy-sota-practice",
+  "displayName": "SOTA Convergence Practice",
+  "version": "3.2.0",
+  "description": "Zero-wrapper SOTA harness practice: progressive rules, Grade-A audit/ADR/handoff skills, read-only auditor subagents, opt-in fail-closed hooks, and reusable workflows.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Run a zero-secret SOTA workspace audit and report verbatim pass/fail gate counts",
+    "Review this ADR against MADR 4.0.0 and disjoint L0-L10 layer invariants",
+    "Generate and verify a SHA-256-sealed cross-session handoff packet for the next session"
+  ],
+  "author": {
+    "name": "Native Agent Stack",
+    "url": "https://github.com/seathatflowsinourveins/agy-sota-convergence"
+  },
+  "homepage": "https://github.com/seathatflowsinourveins/agy-sota-convergence",
+  "repository": "https://github.com/seathatflowsinourveins/agy-sota-convergence",
+  "license": "MIT",
+  "keywords": [
+    "sota",
+    "harness",
+    "adr",
+    "madr",
+    "security",
+    "audit",
+    "handoff",
+    "governance"
+  ]
+}
