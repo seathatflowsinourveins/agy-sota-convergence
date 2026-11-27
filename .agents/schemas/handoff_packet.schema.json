@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://antigravity.local/schemas/v1/handoff_packet.schema.json",
+  "title": "AGY Cross-Session Handoff Packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "handoff_id",
+    "idempotency_key",
+    "created_at",
+    "source_conversation_id",
+    "source_link",
+    "goal",
+    "status",
+    "completed_artifacts",
+    "verified_evidence",
+    "open_decisions",
+    "constraints",
+    "next_actions",
+    "trust_level",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "handoff_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{8,64}$"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Stable deduplication key preventing duplicate dispatch across retries or sidecar restarts."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_conversation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_link": {
+      "type": "string",
+      "pattern": "^conversation://[A-Za-z0-9-]+$"
+    },
+    "source_surface": {
+      "type": "string",
+      "enum": [
+        "agy-app",
+        "agy-cli",
+        "agy-ide",
+        "agy-sdk",
+        "agy-sidecar",
+        "orca",
+        "a2a"
+      ]
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "blocked",
+        "ready_for_review",
+        "completed"
+      ]
+    },
+    "git_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_root",
+        "branch",
+        "head_commit"
+      ],
+      "properties": {
+        "repo_root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "branch": {
+          "type": "string",
+          "minLength": 1
+        },
+        "base_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{7,40}$"
+        },
+        "head_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{7,40}$"
+        },
+        "worktree_path": {
+          "type": "string"
+        }
+      }
+    },
+    "completed_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "role",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "verified_evidence": {
+      "type": "array",
+      "description": "Default-FAIL evidentiary record; claims without passed=true and fresh observed_at must be re-verified.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "check_name",
+          "command",
+          "observed_at",
+          "exit_code",
+          "passed",
+          "summary"
+        ],
+        "properties": {
+          "check_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "command": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "exit_code": {
+            "type": "integer"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "open_decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "question",
+          "owner",
+          "blocking"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "blocking": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "trust_level": {
+      "type": "string",
+      "const": "untrusted_data_never_authority"
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over canonical UTF-8 JSON (sort_keys=True, compact separators) excluding payload_sha256."
+    }
+  }
+}

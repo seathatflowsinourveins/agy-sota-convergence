@@ -1,0 +1,63 @@
+id: no-retiring-nov30-models-python
+language: python
+severity: error
+message: >-
+  Retiring 2026-11-30 model slug detected in Python string literal.
+  Migrate to post-Nov-30 frontier models (gemini-4-neon, gemini-4-carbon,
+  gemini-4-hydrogen, claude-opus-5-5, claude-sonnet-5-5) per ADR-0003.
+ignores:
+  - manifest/**
+  - tests/**
+  - rules/ast-grep/**
+  - site/**
+  - .git/**
+  - .venv/**
+  - .ruff_cache/**
+rule:
+  kind: string
+  regex: '(?i)(gemini[-_ ]4[-_ ]argon|gemini[-_ ]3[._-]8([-_ ]flash)?|gpt[-_ ]oss[-_ ]120b|claude[-_ ]((sonnet|opus)[-_ ])?4[._-]6)'
+---
+id: no-retiring-nov30-models-json
+language: json
+severity: error
+message: >-
+  Retiring 2026-11-30 model slug detected in JSON string literal.
+  Migrate to post-Nov-30 frontier models (gemini-4-neon, gemini-4-carbon,
+  gemini-4-hydrogen, claude-opus-5-5, claude-sonnet-5-5) per ADR-0003.
+ignores:
+  - manifest/**
+  - tests/**
+  - rules/ast-grep/**
+  - site/**
+  - .git/**
+  - .venv/**
+  - .ruff_cache/**
+rule:
+  kind: string
+  regex: '(?i)(gemini[-_ ]4[-_ ]argon|gemini[-_ ]3[._-]8([-_ ]flash)?|gpt[-_ ]oss[-_ ]120b|claude[-_ ]((sonnet|opus)[-_ ])?4[._-]6)'
+---
+id: no-retiring-nov30-models-yaml
+language: yaml
+severity: error
+message: >-
+  Retiring 2026-11-30 model slug detected in YAML scalar.
+  Migrate to post-Nov-30 frontier models (gemini-4-neon, gemini-4-carbon,
+  gemini-4-hydrogen, claude-opus-5-5, claude-sonnet-5-5) per ADR-0003.
+ignores:
+  - manifest/**
+  - tests/**
+  - rules/ast-grep/**
+  - site/**
+  - .git/**
+  - .venv/**
+  - .ruff_cache/**
+rule:
+  any:
+    - kind: string_scalar
+      regex: '(?i)(gemini[-_ ]4[-_ ]argon|gemini[-_ ]3[._-]8([-_ ]flash)?|gpt[-_ ]oss[-_ ]120b|claude[-_ ]((sonnet|opus)[-_ ])?4[._-]6)'
+    - kind: double_quote_scalar
+      regex: '(?i)(gemini[-_ ]4[-_ ]argon|gemini[-_ ]3[._-]8([-_ ]flash)?|gpt[-_ ]oss[-_ ]120b|claude[-_ ]((sonnet|opus)[-_ ])?4[._-]6)'
+    - kind: single_quote_scalar
+      regex: '(?i)(gemini[-_ ]4[-_ ]argon|gemini[-_ ]3[._-]8([-_ ]flash)?|gpt[-_ ]oss[-_ ]120b|claude[-_ ]((sonnet|opus)[-_ ])?4[._-]6)'
+    - kind: block_scalar
+      regex: '(?i)(gemini[-_ ]4[-_ ]argon|gemini[-_ ]3[._-]8([-_ ]flash)?|gpt[-_ ]oss[-_ ]120b|claude[-_ ]((sonnet|opus)[-_ ])?4[._-]6)'

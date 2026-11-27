@@ -1,0 +1,13 @@
+# mise.toml — Deterministic pinned CLI toolchain (verified 2026-11-26)
+# Zero floating tags; aligns 1:1 with docs/clean-install-registry.md and manifest/compounding_manifest.v2.json
+
+[tools]
+uv = "0.13.10"
+ruff = "0.17.6"
+ast-grep = "0.51.3"
+gitleaks = "8.30.1"
+trivy = "0.76.2"
+osv-scanner = "2.7.1"
+shellcheck = "0.11.0"
+zizmor = "1.33.1"
+syft = "1.57.2"

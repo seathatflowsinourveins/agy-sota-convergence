@@ -1,0 +1,65 @@
+schema_version = "1.0.0"
+as_of_date = "2026-11-26"
+doctrine = "upstream_only_native_first_thin_layer"
+upstream_registry = "UPSTREAM.md"
+manifest_path = "manifest/compounding_manifest.v2.json"
+
+[[adapters]]
+path = ".agents/scripts/cross_session_hooks.py"
+layer = "L4"
+adr = "ADR-0006"
+kind = "thin_hook_adapter"
+runtime_dependencies = ["python-stdlib"]
+upstream_winners = ["l4_agy_cross_session_native", "l8_agy_permissions_hooks_browser"]
+upstream_contract = "https://antigravity.google/docs/hooks.md"
+adapter_boundary = "Thin stdlib JSON hook adapter implementing SHA-256 deduplicated SessionStart/PreInvocation handoff hydration and continuationActive/executionNum loop-safe Stop gating."
+non_duplication_proof = "Relies natively on AGY lifecycle hook execution and JSON stdin/stdout protocol; zero custom daemon, broker, or session manager."
+verification_command = "python3 -m unittest tests/test_hooks_and_handoff.py -v"
+
+[[adapters]]
+path = ".agents/scripts/pre_tool_fail_closed.py"
+layer = "L8"
+adr = "ADR-0010"
+kind = "thin_security_hook_adapter"
+runtime_dependencies = ["python-stdlib"]
+upstream_winners = ["l8_agy_permissions_hooks_browser"]
+upstream_contract = "https://antigravity.google/docs/hooks.md"
+adapter_boundary = "Thin stdlib fail-closed PreToolUse wrapper converting any malformed JSON, exception, secret path, file:/// traversal, policy tamper, or live broker port into exit 0 with explicit deny JSON."
+non_duplication_proof = "Augments AGY native permissions engine solely because non-zero hook exits fail open in AGY; zero custom sandbox or container runtime."
+verification_command = "python3 -m unittest tests/test_hooks_and_handoff.py -v"
+
+[[adapters]]
+path = "scripts/audit_ecosystem_hygiene.py"
+layer = "L10"
+adr = "ADR-0012"
+kind = "thin_readonly_hygiene_auditor"
+runtime_dependencies = ["python-stdlib"]
+upstream_winners = ["l2_agy_cli", "l7_codebase_memory_mcp", "l8_agy_permissions_hooks_browser", "l9_skillevaluator"]
+upstream_contract = "https://antigravity.google/docs/customization-discovery.md"
+adapter_boundary = "Read-only, zero-secret stdlib auditor validating non-secret customization roots, charter/rule token budgets, skill description caps, symlink parity, and Nov-30 model sunset cleanliness."
+non_duplication_proof = "Inspects AGY native filesystem conventions and delegates deep skill scoring to NVIDIA SkillEvaluator (l9_skillevaluator); never mutates host files or reads secrets."
+verification_command = "python3 scripts/audit_ecosystem_hygiene.py --json --strict"
+
+[[adapters]]
+path = "scripts/verify_manifest.py"
+layer = "L10"
+adr = "ADR-0012"
+kind = "thin_cryptographic_fitness_gate"
+runtime_dependencies = ["python-stdlib"]
+upstream_winners = ["l10_manifest_v2_verifier_stdlib", "l10_zensical"]
+upstream_contract = "https://json-schema.org/draft/2020-12/schema"
+adapter_boundary = "Zero-dependency stdlib cryptographic sealer and multi-gate verifier checking canonical UTF-8 sorted-key JSON SHA-256, 12-ADR MADR 4.0.0 bijection and file hash parity, clean-install pins, upstream provenance mapping, and anti-bloat ratchets."
+non_duplication_proof = "Thin deterministic CI fitness function enforcing ADR-0001..ADR-0012 invariants; delegates static docs rendering to Zensical and security/AST scanning to ruff/ty/ast-grep/gitleaks/zizmor."
+verification_command = "python3 scripts/verify_manifest.py --verify && python3 -m unittest tests/test_manifest_v2.py -v"
+
+[[adapters]]
+path = "workflows/sota_convergence_audit.py"
+layer = "L3"
+adr = "ADR-0005"
+kind = "thin_run_workflow_pipeline"
+runtime_dependencies = ["python-stdlib"]
+upstream_winners = ["l3_agy_native_orchestration", "l8_ast_grep_cli", "l10_zensical", "l10_manifest_v2_verifier_stdlib"]
+upstream_contract = "https://antigravity.google/docs/dynamic-workflows.md"
+adapter_boundary = "Declarative AGY /run-workflow Python orchestration script invoking verify_manifest.py, audit_ecosystem_hygiene.py, ast-grep scan, unittest, and optional zensical build via native phase()/parallel()/call_tool() primitives."
+non_duplication_proof = "Runs directly on AGY native /run-workflow runtime with typed args contract (workflows/workflow.json); zero custom workflow scheduler or subprocess orchestration framework."
+verification_command = "ruff check workflows/sota_convergence_audit.py && ty check workflows/sota_convergence_audit.py"

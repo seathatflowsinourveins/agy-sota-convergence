@@ -1,0 +1,840 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://antigravity.google/local/schemas/compounding-convergence-manifest.v2.schema.json",
+  "title": "SOTA Convergence & Compounding Manifest v3.0.0 (Definitive Landed Repository)",
+  "description": "Strict Draft 2020-12 JSON Schema validating the standalone Google Antigravity (AGY) & SOTA Convergence Compounding Manifest (v2.x/v3.x), enforcing disjoint L0-L10 architecture layers, cross-session routing contracts, 7-stage compounding flywheel, sunset tracker, security invariants, 12 bounded MADR 4.0.0 ADRs under docs/adrs/ with SHA-256 parity, live-verified L0-L10 clean-install registry, saturation proof, and canonical SHA-256 root seal.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "metadata",
+    "surfaces",
+    "layers",
+    "cross_session_routing",
+    "compounding_flywheel",
+    "deprecations_and_sunsets",
+    "security_invariants",
+    "adr_governance",
+    "clean_install_registry",
+    "saturation_proof",
+    "integrity"
+  ],
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "isoDate": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "v2Semver": {
+      "type": "string",
+      "pattern": "^[23]\\.[0-9]+\\.[0-9]+$"
+    },
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$"
+    },
+    "sha256Hex": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "ideExtensionPin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "version",
+        "release_date",
+        "min_ide_requirement",
+        "transport",
+        "enterprise_status",
+        "canonical_url"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "name": { "$ref": "#/$defs/nonEmptyString" },
+        "version": { "$ref": "#/$defs/nonEmptyString" },
+        "release_date": { "$ref": "#/$defs/isoDate" },
+        "min_ide_requirement": { "$ref": "#/$defs/nonEmptyString" },
+        "transport": {
+          "type": "string",
+          "enum": ["native_extension", "acp_bundled", "acp_registry"]
+        },
+        "enterprise_status": {
+          "type": "string",
+          "enum": ["GA", "Preview", "Unsupported"]
+        },
+        "canonical_url": { "$ref": "#/$defs/httpsUrl" }
+      }
+    },
+    "layerEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "responsibility_scope",
+        "owns_exclusively",
+        "canonical_upstream_local",
+        "canonical_upstream_cloud",
+        "protocol_or_contract",
+        "forbidden_self_invention",
+        "verification_gate"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": ["L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10"]
+        },
+        "name": { "$ref": "#/$defs/nonEmptyString" },
+        "responsibility_scope": { "$ref": "#/$defs/nonEmptyString" },
+        "owns_exclusively": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "canonical_upstream_local": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "canonical_upstream_cloud": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "protocol_or_contract": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "forbidden_self_invention": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "verification_gate": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "routingRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "mechanism",
+        "scope",
+        "transport",
+        "supports_followup_delivery",
+        "best_for",
+        "forbidden_use",
+        "key_constraints"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "conversation_service",
+            "sidecars_agentapi",
+            "swarm_board",
+            "dynamic_workflows",
+            "subagents",
+            "lifecycle_hooks",
+            "remote_ssh_acp",
+            "orca_heterogeneous",
+            "a2a_v1"
+          ]
+        },
+        "mechanism": { "$ref": "#/$defs/nonEmptyString" },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "in_session",
+            "local_cross_session",
+            "machine_persistent_daemon",
+            "cross_host_remote",
+            "cross_vendor_local_remote",
+            "cross_org_federated"
+          ]
+        },
+        "transport": { "$ref": "#/$defs/nonEmptyString" },
+        "supports_followup_delivery": { "type": "boolean" },
+        "best_for": { "$ref": "#/$defs/nonEmptyString" },
+        "forbidden_use": { "$ref": "#/$defs/nonEmptyString" },
+        "key_constraints": { "$ref": "#/$defs/nonEmptyStringArray" }
+      }
+    },
+    "flywheelStage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage_order",
+        "id",
+        "name",
+        "native_agy_mechanisms",
+        "upstream_complements",
+        "inputs",
+        "outputs",
+        "gate_condition"
+      ],
+      "properties": {
+        "stage_order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "id": {
+          "type": "string",
+          "enum": [
+            "capture",
+            "distill",
+            "deduplicate",
+            "evaluate_gate",
+            "promote_escalate",
+            "consolidate_memory",
+            "prune_gc_ratchet"
+          ]
+        },
+        "name": { "$ref": "#/$defs/nonEmptyString" },
+        "native_agy_mechanisms": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "upstream_complements": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "inputs": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "outputs": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "gate_condition": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "sunsetEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "item",
+        "category",
+        "effective_date",
+        "status",
+        "replacement",
+        "detection_pattern",
+        "migration_action",
+        "source_url"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "item": { "$ref": "#/$defs/nonEmptyString" },
+        "category": {
+          "type": "string",
+          "enum": ["model", "protocol", "config_path", "cli_or_sdk", "framework", "benchmark"]
+        },
+        "effective_date": { "$ref": "#/$defs/isoDate" },
+        "status": {
+          "type": "string",
+          "enum": ["imminent", "effective", "scheduled_window", "maintenance_mode", "retired"]
+        },
+        "replacement": { "$ref": "#/$defs/nonEmptyString" },
+        "detection_pattern": { "$ref": "#/$defs/nonEmptyString" },
+        "migration_action": { "$ref": "#/$defs/nonEmptyString" },
+        "source_url": { "$ref": "#/$defs/httpsUrl" }
+      }
+    },
+    "docDriftEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "local_or_docs_source",
+        "drift_description",
+        "canonical_truth",
+        "operational_rule"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "local_or_docs_source": { "$ref": "#/$defs/nonEmptyString" },
+        "drift_description": { "$ref": "#/$defs/nonEmptyString" },
+        "canonical_truth": { "$ref": "#/$defs/nonEmptyString" },
+        "operational_rule": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "adrEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "layer",
+        "title",
+        "file",
+        "status",
+        "date",
+        "owner_agent",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ADR-00(0[1-9]|1[0-2])$"
+        },
+        "layer": {
+          "type": "string",
+          "enum": ["META", "L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10"]
+        },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "file": {
+          "type": "string",
+          "pattern": "^docs/adrs/ADR-00(0[1-9]|1[0-2])-[a-zA-Z0-9-]+\\.md$"
+        },
+        "status": {
+          "type": "string",
+          "const": "accepted"
+        },
+        "date": { "$ref": "#/$defs/isoDate" },
+        "owner_agent": {
+          "type": "string",
+          "enum": ["sota-ecosystem", "cross-session", "changelogs", "best-practices"]
+        },
+        "sha256": { "$ref": "#/$defs/sha256Hex" }
+      }
+    },
+    "cleanInstallEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "layer",
+        "upstream_name",
+        "registry_or_channel",
+        "pinned_version",
+        "install_command",
+        "verify_command",
+        "adapter_boundary",
+        "official_url"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "layer": {
+          "type": "string",
+          "enum": ["L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10"]
+        },
+        "upstream_name": { "$ref": "#/$defs/nonEmptyString" },
+        "registry_or_channel": {
+          "type": "string",
+          "enum": [
+            "bundled_agy",
+            "pypi",
+            "npm",
+            "github_release",
+            "homebrew",
+            "mise",
+            "ide_marketplace",
+            "acp_registry",
+            "cloud_managed",
+            "go_module",
+            "nuget",
+            "cargo",
+            "stdlib"
+          ]
+        },
+        "pinned_version": { "$ref": "#/$defs/nonEmptyString" },
+        "install_command": { "$ref": "#/$defs/nonEmptyString" },
+        "verify_command": { "$ref": "#/$defs/nonEmptyString" },
+        "adapter_boundary": { "$ref": "#/$defs/nonEmptyString" },
+        "official_url": { "$ref": "#/$defs/httpsUrl" }
+      }
+    }
+  },
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_id",
+        "manifest_version",
+        "schema_version",
+        "as_of_date",
+        "architecture_doctrine",
+        "governance_mode",
+        "canonical_sources"
+      ],
+      "properties": {
+        "manifest_id": { "$ref": "#/$defs/nonEmptyString" },
+        "manifest_version": { "$ref": "#/$defs/v2Semver" },
+        "schema_version": { "$ref": "#/$defs/v2Semver" },
+        "as_of_date": { "$ref": "#/$defs/isoDate" },
+        "architecture_doctrine": {
+          "type": "string",
+          "const": "upstream_only_zero_self_invention"
+        },
+        "governance_mode": {
+          "type": "string",
+          "enum": ["strict_ratchet_fail_closed"]
+        },
+        "canonical_sources": {
+          "type": "array",
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/httpsUrl" }
+        }
+      }
+    },
+    "surfaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "official_product_count",
+        "antigravity_app",
+        "antigravity_cli",
+        "antigravity_ide",
+        "antigravity_extensions",
+        "antigravity_sdk",
+        "companion_cloud_services"
+      ],
+      "properties": {
+        "official_product_count": {
+          "type": "integer",
+          "const": 5
+        },
+        "antigravity_app": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["version", "release_date", "local_host_version", "enterprise_supported", "app_data_dir", "canonical_url"],
+          "properties": {
+            "version": { "$ref": "#/$defs/semver" },
+            "release_date": { "$ref": "#/$defs/isoDate" },
+            "local_host_version": { "$ref": "#/$defs/semver" },
+            "enterprise_supported": { "type": "boolean" },
+            "app_data_dir": { "$ref": "#/$defs/nonEmptyString" },
+            "canonical_url": { "$ref": "#/$defs/httpsUrl" }
+          }
+        },
+        "antigravity_cli": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "binary",
+            "version_github_and_local",
+            "release_date_github",
+            "version_changelog_docs",
+            "release_date_changelog",
+            "acp_subcommand",
+            "default_agent_mode",
+            "enterprise_supported",
+            "app_data_dir",
+            "canonical_url"
+          ],
+          "properties": {
+            "binary": { "type": "string", "const": "agy" },
+            "version_github_and_local": { "$ref": "#/$defs/semver" },
+            "release_date_github": { "$ref": "#/$defs/isoDate" },
+            "version_changelog_docs": { "$ref": "#/$defs/semver" },
+            "release_date_changelog": { "$ref": "#/$defs/isoDate" },
+            "acp_subcommand": { "type": "string", "const": "agy acp" },
+            "default_agent_mode": { "type": "string", "const": "auto" },
+            "enterprise_supported": { "type": "boolean" },
+            "app_data_dir": { "$ref": "#/$defs/nonEmptyString" },
+            "canonical_url": { "$ref": "#/$defs/httpsUrl" }
+          }
+        },
+        "antigravity_ide": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["version", "release_date", "enterprise_supported", "app_data_dir", "canonical_url"],
+          "properties": {
+            "version": { "$ref": "#/$defs/semver" },
+            "release_date": { "$ref": "#/$defs/isoDate" },
+            "enterprise_supported": { "type": "boolean", "const": false },
+            "app_data_dir": { "$ref": "#/$defs/nonEmptyString" },
+            "canonical_url": { "$ref": "#/$defs/httpsUrl" }
+          }
+        },
+        "antigravity_extensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["count", "canonical_url", "integrations"],
+          "properties": {
+            "count": { "type": "integer", "const": 7 },
+            "canonical_url": { "$ref": "#/$defs/httpsUrl" },
+            "integrations": {
+              "type": "array",
+              "minItems": 7,
+              "maxItems": 7,
+              "items": { "$ref": "#/$defs/ideExtensionPin" }
+            }
+          }
+        },
+        "antigravity_sdk": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "package",
+            "version",
+            "release_date_changelog",
+            "release_date_pypi",
+            "default_model",
+            "native_otel_since",
+            "beta_workflows_since",
+            "enterprise_supported",
+            "canonical_url"
+          ],
+          "properties": {
+            "package": { "type": "string", "const": "google-antigravity" },
+            "version": { "$ref": "#/$defs/semver" },
+            "release_date_changelog": { "$ref": "#/$defs/isoDate" },
+            "release_date_pypi": { "$ref": "#/$defs/isoDate" },
+            "default_model": { "$ref": "#/$defs/nonEmptyString" },
+            "native_otel_since": { "$ref": "#/$defs/semver" },
+            "beta_workflows_since": { "$ref": "#/$defs/semver" },
+            "enterprise_supported": { "type": "boolean" },
+            "canonical_url": { "$ref": "#/$defs/httpsUrl" }
+          }
+        },
+        "companion_cloud_services": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "relationship", "canonical_url"],
+            "properties": {
+              "name": { "$ref": "#/$defs/nonEmptyString" },
+              "relationship": { "$ref": "#/$defs/nonEmptyString" },
+              "canonical_url": { "$ref": "#/$defs/httpsUrl" }
+            }
+          }
+        }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/layerEntry" }
+    },
+    "cross_session_routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "routes",
+        "handoff_packet",
+        "security_and_idempotency_invariants"
+      ],
+      "properties": {
+        "routes": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": { "$ref": "#/$defs/routingRule" }
+        },
+        "handoff_packet": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schema_version", "storage_convention", "required_fields", "integrity_check"],
+          "properties": {
+            "schema_version": { "$ref": "#/$defs/semver" },
+            "storage_convention": { "$ref": "#/$defs/nonEmptyString" },
+            "required_fields": { "$ref": "#/$defs/nonEmptyStringArray" },
+            "integrity_check": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        },
+        "security_and_idempotency_invariants": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "messages_are_input_never_authority",
+            "forbid_raw_pty_injection",
+            "idempotent_operation_ids_required",
+            "no_polling_loops_reactive_wake_only",
+            "silence_never_proves_exit",
+            "separate_data_from_control_plane",
+            "max_subagent_nesting_depth",
+            "sdk_conversation_id_min_length",
+            "sdk_conversation_id_pattern"
+          ],
+          "properties": {
+            "messages_are_input_never_authority": { "type": "boolean", "const": true },
+            "forbid_raw_pty_injection": { "type": "boolean", "const": true },
+            "idempotent_operation_ids_required": { "type": "boolean", "const": true },
+            "no_polling_loops_reactive_wake_only": { "type": "boolean", "const": true },
+            "silence_never_proves_exit": { "type": "boolean", "const": true },
+            "separate_data_from_control_plane": { "type": "boolean", "const": true },
+            "max_subagent_nesting_depth": { "type": "integer", "const": 10 },
+            "sdk_conversation_id_min_length": { "type": "integer", "const": 32 },
+            "sdk_conversation_id_pattern": { "type": "string", "const": "^[A-Za-z0-9-]{32,}$" }
+          }
+        }
+      }
+    },
+    "compounding_flywheel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stages",
+        "promotion_criteria",
+        "escalation_ladder",
+        "escalation_triggers",
+        "anti_bloat_ratchets"
+      ],
+      "properties": {
+        "stages": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": { "$ref": "#/$defs/flywheelStage" }
+        },
+        "promotion_criteria": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "skillevaluator_tier1_min_score",
+            "skillevaluator_tier1_max_high_or_critical",
+            "skillevaluator_rubric_min_per_criterion",
+            "skillevaluator_tier3_min_per_dimension",
+            "skillevaluator_tier3_dimensions",
+            "skillevaluator_tier3_min_skill_lift",
+            "skillevaluator_tier3_negative_case_required",
+            "skillevaluator_publication_status_required",
+            "plugin_validate_command",
+            "smoke_run_disqualified_as_evidence",
+            "human_approval_required_for_learn"
+          ],
+          "properties": {
+            "skillevaluator_tier1_min_score": { "type": "integer", "minimum": 70, "maximum": 100 },
+            "skillevaluator_tier1_max_high_or_critical": { "type": "integer", "const": 0 },
+            "skillevaluator_rubric_min_per_criterion": { "type": "integer", "minimum": 7, "maximum": 10 },
+            "skillevaluator_tier3_min_per_dimension": { "type": "number", "minimum": 0.5, "maximum": 1.0 },
+            "skillevaluator_tier3_dimensions": { "$ref": "#/$defs/nonEmptyStringArray" },
+            "skillevaluator_tier3_min_skill_lift": { "type": "number", "minimum": 0.05, "maximum": 1.0 },
+            "skillevaluator_tier3_negative_case_required": { "type": "boolean", "const": true },
+            "skillevaluator_publication_status_required": { "type": "string", "const": "pass" },
+            "plugin_validate_command": { "$ref": "#/$defs/nonEmptyString" },
+            "smoke_run_disqualified_as_evidence": { "type": "boolean", "const": true },
+            "human_approval_required_for_learn": { "type": "boolean", "const": true }
+          }
+        },
+        "escalation_ladder": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "escalation_triggers": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "anti_bloat_ratchets": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "rule_file_max_bytes",
+            "rules_aggregate_budget_tokens",
+            "skill_description_max_chars",
+            "mcp_eager_max_tools",
+            "mcp_ondemand_inline_output_max_bytes",
+            "mcp_app_html_max_mib",
+            "mcp_app_persisted_result_max_mib",
+            "mcp_app_max_concurrent_calls",
+            "delete_to_add_policy",
+            "temporal_invalidation_required",
+            "forbid_duplicate_static_preinvocation_injection",
+            "compaction_milestone_discipline"
+          ],
+          "properties": {
+            "rule_file_max_bytes": { "type": "integer", "const": 24000 },
+            "rules_aggregate_budget_tokens": { "type": "integer", "const": 20000 },
+            "skill_description_max_chars": { "type": "integer", "const": 1024 },
+            "mcp_eager_max_tools": { "type": "integer", "minimum": 0, "maximum": 3 },
+            "mcp_ondemand_inline_output_max_bytes": { "type": "integer", "const": 10240 },
+            "mcp_app_html_max_mib": { "type": "integer", "const": 10 },
+            "mcp_app_persisted_result_max_mib": { "type": "integer", "const": 1 },
+            "mcp_app_max_concurrent_calls": { "type": "integer", "const": 4 },
+            "delete_to_add_policy": { "type": "boolean", "const": true },
+            "temporal_invalidation_required": { "type": "boolean", "const": true },
+            "forbid_duplicate_static_preinvocation_injection": { "type": "boolean", "const": true },
+            "compaction_milestone_discipline": { "type": "boolean", "const": true }
+          }
+        }
+      }
+    },
+    "deprecations_and_sunsets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sunsets", "doc_drift_guardrails"],
+      "properties": {
+        "sunsets": {
+          "type": "array",
+          "minItems": 8,
+          "items": { "$ref": "#/$defs/sunsetEntry" }
+        },
+        "doc_drift_guardrails": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "#/$defs/docDriftEntry" }
+        }
+      }
+    },
+    "security_invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "os_sandbox_required",
+        "os_sandbox_primitives",
+        "permission_precedence",
+        "shell_metacharacter_exact_match_enforced",
+        "hooks_fail_closed_wrapper_mandatory",
+        "hooks_fail_open_runtime_rationale",
+        "host_verified_facts_mandatory",
+        "browser_isolation_defaults",
+        "zero_committed_secrets",
+        "protected_credential_paths",
+        "standing_deny_rules_baseline",
+        "mcp_and_plugin_account_hygiene",
+        "untrusted_repo_quarantine"
+      ],
+      "properties": {
+        "os_sandbox_required": { "type": "boolean", "const": true },
+        "os_sandbox_primitives": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["linux", "macos", "windows"],
+          "properties": {
+            "linux": { "$ref": "#/$defs/nonEmptyString" },
+            "macos": { "$ref": "#/$defs/nonEmptyString" },
+            "windows": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        },
+        "permission_precedence": { "type": "string", "const": "Deny > Ask > Allow" },
+        "shell_metacharacter_exact_match_enforced": { "type": "boolean", "const": true },
+        "hooks_fail_closed_wrapper_mandatory": { "type": "boolean", "const": true },
+        "hooks_fail_open_runtime_rationale": { "$ref": "#/$defs/nonEmptyString" },
+        "host_verified_facts_mandatory": { "type": "boolean", "const": true },
+        "browser_isolation_defaults": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "prefer_builtin_isolated_browser",
+            "chrome_js_policy_allowed_values",
+            "per_port_localhost_isolation",
+            "sensitive_google_subdomains_explicit_only",
+            "upload_and_blob_download_always_prompt",
+            "blocked_download_extensions_enforced",
+            "idp_and_payment_masking_enforced"
+          ],
+          "properties": {
+            "prefer_builtin_isolated_browser": { "type": "boolean", "const": true },
+            "chrome_js_policy_allowed_values": { "$ref": "#/$defs/nonEmptyStringArray" },
+            "per_port_localhost_isolation": { "type": "boolean", "const": true },
+            "sensitive_google_subdomains_explicit_only": { "type": "boolean", "const": true },
+            "upload_and_blob_download_always_prompt": { "type": "boolean", "const": true },
+            "blocked_download_extensions_enforced": { "type": "boolean", "const": true },
+            "idp_and_payment_masking_enforced": { "type": "boolean", "const": true }
+          }
+        },
+        "zero_committed_secrets": { "type": "boolean", "const": true },
+        "protected_credential_paths": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "standing_deny_rules_baseline": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "mcp_and_plugin_account_hygiene": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "untrusted_repo_quarantine": { "$ref": "#/$defs/nonEmptyStringArray" }
+      }
+    },
+    "adr_governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "standard",
+        "standard_url",
+        "docs_portal_upstream",
+        "adr_directory",
+        "bounded_max_count",
+        "required_frontmatter_keys",
+        "required_madr4_headings",
+        "zero_self_invention_gate_questions",
+        "adrs"
+      ],
+      "properties": {
+        "standard": { "type": "string", "const": "MADR 4.0.0" },
+        "standard_url": { "$ref": "#/$defs/httpsUrl" },
+        "docs_portal_upstream": { "$ref": "#/$defs/nonEmptyString" },
+        "adr_directory": { "type": "string", "const": "docs/adrs" },
+        "bounded_max_count": { "type": "integer", "const": 12 },
+        "required_frontmatter_keys": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonEmptyString" }
+        },
+        "required_madr4_headings": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonEmptyString" }
+        },
+        "zero_self_invention_gate_questions": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonEmptyString" }
+        },
+        "adrs": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": { "$ref": "#/$defs/adrEntry" }
+        }
+      }
+    },
+    "clean_install_registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registry_doc",
+        "verified_date",
+        "isolation_standards",
+        "entries"
+      ],
+      "properties": {
+        "registry_doc": { "$ref": "#/$defs/nonEmptyString" },
+        "verified_date": { "$ref": "#/$defs/isoDate" },
+        "isolation_standards": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "entries": {
+          "type": "array",
+          "minItems": 11,
+          "items": { "$ref": "#/$defs/cleanInstallEntry" }
+        }
+      }
+    },
+    "saturation_proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "saturation_status",
+        "verified_as_of_date",
+        "zero_self_invention_verified",
+        "unresolved_contradictions",
+        "unverified_claims",
+        "adr_count",
+        "layer_count",
+        "disjoint_overlap_count",
+        "clean_install_layers_covered",
+        "independent_verifier_logs",
+        "research_corpus_files",
+        "exit_gate_criteria",
+        "residual_user_delegated_checks"
+      ],
+      "properties": {
+        "saturation_status": { "type": "string", "const": "saturated" },
+        "verified_as_of_date": { "$ref": "#/$defs/isoDate" },
+        "zero_self_invention_verified": { "type": "boolean", "const": true },
+        "unresolved_contradictions": { "type": "integer", "const": 0 },
+        "unverified_claims": { "type": "integer", "const": 0 },
+        "adr_count": { "type": "integer", "const": 12 },
+        "layer_count": { "type": "integer", "const": 11 },
+        "disjoint_overlap_count": { "type": "integer", "const": 0 },
+        "clean_install_layers_covered": { "type": "integer", "const": 11 },
+        "independent_verifier_logs": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "research_corpus_files": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "exit_gate_criteria": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "residual_user_delegated_checks": { "$ref": "#/$defs/nonEmptyStringArray" }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "payload_scope",
+        "sha256"
+      ],
+      "properties": {
+        "algorithm": { "type": "string", "const": "sha256" },
+        "canonicalization": { "type": "string", "const": "json-utf8-sort-keys-compact" },
+        "payload_scope": { "type": "string", "const": "root_excluding_integrity_sha256" },
+        "sha256": { "$ref": "#/$defs/sha256Hex" }
+      }
+    }
+  }
+}

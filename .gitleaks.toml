@@ -1,0 +1,12 @@
+title = "AGY SOTA Convergence Gitleaks Configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Exclude generated build and cache artifacts ignored by Git"
+paths = [
+  '''^site/''',
+  '''^\.cache/''',
+  '''^\.ruff_cache/''',
+]

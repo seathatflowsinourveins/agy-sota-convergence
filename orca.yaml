@@ -1,0 +1,10 @@
+name: agy-sota-convergence
+setupAgentStartupPolicy: wait-for-setup
+
+scripts:
+  setup: mise trust && mise install
+  check: bash scripts/check.sh
+  seal: python3 scripts/verify_manifest.py --seal && python3 scripts/verify_manifest.py --verify
+  audit: python3 scripts/audit_ecosystem_hygiene.py --json --strict
+  docs: zensical build --clean --strict
+  archive: rm -rf .venv .ruff_cache .pytest_cache .cache site reports

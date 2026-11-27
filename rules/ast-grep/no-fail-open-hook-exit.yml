@@ -1,0 +1,19 @@
+id: no-fail-open-hook-exit
+language: python
+severity: error
+message: >-
+  Non-zero exit detected in an Antigravity hook script under .agents/scripts/.
+  Non-zero exits fail OPEN in Antigravity hooks; emit a JSON deny/allow payload
+  and exit 0 instead per ADR-0006 and ADR-0010.
+files:
+  - .agents/scripts/*.py
+rule:
+  any:
+    - all:
+        - pattern: sys.exit($CODE)
+        - not:
+            pattern: sys.exit(0)
+    - all:
+        - pattern: raise SystemExit($CODE)
+        - not:
+            pattern: raise SystemExit(0)

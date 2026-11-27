@@ -1,0 +1,2073 @@
+{
+  "metadata": {
+    "manifest_id": "agy-sota-compounding-convergence-manifest",
+    "manifest_version": "3.0.0",
+    "schema_version": "2.1.0",
+    "as_of_date": "2026-11-26",
+    "architecture_doctrine": "upstream_only_zero_self_invention",
+    "governance_mode": "strict_ratchet_fail_closed",
+    "canonical_sources": [
+      "https://antigravity.google/llms.txt",
+      "https://antigravity.google/docs/changelog.md",
+      "https://antigravity.google/docs/models.md",
+      "https://antigravity.google/docs/sandbox.md",
+      "https://antigravity.google/docs/permissions.md",
+      "https://antigravity.google/docs/hooks.md",
+      "https://antigravity.google/docs/rules.md",
+      "https://antigravity.google/docs/skills.md",
+      "https://antigravity.google/docs/plugins.md",
+      "https://antigravity.google/docs/build-plugins.md",
+      "https://antigravity.google/docs/sidecars.md",
+      "https://antigravity.google/docs/mcp.md",
+      "https://antigravity.google/docs/mcp-apps.md",
+      "https://antigravity.google/docs/browser.md",
+      "https://antigravity.google/docs/customization-discovery.md",
+      "https://antigravity.google/docs/enterprise.md",
+      "https://antigravity.google/docs/swarm.md",
+      "https://antigravity.google/docs/teamwork.md",
+      "https://antigravity.google/docs/dynamic-workflows.md",
+      "https://antigravity.google/docs/commands/learn.md",
+      "https://antigravity.google/docs/commands/compact.md",
+      "https://antigravity.google/docs/ide/extensions/visual-studio.md",
+      "https://modelcontextprotocol.io/specification/2026-07-28",
+      "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx",
+      "https://github.com/a2aproject/A2A",
+      "https://agentclientprotocol.com/updates",
+      "https://agentskills.io/home",
+      "https://github.com/open-telemetry/semantic-conventions-genai",
+      "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "https://openai.com/index/harness-engineering/",
+      "https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html",
+      "https://every.to/guides/compound-engineering",
+      "https://arxiv.org/abs/2503.18813",
+      "https://arxiv.org/abs/2504.13171",
+      "https://arxiv.org/abs/2507.19457",
+      "https://arxiv.org/abs/2510.04618",
+      "https://arxiv.org/abs/2602.11988",
+      "https://arxiv.org/abs/2602.12670",
+      "https://adr.github.io/madr/",
+      "https://github.com/adr/madr/releases/tag/4.0.0",
+      "https://zensical.org/",
+      "https://github.com/zensical/zensical/releases/tag/v0.1.3",
+      "https://evolutionaryarchitecture.com/",
+      "https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records",
+      "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+      "https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/",
+      "https://json-schema.org/draft/2020-12/schema",
+      "https://docs.astral.sh/uv/",
+      "https://mise.jdx.dev/",
+      "https://antigravity.google/docs/sdk/overview.md",
+      "https://antigravity.google/docs/sdk/local-models.md",
+      "https://antigravity.google/docs/ssh.md",
+      "https://antigravity.google/docs/ide/extensions/acp.md",
+      "https://ai.google.dev/gemini-api/docs/caching",
+      "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+      "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "https://blog.cloudflare.com/code-mode-mcp",
+      "https://www.anthropic.com/research/advanced-tool-use",
+      "https://zensical.org/docs/setup/basics/",
+      "https://zensical.org/docs/setup/navigation/",
+      "https://zensical.org/docs/authoring/diagrams/"
+    ]
+  },
+  "surfaces": {
+    "official_product_count": 5,
+    "antigravity_app": {
+      "version": "2.35.2",
+      "release_date": "2026-11-25",
+      "local_host_version": "2.35.2",
+      "enterprise_supported": true,
+      "app_data_dir": "~/.gemini/antigravity",
+      "canonical_url": "https://antigravity.google/product/antigravity-2"
+    },
+    "antigravity_cli": {
+      "binary": "agy",
+      "version_github_and_local": "1.5.18",
+      "release_date_github": "2026-11-26",
+      "version_changelog_docs": "1.5.16",
+      "release_date_changelog": "2026-11-24",
+      "acp_subcommand": "agy acp",
+      "default_agent_mode": "auto",
+      "enterprise_supported": true,
+      "app_data_dir": "~/.gemini/antigravity-cli",
+      "canonical_url": "https://antigravity.google/product/antigravity-cli"
+    },
+    "antigravity_ide": {
+      "version": "2.8.0",
+      "release_date": "2026-11-19",
+      "enterprise_supported": false,
+      "app_data_dir": "~/.gemini/antigravity-ide",
+      "canonical_url": "https://antigravity.google/product/antigravity-ide"
+    },
+    "antigravity_extensions": {
+      "count": 7,
+      "canonical_url": "https://antigravity.google/docs/ide/extensions",
+      "integrations": [
+        {
+          "id": "vscode",
+          "name": "Visual Studio Code",
+          "version": "1.13.0",
+          "release_date": "2026-11-16",
+          "min_ide_requirement": "VS Code 1.90+",
+          "transport": "native_extension",
+          "enterprise_status": "GA",
+          "canonical_url": "https://antigravity.google/docs/ide/extensions/vscode"
+        },
+        {
+          "id": "visual_studio",
+          "name": "Visual Studio",
+          "version": "1.0.261116.0",
+          "release_date": "2026-11-16",
+          "min_ide_requirement": "Visual Studio 2022 (17.14+) or Visual Studio 2026 on Windows 10/11",
+          "transport": "native_extension",
+          "enterprise_status": "GA",
+          "canonical_url": "https://antigravity.google/docs/ide/extensions/visual-studio"
+        },
+        {
+          "id": "jetbrains",
+          "name": "JetBrains IntelliJ-based IDEs",
+          "version": "1.5.0",
+          "release_date": "2026-11-10",
+          "min_ide_requirement": "IntelliJ-based IDEs 2026.2.1+",
+          "transport": "acp_bundled",
+          "enterprise_status": "GA",
+          "canonical_url": "https://antigravity.google/docs/ide/extensions/jetbrains"
+        },
+        {
+          "id": "zed",
+          "name": "Zed",
+          "version": "1.5.0",
+          "release_date": "2026-11-10",
+          "min_ide_requirement": "Zed 0.140.0+",
+          "transport": "acp_bundled",
+          "enterprise_status": "GA",
+          "canonical_url": "https://antigravity.google/docs/ide/extensions/zed"
+        },
+        {
+          "id": "xcode",
+          "name": "Xcode",
+          "version": "1.5.0",
+          "release_date": "2026-11-10",
+          "min_ide_requirement": "Xcode 27 beta 6+",
+          "transport": "acp_bundled",
+          "enterprise_status": "GA",
+          "canonical_url": "https://antigravity.google/docs/ide/extensions/xcode"
+        },
+        {
+          "id": "eclipse",
+          "name": "Eclipse",
+          "version": "1.2.0",
+          "release_date": "2026-11-19",
+          "min_ide_requirement": "Eclipse 2026-06+",
+          "transport": "native_extension",
+          "enterprise_status": "GA",
+          "canonical_url": "https://antigravity.google/docs/ide/extensions/eclipse"
+        },
+        {
+          "id": "android_studio",
+          "name": "Android Studio",
+          "version": "acp-registry-1.4.1+",
+          "release_date": "2026-10-16",
+          "min_ide_requirement": "Android Studio with Bring Your Own Agent (ACP) support",
+          "transport": "acp_registry",
+          "enterprise_status": "Preview",
+          "canonical_url": "https://antigravity.google/docs/ide/extensions/android-studio"
+        }
+      ]
+    },
+    "antigravity_sdk": {
+      "package": "google-antigravity",
+      "version": "0.1.24",
+      "release_date_changelog": "2026-11-16",
+      "release_date_pypi": "2026-11-19",
+      "default_model": "gemini-4-hydrogen",
+      "native_otel_since": "0.1.5",
+      "beta_workflows_since": "0.1.22",
+      "enterprise_supported": true,
+      "canonical_url": "https://github.com/google-antigravity/antigravity-sdk-python"
+    },
+    "companion_cloud_services": [
+      {
+        "name": "Gemini API Managed Agents",
+        "relationship": "Companion Google Gemini API platform service (distinct from the 5 official AGY products in llms.txt)",
+        "canonical_url": "https://ai.google.dev/gemini-api/docs/antigravity-agent"
+      }
+    ]
+  },
+  "layers": [
+    {
+      "id": "L0",
+      "name": "Execution Isolation & Sandboxes",
+      "responsibility_scope": "Kernel-level local process/filesystem/network confinement, Git worktree workspace isolation, and hardware-virtualized or user-space-kernel cloud sandboxes.",
+      "owns_exclusively": [
+        "os_process_filesystem_network_confinement",
+        "git_worktree_workspace_isolation",
+        "cloud_microvm_and_gvisor_sandboxes"
+      ],
+      "canonical_upstream_local": [
+        "Antigravity OS-native terminal sandbox (Linux kernel namespaces, macOS sandbox-exec Seatbelt SBPL, Windows 11 24H2+ AppContainer process security environments)",
+        "Antigravity Projects New Worktree Mode and workspace:'branch'|'share' Git worktree isolation"
+      ],
+      "canonical_upstream_cloud": [
+        "E2B Firecracker microVMs (multi-tenant hardware KVM isolation)",
+        "Modal Sandboxes (gVisor user-space kernel for high-fan-out rollouts and GPU evals)",
+        "Cloudflare Containers + Sandbox SDK 1.0 (Durable Object paired sandboxes with worker egress firewall)",
+        "Daytona VMs (persistent state and parallel workspace forking)",
+        "Antigravity Remote Agents (Google-managed cloud sandbox)"
+      ],
+      "protocol_or_contract": [
+        "AGY sandbox.md filesystem mount derivation (read_file -> RO, write_file -> RW, read_url -> AllowedDomains)",
+        "Fail-safe degradation to request-review when OS sandbox is unavailable (CLI v1.4.4+)"
+      ],
+      "forbidden_self_invention": [
+        "Custom shell chroot/seccomp/Seatbelt wrapper scripts duplicating native AGY sandboxing",
+        "Unisolated host Docker socket mounts for untrusted multi-tenant code execution",
+        "Ad-hoc raw git worktree orchestration scripts where AGY workspace:'branch'|'share' or Orca applies"
+      ],
+      "verification_gate": "Confirm sandbox enabled under Default/Auto or --sandbox; verify ~/.ssh, .env, ~/.docker, ~/.kube, and outbound unapproved domains are blocked."
+    },
+    {
+      "id": "L1",
+      "name": "Frontier Models, Effort Tiers & Dual-Model Routing",
+      "responsibility_scope": "Selection, pinning, effort budgeting, and planner-vs-executor routing across hosted Gemini 4, partner Claude 5.5, and local on-device SDK models.",
+      "owns_exclusively": [
+        "model_slug_pinning_and_effort_levels",
+        "dual_model_orchestrator_planner_executor_routing",
+        "local_on_device_model_backends"
+      ],
+      "canonical_upstream_local": [
+        "Gemini 4 Neon (512K context; default Paid Pro/Ultra/Enterprise model; 4 thinking levels incl. xhigh)",
+        "Gemini 4 Carbon (flagship long-horizon SWE, science, and cybersecurity model)",
+        "Gemini 4 Hydrogen (fast 4-effort executor; default for Free, Plus, Pro trials, and SDK 0.1.24)",
+        "Antigravity Orchestrator (Neon/Carbon/Claude Opus 5.5 planner paired with Hydrogen executor; Enterprise locked to Carbon High + Hydrogen High)",
+        "Claude Sonnet 5.5 (thinking) and Claude Opus 5.5 (thinking) via hosted partner roster",
+        "Antigravity SDK LiteRTAgentConfig (Gemma 4 26B vision + KV prefix caching) and LocalOpenAIAgentConfig (Ollama/vLLM/LM Studio)"
+      ],
+      "canonical_upstream_cloud": [
+        "Google Cloud Vertex AI / Gemini Enterprise endpoints (global, us, eu multi-region with regional PSC)",
+        "Gemini Enterprise administrator-enabled third-party Claude 5.5 endpoints (with background first-party Gemini coordination)"
+      ],
+      "protocol_or_contract": [
+        "Explicit model slug pinning in CLI (--model/--effort) and SDK LocalAgentConfig (headless mode fails non-zero on unknown model)",
+        "Zero retiring Nov 30, 2026 models in active configs"
+      ],
+      "forbidden_self_invention": [
+        "Custom multi-model prompt-router middleware duplicating native AGY Orchestrator",
+        "Unpinned implicit default models in CI pipelines or SDK evaluations",
+        "Consumer OAuth token scraping or third-party orchestrator wrapping violating ToS"
+      ],
+      "verification_gate": "Run `agy models` and manifest verifier to confirm zero retiring Nov 30, 2026 models appear in any active surface, workflow, or CI pin."
+    },
+    {
+      "id": "L2",
+      "name": "Multi-Surface Developer Harness",
+      "responsibility_scope": "Interactive desktop command center, keyboard-first terminal TUI/headless binary, IDE editor integrations, ACP editor bridge, and programmatic Python runtime.",
+      "owns_exclusively": [
+        "interactive_app_cli_ide_user_surfaces",
+        "editor_to_agent_acp_bridge",
+        "programmatic_local_agent_runtime_sdk"
+      ],
+      "canonical_upstream_local": [
+        "Antigravity App 2.0 (v2.35.2 desktop Electron command center, built-in browser, Review pane, Swarm UI, MCP Apps, Sidecars)",
+        "Antigravity CLI `agy` (v1.5.18 Go binary: TUI, headless `-p` json/stream-json, `agy acp` stdio server, `agy plugin`)",
+        "Antigravity IDE Extensions (7 integrations: VS Code 1.13.0, Visual Studio 1.0.261116.0 [VS 2022 17.14+/2026], JetBrains/Zed/Xcode ACP 1.5.0, Eclipse 1.2.0, Android Studio ACP Registry)",
+        "Antigravity Python SDK (`google-antigravity` 0.1.24)",
+        "Antigravity IDE (v2.8.0 standalone non-Enterprise editor)"
+      ],
+      "canonical_upstream_cloud": [
+        "Antigravity Remote Agents (`antigravity.google.com`, `agy --remote-agent`)",
+        "Antigravity Remote Control (App toggle, CLI `/remote-control`, persistent OS daemon `agy remote-control start`)",
+        "Antigravity App Connect over SSH (`~/.antigravity-hub-server/` on remote Linux hosts)"
+      ],
+      "protocol_or_contract": [
+        "Unified `~/.gemini/config/` (personal) and `<repo>/.agents/` + `AGENTS.md` (workspace) customization contract across surfaces",
+        "Agent Client Protocol (ACP v1.0 / v2 Preview) strictly invoked via `agy acp` (no `--acp` flag)",
+        "Headless NDJSON contract (`--input-format stream-json --output-format stream-json`)"
+      ],
+      "forbidden_self_invention": [
+        "Custom TUI/Electron wrapper shells re-implementing AGY App or `agy` CLI",
+        "Custom editor-to-agent RPC protocols instead of `agy acp`",
+        "Direct manual edits to `~/.gemini/config/config.json` bypassing Language Server atomic writes"
+      ],
+      "verification_gate": "Confirm `agy --version`, `agy acp --help`, App version `2.35.2`, and cross-surface `~/.gemini/config/` parity without CLI-only skill drift."
+    },
+    {
+      "id": "L3",
+      "name": "Intra-Session Multi-Agent Orchestration",
+      "responsibility_scope": "Coordinating concurrent, staged, or adversarial agents inside a single task execution lifecycle.",
+      "owns_exclusively": [
+        "in_session_subagent_delegation",
+        "shared_board_peer_swarms",
+        "scripted_python_workflow_dags",
+        "adversarial_deep_reasoning_and_milestone_teams"
+      ],
+      "canonical_upstream_local": [
+        "AGY Subagents (`invoke_subagent`, `define_subagent`, `send_message`, `manage_subagents`; max depth 10)",
+        "AGY Native Swarms (`/swarm`: `post_message`, `read_board`, `swarm_wait`, `@mentions`, channels, `@verifier`, `@monitor`)",
+        "AGY Dynamic Workflows (`/run-workflow` & SDK `beta.workflows`: `phase`, `agent`, `parallel`, `pipeline`, `call_tool`, `trajectory`, JSON-Schema `finish`)",
+        "AGY `/boost` (DeepCoder/DeepInvestigator adversarial challenge-fix-verify pipeline)",
+        "AGY `/teamwork` (Sentinel + Project Orchestrator + Critic/Challenger/Auditor/Success Auditor with `development`/`demo`/`benchmark` integrity modes)"
+      ],
+      "canonical_upstream_cloud": [
+        "Companion Gemini API Managed Agents",
+        "Google ADK hierarchical & graph multi-agent workflows"
+      ],
+      "protocol_or_contract": [
+        "Exclusive file ownership per concurrent writer or isolated `workspace:'branch'|'share'` worktrees",
+        "Zero-token idle blocking via `swarm_wait(since=<highest_read_seq>)`",
+        "Typed JSON Schema `finish` outputs for `run_workflow` fan-outs"
+      ],
+      "forbidden_self_invention": [
+        "Custom Python multiprocessing/subprocess LLM swarm loops duplicating `/swarm` or `run_workflow`",
+        "Using `ConversationService` to spawn or message in-turn subagents",
+        "Polling loops in shell `sleep` commands instead of reactive wakeups (`swarm_wait`, `schedule`)"
+      ],
+      "verification_gate": "Verify zero overlapping file edits across parallel workers, zero unlanded worktrees before `kill`, and `@verifier` sign-off on diffs."
+    },
+    {
+      "id": "L4",
+      "name": "Cross-Session & Cross-Host Messaging",
+      "responsibility_scope": "Programmatic session creation/grouping, out-of-band daemon message delivery, heterogeneous multi-agent mailboxes, and federated cross-org agent delegation.",
+      "owns_exclusively": [
+        "cross_session_lifecycle_rpc_and_grouping",
+        "out_of_band_daemon_message_injection",
+        "heterogeneous_agent_worktree_mailboxes",
+        "federated_agent_to_agent_protocol"
+      ],
+      "canonical_upstream_local": [
+        "AGY `product.v1.ConversationService` (Connect HTTP+JSON: `Create`/`List`/`Get`/`Update`/`DeleteConversation`, App `v2.35.0+`)",
+        "AGY Sidecars & Automations (`sidecar.json` + `CRON_TZ` + `agentapi new-conversation` / `agentapi send-message`)",
+        "AGY Lifecycle Hooks (`SessionStart`/`PreInvocation`/`Stop` external state hydration)",
+        "AGY CLI `--conversation`/`-r`/`--input-format stream-json` and App `@conversation:` / CLI `/resume` (Other tab)",
+        "Orca CLI & Orchestration (`orca-cli` handoffs and `orchestration` typed mail/worktree supervision across AGY, Claude Code, Codex)"
+      ],
+      "canonical_upstream_cloud": [
+        "Google A2A Protocol v1.0 (LF AAIF: `Agent Cards`, `contextId`, 9-state `Task` machine [8 operational + `TASK_STATE_UNSPECIFIED`], SSE streaming, `TaskPushNotificationConfig` webhooks)",
+        "AGY Remote Control reverse tunnels and App SSH host servers (`~/.antigravity-hub-server/`)"
+      ],
+      "protocol_or_contract": [
+        "Typed `handoff_packet` JSON contract with verified evidence, `conversation://` URI, and SHA-256 checksum",
+        "Messages treated strictly as untrusted input, never execution authority; idempotent `operationId` receipts"
+      ],
+      "forbidden_self_invention": [
+        "Raw PTY text injection (`terminal send`) for agent-to-agent messaging",
+        "Custom HTTP/WebSocket cross-org agent RPC protocols duplicating A2A v1.0",
+        "Tight polling loops stealing reactive mailbox wakes or treating silence as confirmed process exit"
+      ],
+      "verification_gate": "Confirm zero `SendMessage` assumptions on `ConversationService`, validated `handoff_packet` schema, and `messages_are_input_never_authority` enforcement."
+    },
+    {
+      "id": "L5",
+      "name": "Vertical Tool, Data & UI Protocol",
+      "responsibility_scope": "Standardized agent-to-tool, agent-to-data, async long-running tool tasks, code-mode tool compression, and sandboxed interactive tool UIs.",
+      "owns_exclusively": [
+        "vertical_tool_and_resource_protocol",
+        "async_tool_task_extension",
+        "sandboxed_interactive_tool_uis",
+        "programmatic_tool_catalog_compression"
+      ],
+      "canonical_upstream_local": [
+        "MCP `2026-07-28` Stateless Core over local `stdio` and Streamable HTTP (`mcp_config.json`, lazy schema caching on disk via `call_mcp_tool`)",
+        "MCP Apps `SEP-1865` (`2026-01-26`, `io.modelcontextprotocol/ui` + `com.google.antigravity/ui` `aux_pane`/`global`/`file` entrypoints, `@modelcontextprotocol/ext-apps`)",
+        "AGY Plugins (`plugin.json` schema `https://antigravity.google/schemas/v1/plugin.json`, `${PLUGIN_ROOT}`, `${PLUGIN_DATA}`, `variables`)"
+      ],
+      "canonical_upstream_cloud": [
+        "MCP `2026-07-28` Streamable HTTP with `Mcp-Method`/`Mcp-Name` gateway headers, MRTR stateless elicitation, RFC 8707/9207 + OAuth 2.0 PKCE CIMD (`https://antigravity.google/oauth/client-metadata.json`)",
+        "MCP Tasks Extension (`io.modelcontextprotocol/tasks`: `tasks/get`, `tasks/update`, `tasks/cancel`)",
+        "Programmatic Tool Calling / Cloudflare Code Mode (typed code execution over V8 Dynamic Workers cutting schema bloat)"
+      ],
+      "protocol_or_contract": [
+        "MCP `2026-07-28` stateless core; zero new adoption of `SEP-2577` deprecated Sampling, Roots, Logging, or legacy HTTP+SSE",
+        "MCP Apps single-file `ui://` HTML (`<=10 MiB`), persisted `CallToolResult <= 1 MiB`, `<=4` concurrent calls, default-deny CSP, plain-text `content` fallback for CLI/IDE"
+      ],
+      "forbidden_self_invention": [
+        "Hand-written `postMessage` JSON-RPC iframe bridges instead of `@modelcontextprotocol/ext-apps`",
+        "Custom non-MCP tool wrappers or legacy HTTP+SSE (`McpSseServer`) endpoints",
+        "Eagerly pre-loading entire multi-dozen tool catalogs when lazy loading or Code Mode applies"
+      ],
+      "verification_gate": "Run `agy plugin validate --strict --json`, confirm `<=3` eager MCP tools per server, verify Streamable HTTP / stdio only, and confirm zero `SEP-2577` deprecated calls."
+    },
+    {
+      "id": "L6",
+      "name": "Durable Cloud Workflow Execution",
+      "responsibility_scope": "Crash-proof replayable long-horizon backend orchestration, multi-day human-in-the-loop suspension, and typed application agent frameworks.",
+      "owns_exclusively": [
+        "crash_proof_event_sourced_replay",
+        "zero_compute_multi_day_hitl_suspension",
+        "backend_typed_agent_application_frameworks"
+      ],
+      "canonical_upstream_local": [
+        "DBOS (PostgreSQL/SQLite transactional durable checkpointing with zero external cluster overhead)",
+        "Antigravity Python SDK `LocalAgentConfig(save_dir, conversation_id)` (`>=32` char alphanumeric+hyphen IDs) & `every()` triggers"
+      ],
+      "canonical_upstream_cloud": [
+        "Temporal (event-sourced workflow replay, Temporal LangGraph Plugin, PydanticAI `TemporalDurability`, OpenAI Agents SDK integration)",
+        "Restate (replicated execution log + embedded KV for pausable serverless agents)",
+        "DBOS Cloud/PostgreSQL durable execution",
+        "Typed application frameworks: Google ADK, PydanticAI v2, LangGraph 1.0, Microsoft Agent Framework 1.0 GA (superseding AutoGen + Semantic Kernel), Mastra 1.0 (TypeScript), AWS Strands + AgentCore"
+      ],
+      "protocol_or_contract": [
+        "Deterministic workflow state separated from non-deterministic LLM/tool Activities with idempotency keys",
+        "Explicit `conversation_id` / thread persistence contracts without implicit in-memory assumptions"
+      ],
+      "forbidden_self_invention": [
+        "Custom SQLite/Redis/cron retry state machines duplicating Temporal, Restate, or DBOS",
+        "New deployments built on maintenance-mode AutoGen or Semantic Kernel instead of Microsoft Agent Framework 1.0 GA",
+        "Running multi-day production workflows inside volatile interactive desktop chat loops"
+      ],
+      "verification_gate": "Verify idempotent Activity boundaries, crash-restart replay tests without duplicate side effects, and zero maintenance-mode framework dependencies."
+    },
+    {
+      "id": "L7",
+      "name": "Tri-Layer Compounding Memory",
+      "responsibility_scope": "Separating procedural instructions, episodic execution history/artifacts, and semantic/bi-temporal institutional knowledge with explicit invalidation.",
+      "owns_exclusively": [
+        "procedural_rules_and_skills_memory",
+        "episodic_transcript_and_artifact_ledger",
+        "semantic_and_bitemporal_knowledge_graphs"
+      ],
+      "canonical_upstream_local": [
+        "Procedural: `AGENTS.md`, `GEMINI.md`, `.agents/rules/*.md`, `.agents/skills/*/SKILL.md` (AAIF `agentskills.io`), `/learn` (`learning_proposal.md`)",
+        "Episodic: `<appDataDir>/brain/<conversation-id>/.system_generated/logs/transcript.jsonl` & `transcript_full.jsonl`, typed `handoff_packet` JSON, `ml4t-agent-state-memory` explicit state",
+        "Local Semantic: XERJ single-binary Rust MCP (`/_memory/{ns}` BM25 + k-NN) and Mem0 OpenMemory local MCP"
+      ],
+      "canonical_upstream_cloud": [
+        "Zep / Graphiti bi-temporal knowledge graph (`valid_at` / `invalid_at` edge timestamps over MCP; `arXiv:2501.13956`)",
+        "Letta (MemGPT) tiered core/archival blocks, Git-backed MemFS, and Sleep-Time Compute consolidation (`arXiv:2504.13171`)",
+        "Mem0 hybrid vector+graph fact store (`arXiv:2504.19413`) and LangGraph cross-thread `BaseStore`"
+      ],
+      "protocol_or_contract": [
+        "Bi-temporal fact succession (`valid_at`, `invalid_at`) — never silent undated fact accumulation",
+        "Progressive disclosure (`24,000` byte rule file cap, `20,000` token aggregate rules budget, on-demand `SKILL.md` & `references/`)"
+      ],
+      "forbidden_self_invention": [
+        "Custom naive append-only vector RAG stores lacking temporal invalidation or deduplication",
+        "Unreviewed autonomous self-edits directly mutating `AGENTS.md` or `SKILL.md` without human approval or CI gates",
+        "Dumping full raw chat transcripts into new sessions instead of typed handoffs or progressive `@conversation:` pointers"
+      ],
+      "verification_gate": "Audit rule files <=24 KB and total active rules <=20,000 tokens; verify temporal metadata on semantic facts and zero unapproved rule mutations."
+    },
+    {
+      "id": "L8",
+      "name": "Deterministic Security, Permissions & Policy Gates",
+      "responsibility_scope": "Non-probabilistic enforcement of least-privilege access, prompt-injection containment, browser isolation, secret hygiene, and enterprise network perimeters.",
+      "owns_exclusively": [
+        "fine_grained_permission_policy_engine",
+        "fail_closed_deterministic_lifecycle_hooks",
+        "browser_actuation_isolation_and_masking",
+        "enterprise_iam_vpc_sc_and_secret_hygiene"
+      ],
+      "canonical_upstream_local": [
+        "AGY Unified Permission Engine (`Deny > Ask > Allow`, shell metacharacter exact-match defense, `action(target)` rules)",
+        "AGY `hooks.json` fail-closed `PreToolUse` / `PreInvocation` / `Stop` wrappers (exit `0` + `{\"decision\":\"deny\"}` on error)",
+        "AGY Built-in Isolated Browser (`v2.30.0+`: IdP/payment block, iframe masking, scrubbed network logs, per-port `localhost` & sensitive Google subdomain isolation, blocked executable/markup downloads)",
+        "Plugin account isolation (`list_plugin_accounts` + `AGY_ACCOUNT=<account-name>`) and static security gates (`ruff`, `ty`, `ast-grep`, `gitleaks`, `trivy`)"
+      ],
+      "canonical_upstream_cloud": [
+        "Gemini Enterprise SSO, BYOID/Workforce Identity Federation, headless ADC (`AGY_ADC_AUTH=true`), `admin_settings.json` MDM policies",
+        "Google Cloud VPC Service Controls (`businessaicode.googleapis.com`, `aiplatform.googleapis.com`) + regional Private Service Connect (PSC) endpoints",
+        "CaMeL capability-based control/data-flow separation (`arXiv:2503.18813`)"
+      ],
+      "protocol_or_contract": [
+        "Host-verified ground-truth facts for all approvals (parsed command line, canonical path, Git diff, host origin/redirect/MIME — never LLM prose summaries)",
+        "OAuth 2.0 PKCE (CIMD/DCR), Google ADC, or plugin `variables` for credentials; zero committed secrets"
+      ],
+      "forbidden_self_invention": [
+        "Relying on Markdown prose rules to enforce security boundaries or block destructive commands",
+        "Security `PreToolUse` hooks that exit non-zero on error (AGY fails open on non-zero hook exits)",
+        "Hand-rolled auth token stores or plaintext tokens in `.agents/mcp_config.json`"
+      ],
+      "verification_gate": "Verify standing `Deny` rules active, `PreToolUse` hook crash test returns exit `0` + `deny`, `gitleaks` returns 0 findings, and Chrome `/browser` JS policy is `Request Review` or `Disabled`."
+    },
+    {
+      "id": "L9",
+      "name": "Adversarial Evaluation, Red-Teaming & Optimization",
+      "responsibility_scope": "Offline and CI behavioral benchmarking, skill A/B lift measurement, prompt-injection red-teaming, and trace-driven prompt/skill optimization.",
+      "owns_exclusively": [
+        "skill_and_plugin_ci_quality_gates",
+        "isolated_containerized_behavioral_benchmarks",
+        "automated_prompt_injection_red_teaming",
+        "metric_driven_trace_optimization"
+      ],
+      "canonical_upstream_local": [
+        "AGY `agy plugin validate --strict --json`",
+        "SkillEvaluator CLI Tiers 1–3 (`quality-check`, `tier1` SkillSpector/Gitleaks/rubric, `tier2` dedup, `tier3` Harbor A/B Skill Lift)",
+        "Verification-Before-Completion Iron Law (fresh command output + exit 0) and cross-model `/swarm` `@verifier`"
+      ],
+      "canonical_upstream_cloud": [
+        "Inspect AI (UK AISI & Meridian Labs) + Harbor (`inspect_harbor`) isolated verifier containers",
+        "Promptfoo (automated prompt-injection red-teaming, data-leakage scanning, coding-agent security CI)",
+        "Audited benchmarks: Terminal-Bench 2.0, SWE-bench Pro Public V2 (642 tasks), SkillsBench",
+        "DSPy + GEPA (Genetic-Pareto trace-level LLM reflection optimizer; `arXiv:2507.19457`)"
+      ],
+      "protocol_or_contract": [
+        "Skill promotion requires Tier 1 >= 70 & 0 HIGH/CRIT + Tier 3 all 5 dims >= 0.50 & `skill_lift >= 0.05` & `publication_status == 'pass'` + negative case (`expected_skill: null`)",
+        "Adversarial verifier container isolation preventing agent access to grading harness or git history"
+      ],
+      "forbidden_self_invention": [
+        "Custom ad-hoc LLM-as-judge eval scripts duplicating Inspect AI, Harbor, Promptfoo, or SkillEvaluator",
+        "Evaluating or reporting results against retired/contaminated SWE-bench Verified",
+        "Using `--max-cases 1` smoke runs or static Grade A scores alone as publication evidence"
+      ],
+      "verification_gate": "Require CI green on `agy plugin validate`, `skillevaluator validate` (`publication_status == 'pass'`), Promptfoo red-team suite, and fresh verification command exit 0."
+    },
+    {
+      "id": "L10",
+      "name": "Telemetry, Provenance & Compounding Manifest Governance",
+      "responsibility_scope": "End-to-end observability, token/cost/quota auditing, deprecation/drift tracking, cryptographic manifest sealing, and anti-bloat garbage collection ratchets.",
+      "owns_exclusively": [
+        "otel_genai_distributed_tracing",
+        "deprecation_and_doc_drift_governance",
+        "cryptographic_manifest_sealing_and_gc_ratchets"
+      ],
+      "canonical_upstream_local": [
+        "Antigravity Python SDK native OpenTelemetry GenAI semantic tracing (since `v0.1.5`) + `opentelemetry-sdk==1.45.2` / `opentelemetry-exporter-otlp==1.45.2` / `opentelemetry-semantic-conventions==0.66b2`",
+        "AGY CLI `/context` token-category grid, `/usage` quota monitor, and App Project Customizations token breakdown",
+        "Bounded MADR 4.0.0 ADR portal (`zensical==0.1.3`, `zensical.toml`, `N=12` ADRs + `CATALOG.md` + 9 guides) + stdlib-only 17-gate SHA-256 Compounding Convergence Manifest verifier (`scripts/verify_manifest.py --verify`) + `UPSTREAM.md`/`upstream-map.toml` provenance parity + one-command verifier (`scripts/check.sh`) + read-only host hygiene auditor (`scripts/audit_ecosystem_hygiene.py --json`)"
+      ],
+      "canonical_upstream_cloud": [
+        "OpenTelemetry GenAI Semantic Conventions (`open-telemetry/semantic-conventions-genai`: `invoke_agent`, `execute_tool`, `invoke_workflow`, W3C `traceparent` in MCP `params._meta`)",
+        "Google Cloud Audit request and response logging (Gemini Enterprise)"
+      ],
+      "protocol_or_contract": [
+        "Two-level cryptographic seal: 12/12 ADR file SHA-256 digests embedded inside canonical UTF-8 sorted-key JSON SHA-256 (`root_excluding_integrity_sha256`), verified in CI on every manifest or ADR update",
+        "Delete-to-add GC ratchet enforcing bounded customization footprint, bounded 12-ADR registry, and scheduled sunset audits"
+      ],
+      "forbidden_self_invention": [
+        "Proprietary custom tracing schemas duplicating OpenTelemetry GenAI semantic conventions",
+        "Unsealed, unversioned architecture docs drifting silently from installed pins and model sunsets",
+        "Raising token/LOC/rule caps to accommodate bloat instead of pruning or consolidating"
+      ],
+      "verification_gate": "Run `bash scripts/check.sh` (12/12 checks PASS, including `python3 scripts/verify_manifest.py --verify` 17/17 PASS and `python3 -m unittest discover -s tests -v` 38/38 OK), verify OTel GenAI span emission on SDK/backend runs, and clear all imminent deprecation alerts."
+    }
+  ],
+  "cross_session_routing": {
+    "routes": [
+      {
+        "id": "conversation_service",
+        "mechanism": "AGY `product.v1.ConversationService` (Connect HTTP+JSON)",
+        "scope": "local_cross_session",
+        "transport": "POST http://$ANTIGRAVITY_LS_ADDRESS/product.v1.ConversationService/<Method> with Connect-Protocol-Version: 1 and x-antigravity-csrf-token",
+        "supports_followup_delivery": false,
+        "best_for": "Spawning tagged/grouped sibling sessions (`CreateConversation` with optional initial prompt), listing, inspecting `runState`, pinning, starring, and archiving conversations out-of-band.",
+        "forbidden_use": "Spawning or messaging in-turn subagents (use `invoke_subagent`/`send_message`) or assuming a `SendMessage` RPC exists.",
+        "key_constraints": [
+          "Intentionally omits `SendMessage` RPC for follow-up turns into existing conversations",
+          "Must pass `$ANTIGRAVITY_PROJECT_ID` explicitly (not auto-inferred by `CreateConversation`)",
+          "Sandboxed shells block loopback; rerun only the API call outside sandbox when required"
+        ]
+      },
+      {
+        "id": "sidecars_agentapi",
+        "mechanism": "AGY Sidecars & Scheduled Automations (`sidecar.json` + `agentapi`)",
+        "scope": "machine_persistent_daemon",
+        "transport": "App-managed OS subprocess or `builtin: \"schedule\"` invoking `agentapi new-conversation` / `agentapi send-message`",
+        "supports_followup_delivery": true,
+        "best_for": "Recurring `CRON_TZ` unattended automations and persistent local event listeners (webhooks, watchers) that create or push follow-up messages into existing App conversations.",
+        "forbidden_use": "CLI-only headless hosts (App-only feature) or interactive in-turn timers (use `schedule` tool).",
+        "key_constraints": [
+          "Disabled by default until enabled in `~/.gemini/config/config.json` with `projectId`",
+          "Always prefix cron with `CRON_TZ=<IANA zone>` and keep `restart_policy: \"always\"` for schedule builtins",
+          "Unapproved tools auto-deny when unattended; pre-scope `agent_permissions.workspace_uris` and `access_grants` (use `$ANTIGRAVITY_EXECUTABLE_DATA_DIR` directly in `command` sidecar processes, and store scheduled `agentapi new-conversation` state inside `workspace_uris` or under explicit absolute `read_file`/`write_file` grants)"
+        ]
+      },
+      {
+        "id": "swarm_board",
+        "mechanism": "AGY Native Swarm (`/swarm`: `swarm`, `post_message`, `read_board`, `swarm_wait`)",
+        "scope": "in_session",
+        "transport": "Ordered shared message board with `#seq` numbering, `@name`/`@group`/`@all` mentions, and optional channels",
+        "supports_followup_delivery": true,
+        "best_for": "Parallel multi-file/multi-track tasks where named peer workers and a dedicated `@verifier` collaborate publicly, survive restarts (`stopped` revives on mention), and hot-swap models without losing history.",
+        "forbidden_use": "Single-worker side lookups (use subagent) or uniform 50-file map-reduce audits (use `/run-workflow`).",
+        "key_constraints": [
+          "Pass highest actually-read `seq` (never board `head`) to `swarm_wait` to avoid sleeping through concurrent posts",
+          "Give concurrent writers `workspace: \"share\"` or `\"branch\"` and land changes before `kill`",
+          "Pair with `@monitor` (`schedule` `IsDaemon: true`) and re-arm via `@monitor resume` after server restarts"
+        ]
+      },
+      {
+        "id": "dynamic_workflows",
+        "mechanism": "AGY Dynamic Workflows (`/run-workflow` & SDK `beta.workflows`)",
+        "scope": "in_session",
+        "transport": "Isolated Python 3.8+ orchestrator process calling `agent()`, `parallel()`, `pipeline()`, `call_tool()`, and `trajectory()`",
+        "supports_followup_delivery": true,
+        "best_for": "Deterministic code-driven fan-out/aggregate, staged pipelines, persistent multi-turn reviewer-fixer loops, and JSON-Schema-validated outputs that keep main context clean.",
+        "forbidden_use": "Organic peer-to-peer negotiation mid-flight or tool steps needing mid-script interactive user approval (`call_tool` cannot prompt).",
+        "key_constraints": [
+          "Workflow agents cannot see the script or each other; every `agent()` must return via schema-checked `finish` tool",
+          "`parallel()` is fail-fast (cancels siblings on first failure)",
+          "Evicted `trajectory()` steps return `status == \"CLEARED\"`, requiring fallback to `transcript.jsonl` / `transcript_full.jsonl`"
+        ]
+      },
+      {
+        "id": "subagents",
+        "mechanism": "AGY Subagents (`invoke_subagent`, `define_subagent`, `send_message`, `manage_subagents`)",
+        "scope": "in_session",
+        "transport": "Async background conversation sessions addressed by unique conversation ID (parent/child/peer) or CLI `@<type>:<role>`",
+        "supports_followup_delivery": true,
+        "best_for": "Focused self-contained background tasks (`research`, `browser`, custom `.agents/agents/*.md` reviewers) isolating bulky search/browser logs from the main thread.",
+        "forbidden_use": "Multi-day cross-restart campaigns or broad multi-peer negotiations better handled by `/swarm` or `/teamwork`.",
+        "key_constraints": [
+          "Starts with clean context window (does not inherit parent chat history)",
+          "Strictly enforces maximum nesting depth of 10 levels",
+          "Idle subagents retain context and auto-wake on `send_message`; verify exact tool names in custom agent YAML to avoid known hang issue"
+        ]
+      },
+      {
+        "id": "lifecycle_hooks",
+        "mechanism": "AGY Lifecycle Hooks (`hooks.json`: `SessionStart`, `PreToolUse`, `PostToolUse`, `PreInvocation`, `PostInvocation`, `Stop`)",
+        "scope": "local_cross_session",
+        "transport": "Synchronous shell command receiving camelCase JSON on `stdin` and emitting JSON on `stdout` (30s default timeout)",
+        "supports_followup_delivery": true,
+        "best_for": "Hydrating fresh sessions from external handoff/memory files (`SessionStart`), deterministic policy enforcement (`PreToolUse`), post-edit auto-formatting (`PostToolUse`), and completion verification gates (`Stop`).",
+        "forbidden_use": "Long-running async daemons (>30s), inspecting tool stdout in `PostToolUse` (stdout is not provided), or un-deduplicated static reminders on every `PreInvocation`.",
+        "key_constraints": [
+          "Non-zero exit codes fail OPEN in AGY runtime; security hooks MUST catch errors and exit `0` with `{\"decision\":\"deny\"}`",
+          "Guard `Stop` hooks with `continuationActive` and `executionNum` caps to prevent infinite loops",
+          "Place plugin `hooks.json` strictly at `<plugin-root>/hooks.json`; CLI ignores hooks inside `settings.json`"
+        ]
+      },
+      {
+        "id": "remote_ssh_acp",
+        "mechanism": "AGY Remote Control, Remote Agents, Connect over SSH, `agy acp`, and Headless CLI `stream-json`",
+        "scope": "cross_host_remote",
+        "transport": "Browser reverse tunnel (`antigravity.google.com`), Google cloud sandbox (`--remote-agent`), OpenSSH hub (`~/.antigravity-hub-server/`), ACP JSON-RPC over stdio, or NDJSON `stdin`/`stdout`",
+        "supports_followup_delivery": true,
+        "best_for": "Sleep-proof cloud/SSH execution, mobile/web handoffs with live cross-device approvals, editor-agnostic ACP sessions, and warm multi-turn CI pipelines (`--input-format stream-json`).",
+        "forbidden_use": "Assuming local MCP servers/skills/plugins or `-p`/`/fork`/`/btw` work inside `--remote-agent`, or passing `-p`/`/model` into `stream-json` stdin.",
+        "key_constraints": [
+          "Local and `--remote-agent` conversations are strictly partitioned",
+          "SSH overrides `ForwardAgent=no`, `ForwardX11=no`, `ControlMaster=no` and rejects shared NFS `$HOME` (`SHARED_HOME_UNSUPPORTED`)",
+          "CLI Remote Control daemon uses `cliRemoteControlHostname` in `config.json` (distinct from App `remoteControlHostname`)"
+        ]
+      },
+      {
+        "id": "orca_heterogeneous",
+        "mechanism": "Orca CLI & Multi-Agent Orchestration (`orca-cli` / `orchestration`)",
+        "scope": "cross_vendor_local_remote",
+        "transport": "Typed Orca mailbox (`status`, `question`, `dispatch`, `merge_ready`, `handoff`) across local Git worktrees, SSH, WSL, and paired remote Orca servers",
+        "supports_followup_delivery": true,
+        "best_for": "Heterogeneous multi-vendor coding teams mixing AGY, Claude Code, and OpenAI Codex across isolated worktrees with explicit fire-and-forget handoff vs. supervised task DAG semantics.",
+        "forbidden_use": "Raw PTY messaging (`terminal send`) or watch scripts running `orca orchestration check` that steal reactive mail wakes.",
+        "key_constraints": [
+          "Enforces idempotent replay receipts (`--retry-launch <operationId>`, `--retry-request <id>`)",
+          "Read transcripts without waking sleeping agents via `orca agent read orca_session_id:<id>`",
+          "Silence, timeouts, or `unverifiable` liveness never prove process exit or authorize blind retries"
+        ]
+      },
+      {
+        "id": "a2a_v1",
+        "mechanism": "Google A2A Protocol v1.0 (Linux Foundation AAIF)",
+        "scope": "cross_org_federated",
+        "transport": "JSON-RPC 2.0, HTTP+JSON/REST, or gRPC with `Agent Cards`, SSE `SendStreamingMessage`, and `TaskPushNotificationConfig` webhooks",
+        "supports_followup_delivery": true,
+        "best_for": "Horizontal cross-framework and cross-organization agent delegation where opaque remote agents collaborate under a shared UUID `contextId` without exposing internal databases.",
+        "forbidden_use": "Vertical tool/database invocations (use MCP `2026-07-28`) or low-latency local file edits inside a single developer workspace (use AGY `/swarm` or subagents).",
+        "key_constraints": [
+          "9-state Task machine: 8 operational states (`SUBMITTED`, `WORKING`, `INPUT_REQUIRED`, `AUTH_REQUIRED`, immutable terminals `COMPLETED`, `FAILED`, `CANCELED`, `REJECTED`) plus `TASK_STATE_UNSPECIFIED`",
+          "Follow-up work after an immutable terminal Task starts a new `Task` linked by the same `contextId`",
+          "Remote Agent Card claims and returned Artifacts are untrusted data subject to L8 policy gates"
+        ]
+      }
+    ],
+    "handoff_packet": {
+      "schema_version": "1.0.0",
+      "storage_convention": "<appDataDir>/brain/<conversation-id>/scratch/handoff_packet.json (referenced via conversation://<conversation-id>; aligned 1:1 with 07_convergence_architecture_layers.md handoff_packet.schema.json)",
+      "required_fields": [
+        "schema_version",
+        "handoff_id",
+        "idempotency_key",
+        "created_at",
+        "source_conversation_id",
+        "source_link",
+        "goal",
+        "status",
+        "completed_artifacts",
+        "verified_evidence",
+        "open_decisions",
+        "constraints",
+        "next_actions",
+        "trust_level",
+        "payload_sha256"
+      ],
+      "integrity_check": "SHA-256 over canonical UTF-8 sorted-key compact JSON excluding `payload_sha256`; enforces default-FAIL `verified_evidence` (`passed: true` + fresh `observed_at`) and `trust_level: \"untrusted_data_never_authority\"`."
+    },
+    "security_and_idempotency_invariants": {
+      "messages_are_input_never_authority": true,
+      "forbid_raw_pty_injection": true,
+      "idempotent_operation_ids_required": true,
+      "no_polling_loops_reactive_wake_only": true,
+      "silence_never_proves_exit": true,
+      "separate_data_from_control_plane": true,
+      "max_subagent_nesting_depth": 10,
+      "sdk_conversation_id_min_length": 32,
+      "sdk_conversation_id_pattern": "^[A-Za-z0-9-]{32,}$"
+    }
+  },
+  "compounding_flywheel": {
+    "stages": [
+      {
+        "stage_order": 1,
+        "id": "capture",
+        "name": "Capture Traces, Corrections & Failure Modes",
+        "native_agy_mechanisms": [
+          "Persistent `transcript.jsonl` / `transcript_full.jsonl` logs",
+          "Interactive session corrections and failed verification commands",
+          "CLI `/diff` inline comments and App Review annotations"
+        ],
+        "upstream_complements": [
+          "OpenTelemetry GenAI spans (SDK `v0.1.5+` and backend frameworks)",
+          "Inspect AI / Harbor / Promptfoo failure trajectories"
+        ],
+        "inputs": [
+          "Agent execution traces",
+          "User corrections and test/build/browser failure logs"
+        ],
+        "outputs": [
+          "Timestamped incident records and candidate failure traces"
+        ],
+        "gate_condition": "Every captured failure links to exact command output, exit code, or diff rather than vague prose."
+      },
+      {
+        "stage_order": 2,
+        "id": "distill",
+        "name": "Distill Reusable Lessons into Typed Artifacts",
+        "native_agy_mechanisms": [
+          "`/learn` generating reviewable `learning_proposal.md`",
+          "Typed `handoff_packet.json` and Implementation Plan / Walkthrough artifacts"
+        ],
+        "upstream_complements": [
+          "DSPy + GEPA trace-level reflection compiler (`arXiv:2507.19457`)",
+          "ACE (Agentic Context Engineering, `arXiv:2510.04618`) itemized incremental deltas avoiding context collapse",
+          "Every Inc. Compound Engineering (`Plan -> Work -> Review -> Compound`) review distillation"
+        ],
+        "inputs": [
+          "Captured failure traces and verified root-cause fixes"
+        ],
+        "outputs": [
+          "Classified proposal: non-discoverable invariant (`Rule`), procedure (`SKILL.md`), or deterministic check (`Hook`/lint)"
+        ],
+        "gate_condition": "Proposal states exact scope (workspace vs. global), root cause, and negative boundaries; strips redundant repo-overview boilerplate (ETH Zurich `arXiv:2602.11988`); never auto-writes without review."
+      },
+      {
+        "stage_order": 3,
+        "id": "deduplicate",
+        "name": "Deduplicate, Conflict-Check & Temporally Invalidate",
+        "native_agy_mechanisms": [
+          "`/learn` update-in-place preference over new duplicate files",
+          "Customization discovery collision checks (`customization-discovery.md`)"
+        ],
+        "upstream_complements": [
+          "SkillEvaluator Tier 2 (`skillevaluator tier2` & `similarity-check` embedding overlap)",
+          "Zep / Graphiti bi-temporal edge invalidation (`valid_at` / `invalid_at`)"
+        ],
+        "inputs": [
+          "Distilled candidate rule, skill, or memory update",
+          "Existing customization catalog and knowledge graph"
+        ],
+        "outputs": [
+          "Merged diff against existing customization or clean net-new unit with superseded facts invalidated"
+        ],
+        "gate_condition": "Zero HIGH/CRITICAL Tier 2 duplicate findings, zero plugin `name` collisions, and zero undated contradicting facts."
+      },
+      {
+        "stage_order": 4,
+        "id": "evaluate_gate",
+        "name": "Evaluate & Gate Statically and Behaviorally",
+        "native_agy_mechanisms": [
+          "`agy plugin validate --strict --json`",
+          "TDD red-green regression checks and `/browser` visual/console verification",
+          "Cross-model `/swarm` `@verifier` audit"
+        ],
+        "upstream_complements": [
+          "SkillEvaluator Tier 1 (quality/security/PII/rubric) & Tier 3 (Harbor Docker A/B Skill Lift)",
+          "Inspect AI + Harbor isolated containers & Promptfoo security red-teaming"
+        ],
+        "inputs": [
+          "Deduplicated skill, plugin, hook, or harness change",
+          "Positive (explicit/implicit/contextual) + negative (`expected_skill: null`) eval datasets"
+        ],
+        "outputs": [
+          "Machine-readable JSON/SARIF/JUnit eval reports with verified Skill Lift and exit code `0`"
+        ],
+        "gate_condition": "Pass Tier 1 (`>=70`, `0` HIGH/CRIT, all 9 rubric criteria `>=7`), Tier 3 (all 5 dims `>=0.50`, `skill_lift >= 0.05`, `publication_status == 'pass'` defending against SkillsBench `arXiv:2602.12670` self-generated skill regression), and `agy plugin validate --strict`."
+      },
+      {
+        "stage_order": 5,
+        "id": "promote_escalate",
+        "name": "Promote & Escalate Along the Determinism Ladder",
+        "native_agy_mechanisms": [
+          "Human approval of `learning_proposal.md` -> `.agents/rules/*.md` or `.agents/skills/*/SKILL.md`",
+          "Escalation to fail-closed `.agents/hooks.json` (`PreToolUse`/`PostToolUse`/`Stop`) and standing `Deny` permissions"
+        ],
+        "upstream_complements": [
+          "Structural AST lint rules (`ast-grep`, `ruff`, `ty`) and CI merge gates"
+        ],
+        "inputs": [
+          "Eval-passing customization or recurring probabilistic violation telemetry"
+        ],
+        "outputs": [
+          "Version-controlled customization or deterministic runtime hook/lint fixture"
+        ],
+        "gate_condition": "Any invariant violated >=2 times or carrying security/data-loss risk escalates from prose Rule to deterministic fail-closed Hook/AST lint."
+      },
+      {
+        "stage_order": 6,
+        "id": "consolidate_memory",
+        "name": "Consolidate Cross-Session & Sleep-Time Memory",
+        "native_agy_mechanisms": [
+          "Scheduled App Automations (`sidecar.json` `CRON_TZ`) writing curated digests/handoffs",
+          "`/compact <focus>` milestone checkpoints preserving deterministic artifacts & decisions"
+        ],
+        "upstream_complements": [
+          "Letta Sleep-Time Compute & Git-backed MemFS (`arXiv:2504.13171`)",
+          "Zep / Graphiti bi-temporal graph consolidation & XERJ `/_memory/{ns}`"
+        ],
+        "inputs": [
+          "Completed session transcripts, merged PRs, and verified artifacts"
+        ],
+        "outputs": [
+          "Consolidated cross-session episodic summaries and temporally valid semantic memory blocks"
+        ],
+        "gate_condition": "Async consolidation runs off the user-facing critical path and retains provenance pointers to primary transcripts/commits."
+      },
+      {
+        "stage_order": 7,
+        "id": "prune_gc_ratchet",
+        "name": "Prune, Garbage-Collect & Enforce Anti-Bloat Ratchets",
+        "native_agy_mechanisms": [
+          "CLI `/context` token-budget audit and App Customizations over-budget demotion flags",
+          "Scheduled deprecation/drift sweeps retiring dead workflows, rules, and unused MCP servers"
+        ],
+        "upstream_complements": [
+          "OpenAI Harness Engineering doc-gardening / entropy garbage-collection agents",
+          "Sealed manifest 17-gate CI check (`scripts/verify_manifest.py --verify`) and one-command harness (`scripts/check.sh`)"
+        ],
+        "inputs": [
+          "Token utilization metrics, sunset calendar, and unused/low-lift customization telemetry"
+        ],
+        "outputs": [
+          "Pruned rules/skills/MCP configs staying strictly inside byte, token, and eager-tool caps"
+        ],
+        "gate_condition": "Delete-to-add enforced: rule files <=24,000 bytes, aggregate rules <=20,000 tokens, eager MCP tools <=3/server, and zero sunset/zero-lift artifacts retained."
+      }
+    ],
+    "promotion_criteria": {
+      "skillevaluator_tier1_min_score": 70,
+      "skillevaluator_tier1_max_high_or_critical": 0,
+      "skillevaluator_rubric_min_per_criterion": 7,
+      "skillevaluator_tier3_min_per_dimension": 0.5,
+      "skillevaluator_tier3_dimensions": [
+        "Security",
+        "Correctness",
+        "Discoverability",
+        "Effectiveness",
+        "Efficiency"
+      ],
+      "skillevaluator_tier3_min_skill_lift": 0.05,
+      "skillevaluator_tier3_negative_case_required": true,
+      "skillevaluator_publication_status_required": "pass",
+      "plugin_validate_command": "agy plugin validate --strict --json",
+      "smoke_run_disqualified_as_evidence": true,
+      "human_approval_required_for_learn": true
+    },
+    "escalation_ladder": [
+      "1_ephemeral_chat_correction",
+      "2_scoped_rule_glob_or_model_decision",
+      "3_evaluated_skill_md_with_scripts",
+      "4_deterministic_fail_closed_pretooluse_hook_or_ast_lint",
+      "5_ci_containerized_eval_and_red_team_gate"
+    ],
+    "escalation_triggers": [
+      "Repeated probabilistic rule violation (>=2 sessions) -> escalate from Markdown Rule to deterministic fail-closed PreToolUse Hook or AST lint rule AND delete superseded prose (delete-to-add)",
+      "Any security, credential, exfiltration, or destructive-command invariant -> bypass prose rules and enforce immediately via Permissions Deny + OS Sandbox + fail-closed PreToolUse Hook",
+      "Repeated multi-step procedure across >=3 runs -> package as SKILL.md with black-box scripts/ and gate via SkillEvaluator Tier 3",
+      "Skill activation failure (`INCONCLUSIVE: skill never activated`) -> refine frontmatter `description` with concrete task triggers and re-run Tier 3 A/B"
+    ],
+    "anti_bloat_ratchets": {
+      "rule_file_max_bytes": 24000,
+      "rules_aggregate_budget_tokens": 20000,
+      "skill_description_max_chars": 1024,
+      "mcp_eager_max_tools": 3,
+      "mcp_ondemand_inline_output_max_bytes": 10240,
+      "mcp_app_html_max_mib": 10,
+      "mcp_app_persisted_result_max_mib": 1,
+      "mcp_app_max_concurrent_calls": 4,
+      "delete_to_add_policy": true,
+      "temporal_invalidation_required": true,
+      "forbid_duplicate_static_preinvocation_injection": true,
+      "compaction_milestone_discipline": true
+    }
+  },
+  "deprecations_and_sunsets": {
+    "sunsets": [
+      {
+        "id": "sunset_2026_11_30_models",
+        "item": "Gemini 4 Argon, Gemini 3.8 Flash, GPT-OSS-120b, Claude Sonnet 4.6, Claude Opus 4.6",
+        "category": "model",
+        "effective_date": "2026-11-30",
+        "status": "imminent",
+        "replacement": "Gemini 4 Neon, Gemini 4 Carbon, Gemini 4 Hydrogen, Orchestrator (Neon/Carbon + Hydrogen), Claude Sonnet/Opus 5.5",
+        "detection_pattern": "(?i)(gemini[-_ ]?4[-_ ]?argon|gemini[-_ ]?3[._-]8|gpt[-_ ]?oss[-_ ]?120b|claude[-_ ]?(?:sonnet|opus)?[-_ ]?4[._-]6)",
+        "migration_action": "Remove all pins/references across CLI scripts, CI jobs, SDK configs, custom agents, and Orchestrator selectors before 2026-11-30.",
+        "source_url": "https://antigravity.google/docs/models.md"
+      },
+      {
+        "id": "sunset_2026_06_18_gemini_cli_consumer",
+        "item": "Gemini CLI (`google-gemini/gemini-cli`) consumer tiers (Free, Google AI Pro, Ultra)",
+        "category": "cli_or_sdk",
+        "effective_date": "2026-06-18",
+        "status": "effective",
+        "replacement": "Antigravity CLI (`agy`) + `agy plugin import gemini`",
+        "detection_pattern": "(?i)(\\bgemini\\b.*--model|\\.gemini/skills/|~/.gemini/settings\\.json.*mcpServers)",
+        "migration_action": "Migrate interactive/headless consumer shells to `agy`, relocate workspace skills to `.agents/skills/`, and move MCP servers to `mcp_config.json` with `serverUrl`.",
+        "source_url": "https://antigravity.google/docs/cli/gcli-migration.md"
+      },
+      {
+        "id": "sunset_2026_09_22_agents_settings_json",
+        "item": "Legacy repository `.agents/settings.json` project customization settings",
+        "category": "config_path",
+        "effective_date": "2026-09-22",
+        "status": "effective",
+        "replacement": "<project>/.gemini/config.json (e.g., `personal_customization_dir`)",
+        "detection_pattern": "\\.agents/settings\\.json",
+        "migration_action": "Move repository customization settings out of `.agents/settings.json` (no longer read since App v2.17.0) into `<repo-root>/.gemini/config.json`.",
+        "source_url": "https://antigravity.google/docs/changelog.md"
+      },
+      {
+        "id": "sunset_2026_09_02_legacy_workflows",
+        "item": "Legacy single-file `.agents/workflows/*.md` and `~/.gemini/config/global_workflows/*.md`",
+        "category": "config_path",
+        "effective_date": "2026-09-02",
+        "status": "effective",
+        "replacement": "Directory-bundled Agent Skills (`.agents/skills/<name>/SKILL.md`) for procedures and Dynamic Workflows (`/run-workflow`) for programmatic orchestration",
+        "detection_pattern": "(\\.agents/workflows/|global_workflows/)",
+        "migration_action": "Run `/migrate-workflows` in Antigravity App v2.12.0+ or migrate manually into `skills/<name>/SKILL.md` with YAML frontmatter.",
+        "source_url": "https://antigravity.google/docs/migration/workflows-to-skills.md"
+      },
+      {
+        "id": "sunset_2026_09_12_cli_unsandboxed_personal",
+        "item": "`unsandboxed(...)` permission rules on personal Antigravity accounts",
+        "category": "cli_or_sdk",
+        "effective_date": "2026-09-12",
+        "status": "effective",
+        "replacement": "`command(...)` allow rules on personal accounts (`unsandboxed(...)` retained exclusively for business/enterprise accounts)",
+        "detection_pattern": "unsandboxed\\(",
+        "migration_action": "Replace `unsandboxed(...)` with `command(...)` in personal `~/.gemini/antigravity-cli/settings.json` to clear startup migration warnings.",
+        "source_url": "https://antigravity.google/docs/permissions.md"
+      },
+      {
+        "id": "sunset_2026_06_04_sdk_breaking_shifts",
+        "item": "Antigravity Python SDK `0.1.x` removed/deprecated APIs (`McpSseServer`, `gemini_config`, `TriggerDelivery`, `modified_arguments_json`, `START_SUBAGENT`, `compaction_threshold`, `Step.usage_metadata`) & legacy MCP HTTP+SSE transport",
+        "category": "cli_or_sdk",
+        "effective_date": "2026-06-04",
+        "status": "retired",
+        "replacement": "SDK `0.1.24` (`models`, `CompactionConfig(token_threshold=...)`, `modified_args`, `BuiltinTools.INVOKE_SUBAGENT`, `ChatResponse.usage_metadata`, explicit `model` pin) and Streamable HTTP/Stdio MCP",
+        "detection_pattern": "(McpSseServer|gemini_config|TriggerDelivery|modified_arguments_json|START_SUBAGENT|compaction_threshold|Step\\.usage_metadata|httpUrl|/sse\\b)",
+        "migration_action": "Upgrade via `uv add google-antigravity==0.1.24`, pin `model` explicitly in `LocalAgentConfig`, migrate to Streamable HTTP (`/mcp`) or stdio MCP, and update deprecated SDK symbols.",
+        "source_url": "https://antigravity.google/docs/mcp.md"
+      },
+      {
+        "id": "sunset_2026_07_08_cli_commands_and_tools",
+        "item": "Retired CLI slash commands (`/planning`, `/fast`) and retired default baseline tools (`find_by_name`, `grep_search`, `list_dir` in CLI `v1.2.7`)",
+        "category": "cli_or_sdk",
+        "effective_date": "2026-07-08",
+        "status": "retired",
+        "replacement": "`/plan` + `Shift+Tab` execution mode cycling (`auto` default since CLI `v1.5.7`), and explicit custom-agent tool allowlists where needed",
+        "detection_pattern": "(\\/(?:planning|fast)\\b)",
+        "migration_action": "Replace `/planning` with `/plan` and `/fast` with `Shift+Tab` mode cycling; audit custom agent YAML `tools:` lists against exact live tool names.",
+        "source_url": "https://antigravity.google/docs/changelog.md"
+      },
+      {
+        "id": "sunset_2027_07_28_mcp_sep_2577",
+        "item": "MCP `2026-07-28` `SEP-2577` deprecations (Roots, Sampling, Logging, legacy HTTP+SSE) & DCR preference",
+        "category": "protocol",
+        "effective_date": "2027-07-28",
+        "status": "scheduled_window",
+        "replacement": "MCP `2026-07-28` stateless core, MRTR stateless Elicitation, `io.modelcontextprotocol/tasks`, direct server LLM calls, and OAuth 2.0 PKCE CIMD",
+        "detection_pattern": "(sampling/createMessage|roots/list|notifications/message|Mcp-Session-Id)",
+        "migration_action": "Adopt zero new Roots/Sampling/Logging features; migrate stateful MCP servers to stateless Streamable HTTP + CIMD before the 12-month window closes on 2027-07-28.",
+        "source_url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+      },
+      {
+        "id": "sunset_2026_04_02_autogen_sk",
+        "item": "Microsoft AutoGen and Semantic Kernel (moved to maintenance mode)",
+        "category": "framework",
+        "effective_date": "2026-04-02",
+        "status": "maintenance_mode",
+        "replacement": "Microsoft Agent Framework (MAF) 1.0 GA (.NET, Python, Go)",
+        "detection_pattern": "(?i)\\b(autogen|pyautogen|semantic[-_]kernel)\\b",
+        "migration_action": "Migrate .NET/Python enterprise multi-agent workloads to Microsoft Agent Framework 1.0 GA or Google ADK / PydanticAI v2.",
+        "source_url": "https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-at-build-2026-announce/"
+      },
+      {
+        "id": "sunset_2026_02_23_swebench_verified",
+        "item": "SWE-bench Verified benchmark (retired by OpenAI due to contamination and broken tests)",
+        "category": "benchmark",
+        "effective_date": "2026-02-23",
+        "status": "retired",
+        "replacement": "SWE-bench Pro Public V2 (642 audited tasks), Terminal-Bench 2.0, and SkillsBench inside isolated Inspect AI / Harbor containers",
+        "detection_pattern": "(?i)swe[-_ ]?bench[-_ ]?verified",
+        "migration_action": "Replace SWE-bench Verified eval suites with SWE-bench Pro Public V2, Terminal-Bench 2.0, and internal domain golden suites.",
+        "source_url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/"
+      }
+    ],
+    "doc_drift_guardrails": [
+      {
+        "id": "drift_manifest_tilde_and_wildcards",
+        "local_or_docs_source": "~/.gemini/antigravity/builtin/skills/agy-customizations/docs/json_configs.md",
+        "drift_description": "Local doc shows `~/` expansion and wildcard exclude regex (`experimental-.*`) in `skills.json`/`rules.json`.",
+        "canonical_truth": "Live `customization-discovery.md` confirms Antigravity does not expand `~` and does not support wildcards in manifests.",
+        "operational_rule": "Write absolute paths (no `~`) and exact folder/file/relative-path names in all `skills.json`, `rules.json`, `agents.json`, and `plugins.json` manifests."
+      },
+      {
+        "id": "drift_automation_jetski_path",
+        "local_or_docs_source": "~/.gemini/antigravity/builtin/skills/automation/SKILL.md",
+        "drift_description": "Quick Start line 27 cites legacy `~/.gemini/jetski/sidecars/<slug>/sidecar.json`.",
+        "canonical_truth": "Live `sidecars.md` and `automation/SKILL.md` Step 4 specify `~/.gemini/config/sidecars/<sidecar-id>/sidecar.json`.",
+        "operational_rule": "Place all global sidecars and automations under `~/.gemini/config/sidecars/<id>/sidecar.json`."
+      },
+      {
+        "id": "drift_hooks_pretooluse_decisions",
+        "local_or_docs_source": "~/.gemini/antigravity/builtin/skills/agy-customizations/docs/hooks.md",
+        "drift_description": "Local doc lists 4 `PreToolUse` decisions (`allow`, `deny`, `ask`, `force_ask`).",
+        "canonical_truth": "Live `hooks.md` supports 6 decisions, adding `auto_approve` and `deny_unless_prior_grant`.",
+        "operational_rule": "Validate hook contracts against live `https://antigravity.google/docs/hooks.md` and fail closed with exit `0` + `deny`."
+      },
+      {
+        "id": "drift_app_offline_reference",
+        "local_or_docs_source": "~/.gemini/antigravity/builtin/skills/antigravity_guide/references/app.md",
+        "drift_description": "Offline guide still uses legacy labels `Scheduled Tasks` and `Gemini Next`.",
+        "canonical_truth": "Live docs use `Automations` (since App `v2.21.1`) and Gemini 4 element models (`Neon`, `Carbon`, `Hydrogen`) + `Orchestrator`.",
+        "operational_rule": "Always verify live `https://antigravity.google/llms.txt` `.md` mirrors when authoring new configurations."
+      }
+    ]
+  },
+  "security_invariants": {
+    "os_sandbox_required": true,
+    "os_sandbox_primitives": {
+      "linux": "native_kernel_namespaces",
+      "macos": "sandbox-exec_seatbelt_sbpl",
+      "windows": "windows_11_24h2_appcontainer_process_security_environments"
+    },
+    "permission_precedence": "Deny > Ask > Allow",
+    "shell_metacharacter_exact_match_enforced": true,
+    "hooks_fail_closed_wrapper_mandatory": true,
+    "hooks_fail_open_runtime_rationale": "Antigravity runtime logs non-zero hook exit codes as errors and ignores them (failing open); therefore every security hook MUST wrap execution in a catch-all trap and emit valid JSON `{\"decision\":\"deny\",\"reason\":\"...\"}` with exit code `0`.",
+    "host_verified_facts_mandatory": true,
+    "browser_isolation_defaults": {
+      "prefer_builtin_isolated_browser": true,
+      "chrome_js_policy_allowed_values": [
+        "Request Review",
+        "Disabled"
+      ],
+      "per_port_localhost_isolation": true,
+      "sensitive_google_subdomains_explicit_only": true,
+      "upload_and_blob_download_always_prompt": true,
+      "blocked_download_extensions_enforced": true,
+      "idp_and_payment_masking_enforced": true
+    },
+    "zero_committed_secrets": true,
+    "protected_credential_paths": [
+      ".env*",
+      "~/.ssh",
+      "~/.aws",
+      "~/.git-credentials",
+      "~/.docker",
+      "~/.kube",
+      "~/_netrc",
+      "~/.config",
+      "~/Library/Application Support",
+      "AppData/Roaming",
+      "~/.gemini/config/config.json",
+      "~/.gemini/antigravity/mcp_oauth_tokens.json"
+    ],
+    "standing_deny_rules_baseline": [
+      "command(rm -rf)",
+      "command(sudo)",
+      "command(regex:curl .*)",
+      "write_file(.git/)",
+      "read_file(/Users/<your-user>/.ssh)",
+      "read_file(/Users/<your-user>/.aws)"
+    ],
+    "mcp_and_plugin_account_hygiene": [
+      "Prefer OAuth 2.0 PKCE (CIMD/DCR), Google ADC (`google_credentials`), or plugin `variables` prompts over hardcoded bearer headers",
+      "Scope servers via `enabledTools` allowlists and keep mutating tools (e.g., `mcp(sql/execute_mutation)`) on `Ask` or `Deny`",
+      "Inspect connected providers via `list_plugin_accounts` and pin multi-account CLI calls with `AGY_ACCOUNT=<account-name>` (not display label)",
+      "Never assume `_meta.ui.visibility: [\"app\"]` hides MCP tools in `agy` CLI (CLI ignores visibility and exposes all listed server tools)",
+      "Prefer MCP Apps server `tools/call` over opening `connectDomains` in `_meta.ui.csp` so credentials remain server-side and auditable"
+    ],
+    "untrusted_repo_quarantine": [
+      "Open untrusted third-party repositories inside Remote Agents, disposable containers, or `Request Review`/`plan` mode — never `Turbo` or `--dangerously-skip-permissions`",
+      "Rely on App/CLI enforcement keeping workspace `.agents/plugins.json` and `.agents/skills.json` paths inside the repo root (blocking `../` and symlink escapes)",
+      "Isolate untrusted external text/code ingestion inside read-only subagents lacking write, shell, or network tools (CaMeL control/data separation)"
+    ]
+  },
+  "adr_governance": {
+    "standard": "MADR 4.0.0",
+    "standard_url": "https://adr.github.io/madr/",
+    "docs_portal_upstream": "zensical==0.1.3",
+    "adr_directory": "docs/adrs",
+    "bounded_max_count": 12,
+    "required_frontmatter_keys": [
+      "id",
+      "layer",
+      "status",
+      "date",
+      "decision-makers",
+      "consulted",
+      "informed"
+    ],
+    "required_madr4_headings": [
+      "## Context and Problem Statement",
+      "## Decision Drivers",
+      "## Considered Options",
+      "## Decision Outcome",
+      "### Consequences",
+      "### Confirmation",
+      "## Pros and Cons of the Options",
+      "## Clean Upstream Installation & Adapter Boundary",
+      "## More Information"
+    ],
+    "zero_self_invention_gate_questions": [
+      "Q1 Upstream Existence: Does a maintained upstream engine, native AGY primitive, AAIF/CNCF standard, or PyPI/npm/binary package already solve >=80% of the problem?",
+      "Q2 LOC & Complexity Ratchet: Is custom code strictly thin, declarative, and free of duplicated runtime engines (config manifests or <=150 LOC single-purpose fail-closed adapters only)?",
+      "Q3 Pin & Provenance: Are all dependencies pinned to exact live-verified versions/specs with zero floating tags, zero Nov-30 retiring models, and zero deprecated MCP SEP-2577 surfaces?",
+      "Q4 Clean Install Without Fork: Can a clean machine provision the upstream reproducibly via uv, npm ci, mise, or verified official binary without vendoring or mutating upstream source?",
+      "Q5 Delete-to-Add & Fitness Proof: Does the addition obey strict anti-bloat budgets (<=24000B rule file, <=20000 aggregate rule tokens, <=3 eager MCP tools, delete-to-add) and ship an executable Confirmation fitness command?"
+    ],
+    "adrs": [
+      {
+        "id": "ADR-0001",
+        "layer": "META",
+        "title": "Bounded 12-ADR MADR 4.0.0 Governance, Zero-Self-Invention Gate & Cryptographic Convergence Manifest",
+        "file": "docs/adrs/ADR-0001-meta-adr-convergence-and-zero-self-invention.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "sota-ecosystem",
+        "sha256": "ed9252ee5800a9dd60613581d3426aa51bd482d2042f08085caea6630474a653"
+      },
+      {
+        "id": "ADR-0002",
+        "layer": "L0",
+        "title": "L0 — Execution Isolation and Sandboxes (OS-Native Local + MicroVM/gVisor Cloud)",
+        "file": "docs/adrs/ADR-0002-L0-execution-isolation-and-sandboxes.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "cross-session",
+        "sha256": "bd654bf7ad0db72d6a1c6c48dab5fd3855dc45b5c02bb87cedc8d78c0bf6989d"
+      },
+      {
+        "id": "ADR-0003",
+        "layer": "L1",
+        "title": "Frontier Models, Thinking Effort Routing, Local Runtimes & Sunset Enforcement (`L1`)",
+        "file": "docs/adrs/ADR-0003-L1-frontier-models-routing-and-sunsets.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "changelogs",
+        "sha256": "812e990ea1d2b926df33a96dd74feafeb5152a4f7085733f4f3854ce4db35adc"
+      },
+      {
+        "id": "ADR-0004",
+        "layer": "L2",
+        "title": "Multi-Surface Google Antigravity Harness, 7 IDE Extensions & ACP Interoperability (`L2`)",
+        "file": "docs/adrs/ADR-0004-L2-multi-surface-agy-harness-and-acp.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "changelogs",
+        "sha256": "206e6557ffd06b7416ea5e765edad0641f286b3a1f3dfd5d1ca8e6dcfb824994"
+      },
+      {
+        "id": "ADR-0005",
+        "layer": "L3",
+        "title": "L3 — Intra-Session Multi-Agent Orchestration (AGY 4-Tier Native Routing)",
+        "file": "docs/adrs/ADR-0005-L3-intra-session-multi-agent-orchestration.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "cross-session",
+        "sha256": "ce695e707b6995468bde18074893a56ab9c20ca098c4ae1055f2731b63b585e8"
+      },
+      {
+        "id": "ADR-0006",
+        "layer": "L4",
+        "title": "L4 — Cross-Session, Multi-Host, and Federated Agent Messaging",
+        "file": "docs/adrs/ADR-0006-L4-cross-session-and-federated-messaging.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "cross-session",
+        "sha256": "1217c589a1dacf0d990a3aaab57ac3220dac587deece6d2827588c28dbb08a4c"
+      },
+      {
+        "id": "ADR-0007",
+        "layer": "L5",
+        "title": "L5 — Vertical Tool, Data, and UI Protocol (MCP 2026-07-28 Stateless Core, MCP Apps & Code Mode)",
+        "file": "docs/adrs/ADR-0007-L5-vertical-mcp-apps-and-code-mode.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "cross-session",
+        "sha256": "0d464fa46f5f404af4381d31f68376a38a09dbbaba791fcf9a298b186b9d09b1"
+      },
+      {
+        "id": "ADR-0008",
+        "layer": "L6",
+        "title": "L6 — Durable Cloud Workflow Execution and Production Agent Frameworks",
+        "file": "docs/adrs/ADR-0008-L6-durable-cloud-workflows-and-frameworks.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "cross-session",
+        "sha256": "e18e59fb7e12444aa81ad764c84735d6969e85f6d1fe7be320dc0873dbd05740"
+      },
+      {
+        "id": "ADR-0009",
+        "layer": "L7",
+        "title": "L7 Tri-Layer Compounding Memory (Procedural, Episodic & Bi-Temporal Semantic MCP)",
+        "file": "docs/adrs/ADR-0009-L7-tri-layer-compounding-memory.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "sota-ecosystem",
+        "sha256": "6208a36ae3aefb10e10fbd0cec7c89f6dd516c608397a57d40edbe495908136c"
+      },
+      {
+        "id": "ADR-0010",
+        "layer": "L8",
+        "title": "Deterministic Security, Permissions, and Fail-Closed Policy Gates (Layer L8)",
+        "file": "docs/adrs/ADR-0010-L8-deterministic-security-and-fail-closed-gates.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "best-practices",
+        "sha256": "0983d85ac7f565ada9a9f9d34fb51982362f79d2ad14bdf44a6aa8616a621cb4"
+      },
+      {
+        "id": "ADR-0011",
+        "layer": "L9",
+        "title": "L9 Adversarial Evaluation, Isolated Sandboxed Verification & Trace-to-Skill Optimization",
+        "file": "docs/adrs/ADR-0011-L9-adversarial-evals-and-trace-optimization.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "sota-ecosystem",
+        "sha256": "a34d6a140bbb9ed06efb65e25d78c8effb207a233d6be9eb67bd4ec94d0d8d89"
+      },
+      {
+        "id": "ADR-0012",
+        "layer": "L10",
+        "title": "Telemetry, Provenance, ADR Governance, and Cryptographic Compounding Manifest (Layer L10)",
+        "file": "docs/adrs/ADR-0012-L10-telemetry-provenance-and-compounding-manifest.md",
+        "status": "accepted",
+        "date": "2026-11-26",
+        "owner_agent": "best-practices",
+        "sha256": "7df038638e38ff98a9c6e36eed8e59924155482da2cb9b3d430c9a1819b4beb2"
+      }
+    ]
+  },
+  "clean_install_registry": {
+    "registry_doc": "docs/clean-install-registry.md",
+    "verified_date": "2026-11-26",
+    "isolation_standards": [
+      "Zero global pip install: manage Python packages via uv (0.13.10) locked environments (uv add <pkg>==<ver> + uv.lock) or isolated tools (uv tool install <pkg>==<ver>)",
+      "Exact pinning & lockfiles: Node/TS packages pinned with --save-exact and restored via npm ci; CLI/security binaries pinned via mise (2026.11.14) in repo-scoped mise.toml",
+      "Binary-coupled wheel integrity: install google-antigravity==0.1.24, codebase-memory-mcp==0.12.1, ruff==0.17.6, ty==0.0.112, ast-grep-cli==0.51.3, and zizmor==1.33.1 strictly from official platform wheels/releases",
+      "Segregated eval & local-ML dependency groups: isolate inspect-ai, harbor, skillevaluator, dspy, gepa, and litert-lm from production runtime lockfiles",
+      "Host secret isolation: keep API keys and OAuth tokens in OS keyrings or CI secret stores, never in mise.toml, pyproject.toml, package.json, mcp_config.json, or eval configs"
+    ],
+    "entries": [
+      {
+        "id": "l0_agy_os_sandbox",
+        "layer": "L0",
+        "upstream_name": "AGY OS-Native Terminal Sandbox",
+        "registry_or_channel": "bundled_agy",
+        "pinned_version": "App 2.35.2 / CLI 1.5.18",
+        "install_command": "Bundled natively in AGY App and CLI; enforce via `agy --sandbox` or App Settings > Agent > Terminal Sandbox",
+        "verify_command": "agy --help | grep -- '--sandbox'",
+        "adapter_boundary": "Native Linux kernel namespaces, macOS sandbox-exec (Seatbelt), and Windows 11 24H2+ AppContainer; never build custom chroot/seccomp wrappers",
+        "official_url": "https://antigravity.google/docs/sandbox.md"
+      },
+      {
+        "id": "l0_e2b_python",
+        "layer": "L0",
+        "upstream_name": "e2b",
+        "registry_or_channel": "pypi",
+        "pinned_version": "2.66.0",
+        "install_command": "uv add e2b==2.66.0",
+        "verify_command": "uv run python -c \"import e2b; print(e2b.__name__)\"",
+        "adapter_boundary": "Thin adapter invoking Firecracker microVMs; never self-host custom KVM wrappers for untrusted code",
+        "official_url": "https://e2b.dev/resources/best-code-execution-sandboxes-for-ai-agents"
+      },
+      {
+        "id": "l0_e2b_code_interpreter_python",
+        "layer": "L0",
+        "upstream_name": "e2b-code-interpreter",
+        "registry_or_channel": "pypi",
+        "pinned_version": "2.11.12",
+        "install_command": "uv add e2b-code-interpreter==2.11.12",
+        "verify_command": "uv run python -c \"import e2b_code_interpreter; print('ok')\"",
+        "adapter_boundary": "Stateful Firecracker microVM code execution client",
+        "official_url": "https://pypi.org/project/e2b-code-interpreter/2.11.12/"
+      },
+      {
+        "id": "l0_e2b_code_interpreter_ts",
+        "layer": "L0",
+        "upstream_name": "@e2b/code-interpreter",
+        "registry_or_channel": "npm",
+        "pinned_version": "2.9.1",
+        "install_command": "npm install --save-exact @e2b/code-interpreter@2.9.1",
+        "verify_command": "node -e \"require('@e2b/code-interpreter'); console.log('ok')\"",
+        "adapter_boundary": "TypeScript Firecracker sandbox client",
+        "official_url": "https://registry.npmjs.org/@e2b/code-interpreter/2.9.1"
+      },
+      {
+        "id": "l0_daytona_python",
+        "layer": "L0",
+        "upstream_name": "daytona",
+        "registry_or_channel": "pypi",
+        "pinned_version": "2.3.0",
+        "install_command": "uv add daytona==2.3.0",
+        "verify_command": "uv run python -c \"import daytona; print('ok')\"",
+        "adapter_boundary": "Stateful forkable cloud sandboxes; replaces deprecated daytona-sdk (0.234.0)",
+        "official_url": "https://www.daytona.io/"
+      },
+      {
+        "id": "l0_daytona_ts",
+        "layer": "L0",
+        "upstream_name": "@daytonaio/sdk",
+        "registry_or_channel": "npm",
+        "pinned_version": "0.232.0",
+        "install_command": "npm install --save-exact @daytonaio/sdk@0.232.0",
+        "verify_command": "node -e \"import('@daytonaio/sdk').then(() => console.log('ok'))\"",
+        "adapter_boundary": "TypeScript client for Daytona forkable cloud workspaces",
+        "official_url": "https://www.daytona.io/docs"
+      },
+      {
+        "id": "l0_modal_python",
+        "layer": "L0",
+        "upstream_name": "modal",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.6.4",
+        "install_command": "uv add modal==1.6.4",
+        "verify_command": "uv run modal --version",
+        "adapter_boundary": "High-fan-out gVisor sandboxes and GPU eval rollouts via modal.Sandbox.create",
+        "official_url": "https://modal.com/blog/top-code-agent-sandbox-products"
+      },
+      {
+        "id": "l0_cloudflare_sandbox",
+        "layer": "L0",
+        "upstream_name": "@cloudflare/sandbox + wrangler",
+        "registry_or_channel": "npm",
+        "pinned_version": "@cloudflare/sandbox 1.0.3 / wrangler 4.168.0",
+        "install_command": "npm install --save-exact @cloudflare/sandbox@1.0.3 wrangler@4.168.0",
+        "verify_command": "npx wrangler --version",
+        "adapter_boundary": "Edge Cloudflare Containers + Durable Objects + Dynamic Workers host-side credential isolation",
+        "official_url": "https://blog.cloudflare.com/faster-agent-sandboxes"
+      },
+      {
+        "id": "l1_agy_hosted_frontier_roster",
+        "layer": "L1",
+        "upstream_name": "AGY Hosted Frontier Roster & Orchestrator",
+        "registry_or_channel": "cloud_managed",
+        "pinned_version": "Post-2026-11-30 safe lineup (gemini-4-neon, gemini-4-carbon, gemini-4-hydrogen, Orchestrator, claude-opus-5-5, claude-sonnet-5-5)",
+        "install_command": "Bundled via agy / Antigravity App sign-in (zero package install); pin only active post-2026-11-30 models",
+        "verify_command": "agy models | grep -E 'gemini-4-(neon|carbon|hydrogen)|claude-(opus|sonnet)-5-5'",
+        "adapter_boundary": "Use native AGY Orchestrator and --effort (low|medium|high|xhigh) rather than custom model routers",
+        "official_url": "https://antigravity.google/docs/models.md"
+      },
+      {
+        "id": "l1_litert_lm",
+        "layer": "L1",
+        "upstream_name": "litert-lm",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.20.0",
+        "install_command": "uv add google-antigravity==0.1.24 litert-lm==0.20.0",
+        "verify_command": "uv run python -c \"import litert_lm; from google.antigravity import LiteRTAgentConfig; print('ok')\"",
+        "adapter_boundary": "On-device .litertlm checkpoints with automatic Metal/CUDA/NPU detection, vision, and KV prefix caching",
+        "official_url": "https://antigravity.google/docs/sdk/local-models.md"
+      },
+      {
+        "id": "l1_sdk_local_openai",
+        "layer": "L1",
+        "upstream_name": "AGY SDK LocalOpenAIAgentConfig",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.1.24",
+        "install_command": "uv add google-antigravity==0.1.24",
+        "verify_command": "uv run python -c \"from google.antigravity import LocalOpenAIAgentConfig; print('ok')\"",
+        "adapter_boundary": "Native SDK loopback bridge to Ollama/LM Studio/vLLM with JSON Schema normalization and Retry-After handling",
+        "official_url": "https://antigravity.google/docs/sdk/local-models.md"
+      },
+      {
+        "id": "l2_antigravity_app",
+        "layer": "L2",
+        "upstream_name": "Antigravity App (2.0)",
+        "registry_or_channel": "bundled_agy",
+        "pinned_version": "2.35.2",
+        "install_command": "Download official signed installer v2.35.2 from https://antigravity.google/download (macOS ARM64 DMG: 2.35.2-4585983447007232)",
+        "verify_command": "defaults read /Applications/Antigravity.app/Contents/Info.plist CFBundleShortVersionString",
+        "adapter_boundary": "Desktop multi-agent command center, built-in isolated browser, Voice Mode, SSH, and MCP Apps; never fork custom desktop chat shells",
+        "official_url": "https://antigravity.google/docs/getting-started.md"
+      },
+      {
+        "id": "l2_agy_cli",
+        "layer": "L2",
+        "upstream_name": "Antigravity CLI (agy)",
+        "registry_or_channel": "github_release",
+        "pinned_version": "1.5.18",
+        "install_command": "mise use -g agy@1.5.18 (or official installer https://antigravity.google/cli/install.sh)",
+        "verify_command": "agy --version && agy acp --help",
+        "adapter_boundary": "Native Go TUI, headless -p/stream-json mode, and agy acp stdio JSON-RPC server; zero custom PTY/CLI wrappers",
+        "official_url": "https://github.com/google-antigravity/antigravity-cli/releases/tag/1.5.18"
+      },
+      {
+        "id": "l2_google_antigravity_sdk",
+        "layer": "L2",
+        "upstream_name": "google-antigravity",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.1.24",
+        "install_command": "uv add google-antigravity==0.1.24",
+        "verify_command": "uv run python -c \"import google.antigravity as ag; print(ag.__name__)\"",
+        "adapter_boundary": "Binary-coupled Apache-2.0 wheel embedding localharness, policies, hooks, subagents, beta.workflows, and native OTel tracing",
+        "official_url": "https://pypi.org/project/google-antigravity/0.1.24/"
+      },
+      {
+        "id": "l2_antigravity_ide",
+        "layer": "L2",
+        "upstream_name": "Antigravity IDE (Standalone)",
+        "registry_or_channel": "bundled_agy",
+        "pinned_version": "2.8.0",
+        "install_command": "Download standalone IDE installer v2.8.0 from https://antigravity.google/download (non-Enterprise personal auth only)",
+        "verify_command": "Verify Help > About displays version 2.8.0",
+        "adapter_boundary": "Standalone VS Code-based IDE for personal use; use App/CLI/Extensions for Gemini Enterprise",
+        "official_url": "https://antigravity.google/product/antigravity-ide"
+      },
+      {
+        "id": "l2_ext_vscode",
+        "layer": "L2",
+        "upstream_name": "Antigravity Extension — VS Code",
+        "registry_or_channel": "ide_marketplace",
+        "pinned_version": "1.13.0",
+        "install_command": "code --install-extension Google.google-antigravity@1.13.0",
+        "verify_command": "code --list-extensions --show-versions | grep -i antigravity",
+        "adapter_boundary": "First-party VS Code 1.90+ editor integration, inline diffs, @terminal pills, and voice dictation",
+        "official_url": "https://antigravity.google/docs/ide/extensions/vscode.md"
+      },
+      {
+        "id": "l2_ext_visual_studio",
+        "layer": "L2",
+        "upstream_name": "Antigravity Extension — Visual Studio",
+        "registry_or_channel": "ide_marketplace",
+        "pinned_version": "1.0.261116.0",
+        "install_command": "Visual Studio (VS 2022 17.14+ or VS 2026) > Extensions > Manage Extensions > install Google.GoogleAntigravity 1.0.261116.0",
+        "verify_command": "Open View > Other Windows > Antigravity in Visual Studio",
+        "adapter_boundary": "Native MSBuild/solution inline diffs and chat on Windows 10/11",
+        "official_url": "https://antigravity.google/docs/ide/extensions/visual-studio.md"
+      },
+      {
+        "id": "l2_ext_eclipse",
+        "layer": "L2",
+        "upstream_name": "Antigravity Extension — Eclipse",
+        "registry_or_channel": "ide_marketplace",
+        "pinned_version": "1.2.0",
+        "install_command": "Eclipse 2026-06+ > Help > Eclipse Marketplace > install Google Antigravity 1.2.0",
+        "verify_command": "Trigger Antigravity > Toggle Chat (Cmd+Option+E / Ctrl+Alt+K)",
+        "adapter_boundary": "Native Eclipse compare editor diffs and workspace trust integration",
+        "official_url": "https://antigravity.google/docs/ide/extensions/eclipse.md"
+      },
+      {
+        "id": "l2_ext_acp_editors",
+        "layer": "L2",
+        "upstream_name": "Antigravity ACP Integrations (JetBrains, Zed, Xcode, Android Studio)",
+        "registry_or_channel": "acp_registry",
+        "pinned_version": "antigravity-acp 1.5.0 / agy 1.5.18",
+        "install_command": "Install Google Antigravity from JetBrains (2026.2.1+), Zed (0.140.0+), Xcode (27 beta 6+), or Android Studio ACP/Agent registry backed by agy acp",
+        "verify_command": "agy acp --help",
+        "adapter_boundary": "Standard ACP integration across 4 IDEs with zero custom editor plugins",
+        "official_url": "https://antigravity.google/docs/ide/extensions/acp.md"
+      },
+      {
+        "id": "l3_agy_native_orchestration",
+        "layer": "L3",
+        "upstream_name": "AGY Native Intra-Session Orchestration (/swarm, /run-workflow, subagents, /boost, /teamwork)",
+        "registry_or_channel": "bundled_agy",
+        "pinned_version": "App 2.35.2 / CLI 1.5.18 / SDK 0.1.24",
+        "install_command": "Bundled natively in AGY App, CLI, and Python SDK (zero external install)",
+        "verify_command": "agy --version && agy agents",
+        "adapter_boundary": "Use native /swarm, /run-workflow, and subagents instead of custom chat routers, subprocess fan-out managers, or polling loops",
+        "official_url": "https://antigravity.google/docs/swarm.md"
+      },
+      {
+        "id": "l4_agy_cross_session_native",
+        "layer": "L4",
+        "upstream_name": "AGY ConversationService, Sidecars (agentapi), Hooks & Remote SSH/Control",
+        "registry_or_channel": "bundled_agy",
+        "pinned_version": "App 2.35.2 / CLI 1.5.18",
+        "install_command": "Bundled natively in AGY App and CLI; configure declaratively via sidecar.json, hooks.json, and SSH settings",
+        "verify_command": "agy remote-control --help",
+        "adapter_boundary": "Native Connect HTTP+JSON lifecycle RPC, sidecar agentapi, and OpenSSH connections instead of ad-hoc socket daemons",
+        "official_url": "https://antigravity.google/docs/sidecars.md"
+      },
+      {
+        "id": "l4_orca_cli",
+        "layer": "L4",
+        "upstream_name": "orca (stablyai/orca)",
+        "registry_or_channel": "github_release",
+        "pinned_version": "v1.4.278 (GitHub; 1.4.277 local Orca.app desktop-managed hold)",
+        "install_command": "Download pinned release v1.4.278 from https://github.com/stablyai/orca/releases/tag/v1.4.278",
+        "verify_command": "orca --version && orca status --json",
+        "adapter_boundary": "Heterogeneous cross-agent (AGY/Claude/Codex) worktrees, terminal control, and mail orchestration; never script raw git worktree + tmux PTY hacks",
+        "official_url": "https://github.com/stablyai/orca/releases/tag/v1.4.278"
+      },
+      {
+        "id": "l4_a2a_sdk_python",
+        "layer": "L4",
+        "upstream_name": "a2a-sdk",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.3.1",
+        "install_command": "uv add a2a-sdk==1.3.1",
+        "verify_command": "uv run python -c \"import a2a; print(a2a.__name__)\"",
+        "adapter_boundary": "Linux Foundation AAIF A2A v1.0 Agent Cards and 9-state task protocol across vendor/org boundaries",
+        "official_url": "https://pypi.org/project/a2a-sdk/1.3.1/"
+      },
+      {
+        "id": "l4_a2a_sdk_ts",
+        "layer": "L4",
+        "upstream_name": "@a2a-js/sdk",
+        "registry_or_channel": "npm",
+        "pinned_version": "1.3.0",
+        "install_command": "npm install --save-exact @a2a-js/sdk@1.3.0",
+        "verify_command": "node -e \"import('@a2a-js/sdk').then(() => console.log('ok'))\"",
+        "adapter_boundary": "TypeScript AAIF A2A v1.0 client/server SDK",
+        "official_url": "https://github.com/a2aproject/a2a-js"
+      },
+      {
+        "id": "l5_mcp_python",
+        "layer": "L5",
+        "upstream_name": "mcp",
+        "registry_or_channel": "pypi",
+        "pinned_version": "2.3.0",
+        "install_command": "uv add mcp==2.3.0",
+        "verify_command": "uv run python -c \"import mcp; print(mcp.__name__)\"",
+        "adapter_boundary": "Stateless Streamable HTTP and Stdio MCP 2026-07-28 servers; zero SEP-2577 deprecated Roots/Sampling/Logging or legacy HTTP+SSE",
+        "official_url": "https://pypi.org/project/mcp/2.3.0/"
+      },
+      {
+        "id": "l5_mcp_ts_sdk",
+        "layer": "L5",
+        "upstream_name": "@modelcontextprotocol/sdk",
+        "registry_or_channel": "npm",
+        "pinned_version": "1.32.2",
+        "install_command": "npm install --save-exact @modelcontextprotocol/sdk@1.32.2",
+        "verify_command": "node -e \"import('@modelcontextprotocol/sdk/server/mcp.js').then(() => console.log('ok'))\"",
+        "adapter_boundary": "Official TypeScript MCP client/server SDK supporting Streamable HTTP and CIMD/RFC 9207",
+        "official_url": "https://github.com/modelcontextprotocol/typescript-sdk"
+      },
+      {
+        "id": "l5_mcp_ext_apps",
+        "layer": "L5",
+        "upstream_name": "@modelcontextprotocol/ext-apps",
+        "registry_or_channel": "npm",
+        "pinned_version": "2.0.4",
+        "install_command": "npm install --save-exact @modelcontextprotocol/ext-apps@2.0.4",
+        "verify_command": "node -e \"import('@modelcontextprotocol/ext-apps').then(() => console.log('ok'))\"",
+        "adapter_boundary": "Sandboxed ui:// HTML MCP Apps (SEP-1865) rendering inline, side-panel, full-page, and custom viewers in AGY App v2.34.0+",
+        "official_url": "https://modelcontextprotocol.io/extensions/apps/overview"
+      },
+      {
+        "id": "l6_dbos",
+        "layer": "L6",
+        "upstream_name": "dbos",
+        "registry_or_channel": "pypi",
+        "pinned_version": "3.7.0",
+        "install_command": "uv add dbos==3.7.0",
+        "verify_command": "uv run python -c \"import dbos; print(dbos.__name__)\"",
+        "adapter_boundary": "Lightweight Postgres/SQLite crash-proof step checkpointing with zero custom SQL retry queues",
+        "official_url": "https://pypi.org/project/dbos/3.7.0/"
+      },
+      {
+        "id": "l6_temporalio",
+        "layer": "L6",
+        "upstream_name": "temporalio",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.37.0",
+        "install_command": "uv add temporalio==1.37.0",
+        "verify_command": "uv run python -c \"import temporalio; print(temporalio.__version__)\"",
+        "adapter_boundary": "Enterprise event-sourced deterministic workflow replay and indefinite HITL suspension",
+        "official_url": "https://pypi.org/project/temporalio/1.37.0/"
+      },
+      {
+        "id": "l6_restate_sdk",
+        "layer": "L6",
+        "upstream_name": "restate-sdk",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.5.5",
+        "install_command": "uv add restate-sdk==1.5.5",
+        "verify_command": "uv run python -c \"import restate; print(restate.__name__)\"",
+        "adapter_boundary": "Scale-to-zero pausable/steerable serverless durable agent execution",
+        "official_url": "https://pypi.org/project/restate-sdk/1.5.5/"
+      },
+      {
+        "id": "l6_google_adk",
+        "layer": "L6",
+        "upstream_name": "google-adk",
+        "registry_or_channel": "pypi",
+        "pinned_version": "2.15.1",
+        "install_command": "uv add google-adk==2.15.1",
+        "verify_command": "uv run adk --version",
+        "adapter_boundary": "First-party GCP/Vertex AI/A2A/MCP multi-agent backend runtime",
+        "official_url": "https://pypi.org/project/google-adk/2.15.1/"
+      },
+      {
+        "id": "l6_pydantic_ai",
+        "layer": "L6",
+        "upstream_name": "pydantic-ai",
+        "registry_or_channel": "pypi",
+        "pinned_version": "2.75.0",
+        "install_command": "uv add pydantic-ai==2.75.0",
+        "verify_command": "uv run python -c \"import pydantic_ai; print(pydantic_ai.__version__)\"",
+        "adapter_boundary": "Strictly typed Python agent runtime with native DBOSDurability, TemporalDurability, and RestateAgent adapters",
+        "official_url": "https://pypi.org/project/pydantic-ai/2.75.0/"
+      },
+      {
+        "id": "l6_langgraph",
+        "layer": "L6",
+        "upstream_name": "langgraph",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.2.24",
+        "install_command": "uv add langgraph==1.2.24",
+        "verify_command": "uv run python -c \"import langgraph; print('ok')\"",
+        "adapter_boundary": "Explicit cyclical state graphs, checkpointers, HITL interrupts, and Temporal plugin integration",
+        "official_url": "https://pypi.org/project/langgraph/1.2.24/"
+      },
+      {
+        "id": "l6_microsoft_agent_framework",
+        "layer": "L6",
+        "upstream_name": "agent-framework / Microsoft.Agents.AI",
+        "registry_or_channel": "pypi",
+        "pinned_version": "Python 1.26.0 / NuGet 1.28.0",
+        "install_command": "uv add agent-framework==1.26.0 (or dotnet add package Microsoft.Agents.AI --version 1.28.0)",
+        "verify_command": "uv run python -c \"import agent_framework; print('ok')\"",
+        "adapter_boundary": "Microsoft Agent Framework 1.0 GA superseding maintenance-mode AutoGen and Semantic Kernel",
+        "official_url": "https://pypi.org/project/agent-framework/1.26.0/"
+      },
+      {
+        "id": "l6_openai_agents",
+        "layer": "L6",
+        "upstream_name": "openai-agents / @openai/agents",
+        "registry_or_channel": "pypi",
+        "pinned_version": "Python 0.26.0 / npm 0.22.0",
+        "install_command": "uv add openai-agents==0.26.0 (or npm install --save-exact @openai/agents@0.22.0)",
+        "verify_command": "uv run python -c \"import agents; print('ok')\"",
+        "adapter_boundary": "Lightweight OpenAI Handoffs, Guardrails, and Hosted Sandboxes",
+        "official_url": "https://pypi.org/project/openai-agents/0.26.0/"
+      },
+      {
+        "id": "l6_claude_agent_sdk",
+        "layer": "L6",
+        "upstream_name": "claude-agent-sdk / @anthropic-ai/claude-agent-sdk",
+        "registry_or_channel": "pypi",
+        "pinned_version": "Python 0.2.189 / npm 0.3.332",
+        "install_command": "uv add claude-agent-sdk==0.2.189 (or npm install --save-exact @anthropic-ai/claude-agent-sdk@0.3.332)",
+        "verify_command": "uv run python -c \"import claude_agent_sdk; print('ok')\"",
+        "adapter_boundary": "Programmatic Claude Code loop, hooks, and MCP embedding",
+        "official_url": "https://pypi.org/project/claude-agent-sdk/0.2.189/"
+      },
+      {
+        "id": "l6_strands_agents",
+        "layer": "L6",
+        "upstream_name": "strands-agents",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.67.0",
+        "install_command": "uv add strands-agents==1.67.0",
+        "verify_command": "uv run python -c \"import strands; print('ok')\"",
+        "adapter_boundary": "In-process model-driven library pairing with Amazon Bedrock AgentCore",
+        "official_url": "https://pypi.org/project/strands-agents/1.67.0/"
+      },
+      {
+        "id": "l6_mastra",
+        "layer": "L6",
+        "upstream_name": "mastra + @mastra/core",
+        "registry_or_channel": "npm",
+        "pinned_version": "mastra 1.40.2 / @mastra/core 1.86.0",
+        "install_command": "npm install --save-exact mastra@1.40.2 @mastra/core@1.86.0",
+        "verify_command": "npx mastra --version",
+        "adapter_boundary": "Native TypeScript Zod-typed agents and workflows with zero Python bridge required",
+        "official_url": "https://mastra.ai"
+      },
+      {
+        "id": "l7_graphiti_core",
+        "layer": "L7",
+        "upstream_name": "graphiti-core",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.32.1",
+        "install_command": "uv add graphiti-core==0.32.1",
+        "verify_command": "uv run python -c \"import graphiti_core; print('ok')\"",
+        "adapter_boundary": "Bi-temporal knowledge graph (valid_at/invalid_at) exposed over MCP; zero append-only vector dumps",
+        "official_url": "https://pypi.org/project/graphiti-core/0.32.1/"
+      },
+      {
+        "id": "l7_letta",
+        "layer": "L7",
+        "upstream_name": "letta + letta-client",
+        "registry_or_channel": "pypi",
+        "pinned_version": "letta 0.34.12 / letta-client 1.12.1",
+        "install_command": "uv add letta==0.34.12 letta-client==1.12.1",
+        "verify_command": "uv run python -c \"import letta_client; print('ok')\"",
+        "adapter_boundary": "Self-editing tiered context blocks, Git-backed MemFS, and Sleep-Time Compute consolidation",
+        "official_url": "https://pypi.org/project/letta-client/1.12.1/"
+      },
+      {
+        "id": "l7_mem0ai",
+        "layer": "L7",
+        "upstream_name": "mem0ai",
+        "registry_or_channel": "pypi",
+        "pinned_version": "2.2.1",
+        "install_command": "uv add mem0ai==2.2.1",
+        "verify_command": "uv run python -c \"import mem0; print('ok')\"",
+        "adapter_boundary": "Low-latency hybrid vector+graph preference and entity memory",
+        "official_url": "https://pypi.org/project/mem0ai/2.2.1/"
+      },
+      {
+        "id": "l7_xerj",
+        "layer": "L7",
+        "upstream_name": "xerj",
+        "registry_or_channel": "github_release",
+        "pinned_version": "v1.0.0-rc.105",
+        "install_command": "Download pinned release tarball v1.0.0-rc.105 from https://github.com/xerj-org/xerj/releases/tag/v1.0.0-rc.105",
+        "verify_command": "xerj --version",
+        "adapter_boundary": "Single static Rust hybrid BM25+kNN search and /_memory/{ns} MCP engine; never build custom RAG indexers",
+        "official_url": "https://github.com/xerj-org/xerj/releases/tag/v1.0.0-rc.105"
+      },
+      {
+        "id": "l7_codebase_memory_mcp",
+        "layer": "L7",
+        "upstream_name": "codebase-memory-mcp",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.12.1",
+        "install_command": "uv tool install codebase-memory-mcp==0.12.1",
+        "verify_command": "codebase-memory-mcp --version",
+        "adapter_boundary": "Native tree-sitter AST/call-graph MCP and manage_adr CRUD tool; zero ad-hoc regex code-graph scrapers",
+        "official_url": "https://github.com/DeusData/codebase-memory-mcp/releases/tag/v0.12.1"
+      },
+      {
+        "id": "l8_agy_permissions_hooks_browser",
+        "layer": "L8",
+        "upstream_name": "AGY Permissions, Fail-Closed Hooks & Built-In Isolated Browser",
+        "registry_or_channel": "bundled_agy",
+        "pinned_version": "App 2.35.2 / CLI 1.5.18",
+        "install_command": "Bundled natively in AGY App and CLI; configure standing absolute-path Deny rules and fail-closed exit-0 PreToolUse hook wrappers",
+        "verify_command": "agy --version",
+        "adapter_boundary": "Declarative hooks.json/admin_settings.json + <=120 LOC stdlib fail-closed hook adapter; zero custom RBAC proxies",
+        "official_url": "https://antigravity.google/docs/permissions.md"
+      },
+      {
+        "id": "l8_ruff",
+        "layer": "L8",
+        "upstream_name": "ruff",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.17.6",
+        "install_command": "uv tool install ruff==0.17.6",
+        "verify_command": "ruff --version",
+        "adapter_boundary": "Sub-second Rust Python linter/formatter for PostToolUse and CI",
+        "official_url": "https://docs.astral.sh/ruff/"
+      },
+      {
+        "id": "l8_ty",
+        "layer": "L8",
+        "upstream_name": "ty",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.0.112",
+        "install_command": "uv tool install ty==0.0.112",
+        "verify_command": "ty --version",
+        "adapter_boundary": "Fast Rust Python static type verification gate",
+        "official_url": "https://github.com/astral-sh/ty/"
+      },
+      {
+        "id": "l8_ast_grep_cli",
+        "layer": "L8",
+        "upstream_name": "ast-grep-cli",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.51.3",
+        "install_command": "uv tool install ast-grep-cli==0.51.3",
+        "verify_command": "ast-grep --version",
+        "adapter_boundary": "Structural AST rule gates escalating repeated prose rule violations into deterministic CI failures",
+        "official_url": "https://ast-grep.github.io/"
+      },
+      {
+        "id": "l8_gitleaks",
+        "layer": "L8",
+        "upstream_name": "gitleaks",
+        "registry_or_channel": "mise",
+        "pinned_version": "8.30.1",
+        "install_command": "mise use gitleaks@8.30.1",
+        "verify_command": "gitleaks version",
+        "adapter_boundary": "Deterministic secret leak prevention in pre-commit and CI",
+        "official_url": "https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1"
+      },
+      {
+        "id": "l8_trivy",
+        "layer": "L8",
+        "upstream_name": "trivy",
+        "registry_or_channel": "mise",
+        "pinned_version": "0.76.2",
+        "install_command": "mise use trivy@0.76.2",
+        "verify_command": "trivy --version",
+        "adapter_boundary": "Unified CVE, container, and IaC misconfiguration scanner",
+        "official_url": "https://github.com/aquasecurity/trivy/releases/tag/v0.76.2"
+      },
+      {
+        "id": "l8_osv_scanner",
+        "layer": "L8",
+        "upstream_name": "osv-scanner",
+        "registry_or_channel": "mise",
+        "pinned_version": "2.7.1",
+        "install_command": "mise use osv-scanner@2.7.1",
+        "verify_command": "osv-scanner --version",
+        "adapter_boundary": "OSV database lockfile vulnerability gating for uv.lock and package-lock.json",
+        "official_url": "https://github.com/google/osv-scanner/releases/tag/v2.7.1"
+      },
+      {
+        "id": "l8_shellcheck",
+        "layer": "L8",
+        "upstream_name": "shellcheck",
+        "registry_or_channel": "mise",
+        "pinned_version": "0.11.0",
+        "install_command": "mise use shellcheck@0.11.0",
+        "verify_command": "shellcheck --version",
+        "adapter_boundary": "Deterministic static analyzer for hook and automation shell scripts",
+        "official_url": "https://github.com/koalaman/shellcheck/releases/tag/v0.11.0"
+      },
+      {
+        "id": "l8_zizmor",
+        "layer": "L8",
+        "upstream_name": "zizmor",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.33.1",
+        "install_command": "uv tool install zizmor==1.33.1",
+        "verify_command": "zizmor --version",
+        "adapter_boundary": "Static security audit of GitHub Actions workflows against supply-chain and injection risks",
+        "official_url": "https://docs.zizmor.sh/"
+      },
+      {
+        "id": "l8_syft",
+        "layer": "L8",
+        "upstream_name": "syft",
+        "registry_or_channel": "mise",
+        "pinned_version": "1.57.2",
+        "install_command": "mise use syft@1.57.2",
+        "verify_command": "syft version",
+        "adapter_boundary": "CycloneDX and SPDX SBOM provenance generation feeding vulnerability scanners",
+        "official_url": "https://github.com/anchore/syft/releases/tag/v1.57.2"
+      },
+      {
+        "id": "l9_inspect_ai_harbor",
+        "layer": "L9",
+        "upstream_name": "inspect-ai + inspect-harbor",
+        "registry_or_channel": "pypi",
+        "pinned_version": "inspect-ai 0.3.292 / inspect-harbor 1.0.0",
+        "install_command": "uv add --group eval inspect-ai==0.3.292 inspect-harbor==1.0.0",
+        "verify_command": "uv run inspect --version",
+        "adapter_boundary": "Isolated Docker/K8s frontier eval framework by UK AISI & Meridian Labs; never grade inside agent-editable containers",
+        "official_url": "https://inspect.aisi.org.uk/"
+      },
+      {
+        "id": "l9_harbor",
+        "layer": "L9",
+        "upstream_name": "harbor",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.27.0",
+        "install_command": "uv add --group eval harbor==0.27.0",
+        "verify_command": "uv run harbor --help",
+        "adapter_boundary": "Multi-sandbox eval and rollout harness powering Terminal-Bench 2.0 across Docker/Modal/E2B/Daytona",
+        "official_url": "https://www.harborframework.com/"
+      },
+      {
+        "id": "l9_promptfoo",
+        "layer": "L9",
+        "upstream_name": "promptfoo",
+        "registry_or_channel": "npm",
+        "pinned_version": "0.126.0",
+        "install_command": "npm install --save-exact --save-dev promptfoo@0.126.0",
+        "verify_command": "npx promptfoo --version",
+        "adapter_boundary": "Automated prompt-injection red-teaming, PII/leakage gates, and SDK regression tests",
+        "official_url": "https://promptfoo.dev"
+      },
+      {
+        "id": "l9_dspy",
+        "layer": "L9",
+        "upstream_name": "dspy",
+        "registry_or_channel": "pypi",
+        "pinned_version": "3.5.0",
+        "install_command": "uv add --group eval dspy==3.5.0",
+        "verify_command": "uv run python -c \"import dspy; print(dspy.__version__)\"",
+        "adapter_boundary": "Declarative metric-driven module/prompt compilation replacing manual prompt guesswork",
+        "official_url": "https://pypi.org/project/dspy/3.5.0/"
+      },
+      {
+        "id": "l9_gepa",
+        "layer": "L9",
+        "upstream_name": "gepa",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.1.4",
+        "install_command": "uv add --group eval gepa==0.1.4",
+        "verify_command": "uv run python -c \"import gepa; print('ok')\"",
+        "adapter_boundary": "Genetic-Pareto trace-level LLM reflection optimizer for skills/prompts with up to 35x fewer rollouts than RL",
+        "official_url": "https://github.com/gepa-ai/gepa"
+      },
+      {
+        "id": "l9_skillevaluator",
+        "layer": "L9",
+        "upstream_name": "skillevaluator",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.2.1",
+        "install_command": "uv tool install --python 3.13 \"skillevaluator[all]==1.2.1\"",
+        "verify_command": "skillevaluator --version",
+        "adapter_boundary": "Multi-tier (Tier 1-3) static, security/PII, dedup, and live A/B skill_lift CI gating for SKILL.md and plugins",
+        "official_url": "https://github.com/NVIDIA/SkillEvaluator/releases/tag/v1.2.1"
+      },
+      {
+        "id": "l10_opentelemetry_sdk_otlp",
+        "layer": "L10",
+        "upstream_name": "opentelemetry-sdk + opentelemetry-exporter-otlp",
+        "registry_or_channel": "pypi",
+        "pinned_version": "1.45.2",
+        "install_command": "uv add opentelemetry-sdk==1.45.2 opentelemetry-exporter-otlp==1.45.2",
+        "verify_command": "uv run python -c \"import opentelemetry.sdk, opentelemetry.exporter.otlp; print('ok')\"",
+        "adapter_boundary": "Vendor-neutral OTel GenAI spans (invoke_agent, execute_tool, traceparent over MCP params._meta) complementing native AGY SDK OTel",
+        "official_url": "https://github.com/open-telemetry/semantic-conventions-genai"
+      },
+      {
+        "id": "l10_opentelemetry_semantic_conventions",
+        "layer": "L10",
+        "upstream_name": "opentelemetry-semantic-conventions",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.66b2",
+        "install_command": "uv add opentelemetry-semantic-conventions==0.66b2",
+        "verify_command": "uv run python -c \"import importlib.metadata as m; print(m.version('opentelemetry-semantic-conventions'))\"",
+        "adapter_boundary": "Standardized OpenTelemetry GenAI semantic attribute constants; zero proprietary trace attribute schemas",
+        "official_url": "https://pypi.org/project/opentelemetry-semantic-conventions/"
+      },
+      {
+        "id": "l10_zensical",
+        "layer": "L10",
+        "upstream_name": "zensical",
+        "registry_or_channel": "pypi",
+        "pinned_version": "0.1.3",
+        "install_command": "uv tool install zensical==0.1.3",
+        "verify_command": "zensical --version",
+        "adapter_boundary": "Rust-core static documentation and MADR 4.0 ADR portal by squidfunk; zero bespoke HTML ADR generators",
+        "official_url": "https://github.com/zensical/zensical/releases/tag/v0.1.3"
+      },
+      {
+        "id": "l10_manifest_v2_verifier_stdlib",
+        "layer": "L10",
+        "upstream_name": "scripts/verify_manifest.py (Python 3 Stdlib)",
+        "registry_or_channel": "stdlib",
+        "pinned_version": "Python 3.12+ stdlib (Manifest v3.0.0, 17 gates)",
+        "install_command": "Zero external install required; runs natively on standard Python 3 runtime",
+        "verify_command": "python3 scripts/verify_manifest.py --verify",
+        "adapter_boundary": "Thin declarative Draft 2020-12 schema, 12-ADR SHA-256 parity, UPSTREAM.md and upstream-map.toml bijection, repo scaffolding/portal integrity, anti-bloat hygiene ratchet, and canonical root SHA-256 CI gate",
+        "official_url": "https://json-schema.org/draft/2020-12/schema"
+      }
+    ]
+  },
+  "saturation_proof": {
+    "saturation_status": "saturated",
+    "verified_as_of_date": "2026-11-26",
+    "zero_self_invention_verified": true,
+    "unresolved_contradictions": 0,
+    "unverified_claims": 0,
+    "adr_count": 12,
+    "layer_count": 11,
+    "disjoint_overlap_count": 0,
+    "clean_install_layers_covered": 11,
+    "independent_verifier_logs": [
+      "UPSTREAM.md",
+      "docs/manifest-guide.md",
+      "scripts/audit_ecosystem_hygiene.py",
+      "scripts/check.sh",
+      "tests/test_hooks_and_handoff.py",
+      "tests/test_host_shim_contract.py",
+      "tests/test_manifest_v2.py",
+      "upstream-map.toml",
+      "workflows/sota_convergence_audit.py"
+    ],
+    "research_corpus_files": [
+      ".agents/hooks.json",
+      ".agents/rules/adr-and-manifest-gates.md",
+      ".agents/schemas/handoff_packet.schema.json",
+      ".agents/scripts/cross_session_hooks.py",
+      ".agents/scripts/pre_tool_fail_closed.py",
+      ".agents/skills/sota-convergence-audit/SKILL.md",
+      ".agents/templates/permissions.baseline.json",
+      ".agents/templates/sidecar.relay.json",
+      ".agents/templates/sidecar.scheduled.json",
+      ".github/workflows/sota-convergence-gates.yml",
+      ".gitignore",
+      ".gitleaks.toml",
+      "AGENTS.md",
+      "LICENSE",
+      "Makefile",
+      "README.md",
+      "SECURITY.md",
+      "UPSTREAM.md",
+      "docs/adr-and-convergence-practice.md",
+      "docs/adrs/ADR-0001-meta-adr-convergence-and-zero-self-invention.md",
+      "docs/adrs/ADR-0002-L0-execution-isolation-and-sandboxes.md",
+      "docs/adrs/ADR-0003-L1-frontier-models-routing-and-sunsets.md",
+      "docs/adrs/ADR-0004-L2-multi-surface-agy-harness-and-acp.md",
+      "docs/adrs/ADR-0005-L3-intra-session-multi-agent-orchestration.md",
+      "docs/adrs/ADR-0006-L4-cross-session-and-federated-messaging.md",
+      "docs/adrs/ADR-0007-L5-vertical-mcp-apps-and-code-mode.md",
+      "docs/adrs/ADR-0008-L6-durable-cloud-workflows-and-frameworks.md",
+      "docs/adrs/ADR-0009-L7-tri-layer-compounding-memory.md",
+      "docs/adrs/ADR-0010-L8-deterministic-security-and-fail-closed-gates.md",
+      "docs/adrs/ADR-0011-L9-adversarial-evals-and-trace-optimization.md",
+      "docs/adrs/ADR-0012-L10-telemetry-provenance-and-compounding-manifest.md",
+      "docs/adrs/CATALOG.md",
+      "docs/agy-surfaces-and-changelogs.md",
+      "docs/clean-install-registry.md",
+      "docs/compounding-flywheel.md",
+      "docs/context-manifest-audit.md",
+      "docs/convergence-stack.md",
+      "docs/cross-session-and-agy-practice.md",
+      "docs/ecosystem-frameworks-matrix.md",
+      "docs/index.md",
+      "docs/manifest-guide.md",
+      "manifest/compounding_manifest.v2.json",
+      "manifest/compounding_manifest.v2.schema.json",
+      "mise.toml",
+      "orca.yaml",
+      "pyproject.toml",
+      "rules/ast-grep/no-deprecated-mcp-sse-or-autogen.yml",
+      "rules/ast-grep/no-fail-open-hook-exit.yml",
+      "rules/ast-grep/no-live-broker-ports.yml",
+      "rules/ast-grep/no-retiring-nov30-models.yml",
+      "scripts/audit_ecosystem_hygiene.py",
+      "scripts/check.sh",
+      "scripts/verify_manifest.py",
+      "sgconfig.yml",
+      "tests/test_hooks_and_handoff.py",
+      "tests/test_host_shim_contract.py",
+      "tests/test_manifest_v2.py",
+      "upstream-map.toml",
+      "workflows/sota_convergence_audit.py",
+      "workflows/workflow.json",
+      "zensical.toml"
+    ],
+    "exit_gate_criteria": [
+      "C1 Live Primary-Source Triangulation: 100% of load-bearing claims, URLs, and 63 package pins verified live against primary specs, arXiv abstracts, and PyPI/npm/NuGet/GitHub registries",
+      "C2 Zero Unresolved Contradictions: unresolved_contradictions == 0 across all 61 tracked files, 12 MADR 4.0.0 ADRs, UPSTREAM.md, upstream-map.toml, clean-install registry, harness templates, ast-grep rules, workflows, and manifest blocks",
+      "C3 Zero Unverified Claims or Unpinned Tokens: unverified_claims == 0 and zero unpinned stub or floating-tag version strings across active manifest, UPSTREAM.md, registry, and ADRs",
+      "C4 Strictly Disjoint Layer Bijection: exact 11 layers (L0-L10) with 0 domain overlaps and 1:1 bijection to 12 bounded ADRs (ADR-0001 META + ADR-0002..0012 under docs/adrs/)",
+      "C5 Exhaustive Option Elimination: >=3 concrete options per ADR with falsification evidence and 5-question Zero-Self-Invention proof",
+      "C6 Adversarial Verification & 12-Step Unified Harness Proof: bash scripts/check.sh 12/12 PASS covering live 17/17 --verify (double determinism run, incl. UPSTREAM.md 63/63 + upstream-map.toml 5/5 bijection + repo scaffolding/portal nav integrity) + 38/38 unittest suite (12 hook/handoff + 16 manifest/14-mutation/scorecard + 10 live host-shim contract) + live skillevaluator Tier-1 A 100.0/100 (9/9, 0 HIGH/CRIT) + live syft CycloneDX SBOM & osv-scanner (0 CVEs) + live codebase-memory-mcp AST index + live zensical 0.1.3 strict build (24 HTML pages) + live ast-grep scan + shellcheck 0 findings + 0-finding host hygiene & context_manifest_scorecard + ruff/ty/gitleaks/zizmor 0 errors",
+      "C7 Cryptographic Reproducibility & ADR Hash Parity: two consecutive --verify runs exit 0, independent canonical root SHA-256 matches byte-for-byte, and 12/12 docs/adrs/ADR-*.md SHA-256 digests match disk byte-for-byte"
+    ],
+    "residual_user_delegated_checks": [
+      "RESOLVED AND VERIFIED LIVE (2026-11-26 Phases 5–9): Definitive standalone agy-sota-convergence v3.0.0 repository materialized with 61 tracked files (LICENSE, SECURITY.md, .gitleaks.toml, orca.yaml, Makefile, scripts/check.sh, UPSTREAM.md 63/63, upstream-map.toml 5/5, docs/adrs/CATALOG.md, and 9 comprehensive architecture/operational guides); all 5 workstation security hardening gaps closed fail-closed; global charter trimmed of 4 editorial HTML comments (html_comment_chars=0, 6L/1,062c/~265 tok, -121 tok/turn with all 4 rules verbatim intact); audit_ecosystem_hygiene.py v1.1.0 context_manifest_scorecard PASS (HIGH=0, MEDIUM=0, LOW=0, secrets_accessed=false); 16/17 host CLIs (9/9 mise.toml exact; 17/18 incl. Antigravity.app 2.35.2) at exact registry pins; safe ~/.gemini/antigravity-cli/settings.json model check verified 0 retiring Nov-30 slugs; bash scripts/check.sh 12/12 PASS (17/17 manifest verifier, 38/38 unittest, skillevaluator Grade A 100.0/100, syft+osv-scanner 0 CVEs, shellcheck 0, zensical 0.1.3 strict 24 HTML pages, ast-grep/ruff/ty/gitleaks/zizmor 0); codebase-memory-mcp AST/call-graph index ready",
+      "Private `.env*` / secret config Nov-30 check (strictly user-owned under Charter Rule 4): verify private `.env*` files outside agent read boundaries contain zero Nov-30 retiring model slugs",
+      "Orca Desktop app-managed hold (user-owned): `orca` 1.4.277 symlinks to actively running `/Applications/Orca.app/Contents/Resources/bin/orca` and `v1.4.278` ships macOS desktop `.dmg`/`.zip` bundles only; apply via Orca Desktop's in-app updater on next restart"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "canonicalization": "json-utf8-sort-keys-compact",
+    "payload_scope": "root_excluding_integrity_sha256",
+    "sha256": "642ed427ab0eed77a382dd9fc4c9575fb4942310bffe075e4883722501ad8afc"
+  }
+}

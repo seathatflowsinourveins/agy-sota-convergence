@@ -1,0 +1,42 @@
+[project]
+site_name = "AGY SOTA Convergence Portal"
+site_description = "Bounded 12-ADR MADR 4.0.0 architecture, disjoint L0-L10 upstream-only convergence stack, and SHA-256 sealed compounding manifest (v3.0.0)."
+docs_dir = "docs"
+site_dir = "site"
+nav = [
+  { "Home" = "index.md" },
+  { "Architecture & Practice" = [
+    { "ADR & Convergence Practice" = "adr-and-convergence-practice.md" },
+    { "AGY Surfaces & Changelogs" = "agy-surfaces-and-changelogs.md" },
+    { "Cross-Session & AGY Operational Practice" = "cross-session-and-agy-practice.md" },
+    { "Ecosystem & Frameworks Matrix" = "ecosystem-frameworks-matrix.md" },
+    { "Disjoint L0-L10 Convergence Stack" = "convergence-stack.md" },
+    { "Compounding Flywheel & KPIs" = "compounding-flywheel.md" },
+    { "Clean Upstream Install Registry" = "clean-install-registry.md" },
+    { "Context & Manifest Audit" = "context-manifest-audit.md" },
+    { "Sealed Manifest v3.0 Guide" = "manifest-guide.md" },
+  ] },
+  { "Architecture Decision Records (ADRs)" = [
+    { "ADR Catalog (12 Bounded ADRs)" = "adrs/CATALOG.md" },
+    { "ADR-0001 (META): Convergence & Zero-Self-Invention" = "adrs/ADR-0001-meta-adr-convergence-and-zero-self-invention.md" },
+    { "ADR-0002 (L0): Execution Isolation & Sandboxes" = "adrs/ADR-0002-L0-execution-isolation-and-sandboxes.md" },
+    { "ADR-0003 (L1): Frontier Models, Routing & Sunsets" = "adrs/ADR-0003-L1-frontier-models-routing-and-sunsets.md" },
+    { "ADR-0004 (L2): Multi-Surface AGY Harness & ACP" = "adrs/ADR-0004-L2-multi-surface-agy-harness-and-acp.md" },
+    { "ADR-0005 (L3): Intra-Session Multi-Agent Orchestration" = "adrs/ADR-0005-L3-intra-session-multi-agent-orchestration.md" },
+    { "ADR-0006 (L4): Cross-Session & Federated Messaging" = "adrs/ADR-0006-L4-cross-session-and-federated-messaging.md" },
+    { "ADR-0007 (L5): Vertical MCP, MCP Apps & Code Mode" = "adrs/ADR-0007-L5-vertical-mcp-apps-and-code-mode.md" },
+    { "ADR-0008 (L6): Durable Cloud Workflows & Frameworks" = "adrs/ADR-0008-L6-durable-cloud-workflows-and-frameworks.md" },
+    { "ADR-0009 (L7): Tri-Layer Compounding Memory" = "adrs/ADR-0009-L7-tri-layer-compounding-memory.md" },
+    { "ADR-0010 (L8): Deterministic Security & Fail-Closed Gates" = "adrs/ADR-0010-L8-deterministic-security-and-fail-closed-gates.md" },
+    { "ADR-0011 (L9): Adversarial Evals & Trace Optimization" = "adrs/ADR-0011-L9-adversarial-evals-and-trace-optimization.md" },
+    { "ADR-0012 (L10): Telemetry, Provenance & Manifest" = "adrs/ADR-0012-L10-telemetry-provenance-and-compounding-manifest.md" },
+  ] },
+]
+
+[project.markdown_extensions]
+admonition = {}
+tables = {}
+toc = { permalink = true }
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]

@@ -1,0 +1,19 @@
+id: no-deprecated-mcp-sse-or-autogen
+language: python
+severity: error
+message: >-
+  Deprecated legacy import detected (McpSseServer, autogen, pyautogen, or
+  semantic_kernel). Use MCP 2026-07-28 Streamable HTTP (`mcp==2.3.0`) per
+  ADR-0007 and `agent-framework` / `pydantic-ai` / `google-adk` per ADR-0008.
+ignores:
+  - tests/**
+  - site/**
+  - .git/**
+  - .venv/**
+  - .ruff_cache/**
+rule:
+  any:
+    - kind: import_statement
+      regex: '\b(McpSseServer|autogen|pyautogen|semantic_kernel)\b'
+    - kind: import_from_statement
+      regex: '\b(McpSseServer|autogen|pyautogen|semantic_kernel)\b'

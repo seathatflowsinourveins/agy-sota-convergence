@@ -1,0 +1,27 @@
+{
+  "enableTerminalSandbox": true,
+  "agentMode": "auto",
+  "permissions": {
+    "deny": [
+      "command(rm -rf)",
+      "command(sudo)",
+      "command(regex:curl .*)",
+      "command(regex:wget .*)",
+      "write_file(.git/)",
+      "write_file(.agents/hooks.json)",
+      "write_file(.agents/mcp_config.json)",
+      "read_file(/Users/<your-user>/.ssh)",
+      "read_file(/Users/<your-user>/.aws)",
+      "read_file(/Users/<your-user>/.docker)",
+      "read_file(/Users/<your-user>/.kube)",
+      "read_file(/Users/<your-user>/.gemini/config/config.json)",
+      "read_file(/Users/<your-user>/.gemini/antigravity/mcp_oauth_tokens.json)",
+      "read_file(/Users/<your-user>/Documents/upstream)"
+    ],
+    "allow": [
+      "command(git status)",
+      "command(git diff)",
+      "command(git log)"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+[project]
+name = "agy-sota-convergence"
+version = "2.1.0"
+description = "Google Antigravity (AGY) SOTA Convergence Architecture, MADR 4.0.0 ADRs, Drop-In Harness Pack & Cryptographically Sealed Compounding Manifest"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "google-antigravity==0.1.24",
+  "mcp==2.3.0",
+  "opentelemetry-sdk==1.45.2",
+  "opentelemetry-exporter-otlp==1.45.2",
+  "opentelemetry-semantic-conventions==0.66b2",
+]
+
+[dependency-groups]
+cloud = [
+  "pydantic-ai==2.75.0",
+  "dbos==3.7.0",
+  "a2a-sdk==1.3.1",
+]
+eval = [
+  "inspect-ai==0.3.292",
+  "inspect-harbor==1.0.0",
+  "harbor==0.27.0",
+  "dspy==3.5.0",
+  "gepa==0.1.4",
+  "skillevaluator==1.2.1",
+]
+local-ml = [
+  "litert-lm==0.20.0",
+]
+dev = [
+  "ruff==0.17.6",
+  "ty==0.0.112",
+  "zizmor==1.33.1",
+  "zensical==0.1.3",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ty.environment]
+python-version = "3.12"
