@@ -43,7 +43,7 @@ agy-sota-convergence/
 │   ├── compounding-flywheel.md       # 7-stage flywheel, anti-bloat ratchets & KPIs
 │   ├── clean-install-registry.md     # 63 live-verified L0-L10 upstream install pins
 │   ├── context-manifest-audit.md     # Startup context telemetry & zero-secret scorecard
-│   ├── github-sota-workflows.md      # Unified 4-repo GitHub SOTA workflow & reusable gate guide
+│   ├── github-sota-workflows.md      # Live public ecosystem GitHub SOTA workflow & reusable gate guide
 │   ├── manifest-guide.md             # Sealed manifest v3.1.0 SHA-256 ledger & verifier guide
 │   └── adrs/
 │       ├── CATALOG.md                # Indexed catalog across all 12 bounded ADRs

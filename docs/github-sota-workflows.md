@@ -1,4 +1,4 @@
-# GitHub SOTA Workflows & Unified 4-Repo Governance Standard
+# GitHub SOTA Workflows & Live Public Ecosystem Governance Standard
 
 **As-of Date:** 2026-11-26  
 **Manifest Baseline:** `v3.1.0` (`ADR-0001`, `ADR-0010`, `ADR-0012`)
@@ -7,16 +7,17 @@ This guide defines the fail-closed GitHub Actions, supply-chain hardening, and r
 
 ---
 
-## 1. Unified 4-Repository Workspace Ecosystem
+## 1. Unified GitHub & Local Workspace Ecosystem Topology
 
 Every repository in the ecosystem adheres to one non-overlapping ownership boundary, one pinned CLI toolchain (`2026-11-26`), and one deterministic GitHub supply-chain baseline:
 
-| Repository | Exclusive Role | Primary CI & Docs Workflows | Governance Anchor |
-| :--- | :--- | :--- | :--- |
-| **`dot-github`** | Organization-wide profile, shared governance ADRs (`ADR-0045`), and `ECOSYSTEM_ORG_MANIFEST.json` linking sibling repo seals. | Org-level standards & cross-repo manifest verification. | Organization governance ledger |
-| **`agy-sota-convergence`** *(this repo)* | Definitive Google Antigravity (`AGY 2.0`) SOTA practice, bounded 12-ADR MADR 4.0.0 architecture, 63-pin `UPSTREAM.md`, drop-in `.agents/` pack, and reusable GitHub practice gate. | `sota-convergence-gates.yml`, `sota-docs-pages.yml`, `reusable-agy-sota-practice-gate.yml` | `manifest/compounding_manifest.v2.json` (`v3.1.0`, 17 gates) |
-| **`sota-research-convergence`** | 7-plane scientific & research-engineering convergence stack (`UPSTREAM.md` + `upstream-map.toml`, Marimo notebooks, Zensical portal, fail-closed `check.sh`). | `convergence-ci.yml`, `convergence-docs-pages.yml` | Sealed research convergence manifest (`11/11` native checks) |
-| **`tier0-quant`** | Quantitative research and execution-sandbox repository subject to strict zero-live-broker isolation and AGY charter/CI compliance. | `tier0-ci.yml`, `tier0-docs-pages.yml`, `tier0-workstation-dispatch.yml` | Audited continuously against `v3.1.0` AGY practice & SHA-pin rules |
+| Repository | GitHub Visibility & Status (`2026-11-26`) | Exclusive Role | Primary CI & Docs Workflows | Governance Anchor |
+| :--- | :--- | :--- | :--- | :--- |
+| **[`seathatflowsinourveins/agy-sota-convergence`](https://github.com/seathatflowsinourveins/agy-sota-convergence)** *(this repo)* | **Public (Active)** | Definitive Google Antigravity (`AGY 2.0`) SOTA practice SSOT, bounded 12-ADR MADR 4.0.0 architecture, 63-pin `UPSTREAM.md`, drop-in `.agents/` pack, and reusable GitHub practice gate. | `sota-convergence-gates.yml`, `sota-docs-pages.yml`, `reusable-agy-sota-practice-gate.yml` | `manifest/compounding_manifest.v2.json` (`v3.1.0`, 17 gates) |
+| **[`native-agent-stack/.github`](https://github.com/native-agent-stack/.github)** | **Public (Active)** | Organization control plane, shared governance ADRs (`ADR-0045`), `ECOSYSTEM_ORG_MANIFEST.json`, and org-level reusable practice workflow (`reusable-agy-sota-practice.yml`). | `ci.yml`, `reusable-agy-sota-practice.yml` | Organization governance ledger (`45/45` ADRs) |
+| **[`seathatflowsinourveins/noesis`](https://github.com/seathatflowsinourveins/noesis)** | **Public (Active)** | Active Tier-0 quantitative research & execution successor to archived `tier0-quant`, governed under zero-live-broker isolation and AGY SOTA CI standards. | Active Tier-0 quant CI & docs suites | Public Tier-0 quant successor |
+| **`seathatflowsinourveins/tier0-quant`** | **Archived Private** *(retained locally for continuity)* | Historical Tier-0 quant research baseline audited read-only against `v3.1.0` AGY practice & GitHub supply-chain controls. | `tier0-ci.yml`, `tier0-docs-pages.yml`, `tier0-workstation-dispatch.yml` | Archived private continuity snapshot |
+| **`seathatflowsinourveins/sota-research-convergence`** | **Archived Private** *(retained locally for continuity)* | Historical 7-plane scientific & research-engineering convergence stack (`UPSTREAM.md` + `upstream-map.toml`, Marimo notebooks, Zensical portal, `11/11` `check.sh`). | `convergence-ci.yml`, `convergence-docs-pages.yml` | Archived private continuity snapshot |
 
 ---
 
@@ -63,7 +64,7 @@ Every workflow under `.github/workflows/*.yml` MUST satisfy all eight determinis
 
 ## 4. Adopting the Reusable Practice Gate in Sibling Repositories
 
-Once `agy-sota-convergence` is hosted on GitHub under your organization, any sibling repository (`sota-research-convergence`, `tier0-quant`, or new projects) can invoke the shared gate by pinning the exact 40-char commit SHA of `reusable-agy-sota-practice-gate.yml`:
+Any active public or private repository (such as [`seathatflowsinourveins/noesis`](https://github.com/seathatflowsinourveins/noesis), [`native-agent-stack/.github`](https://github.com/native-agent-stack/.github), or new projects) can invoke the shared gate directly by pinning the exact 40-char commit SHA of `reusable-agy-sota-practice-gate.yml`:
 
 ```yaml
 name: AGY SOTA Practice Compliance
@@ -84,7 +85,7 @@ jobs:
   agy-practice:
     permissions:
       contents: read
-    uses: <org>/agy-sota-convergence/.github/workflows/reusable-agy-sota-practice-gate.yml@<40-char-commit-sha>
+    uses: seathatflowsinourveins/agy-sota-convergence/.github/workflows/reusable-agy-sota-practice-gate.yml@<40-char-commit-sha>
     with:
       check-docs: true
       skill-path: ".agents/skills/my-skill"

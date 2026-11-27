@@ -18,7 +18,7 @@ This portal publishes a strictly disjoint **11-layer upstream-only architecture 
 | [Compounding Flywheel & KPIs](compounding-flywheel.md) | 2025–2026 compounding & self-improving harness research, 7-stage flywheel, probabilistic-to-deterministic escalation ladder, anti-bloat ratchets, and operational KPIs. |
 | [Clean Upstream Install Registry](clean-install-registry.md) | Exact `2026-11-26` pinned versions, isolated `uv`/`mise`/`npm` install commands, and post-install smoke checks across `L0`–`L10`. |
 | [Context & Manifest Audit](context-manifest-audit.md) | Empirical startup token telemetry, zero-secret `context_manifest_scorecard`, and live workstation parity evidence. |
-| [GitHub SOTA Workflows](github-sota-workflows.md) | Unified 4-repo ecosystem governance, 40-char SHA pins, `harden-runner`, `zizmor`, and reusable `workflow_call` adoption guide. |
+| [GitHub SOTA Workflows](github-sota-workflows.md) | Live public ecosystem topology (`agy-sota-convergence`, `native-agent-stack/.github`, `noesis`), 40-char SHA pins, `harden-runner`, `zizmor`, and reusable `workflow_call` adoption guide. |
 | [Sealed Manifest v3.1 Guide](manifest-guide.md) | Canonical SHA-256 seal, 12/12 ADR hash ledger, 17-gate `--verify` instructions, and adversarial negative-guard evidence. |
 
 ---
