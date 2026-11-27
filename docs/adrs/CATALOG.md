@@ -7,7 +7,7 @@
 
 ## 1. Structural & Cryptographic Verification Contract
 
-Every ADR linked in this catalog is mechanically verified by `scripts/verify_manifest.py --verify` (`Gate [07]` MADR 4.0.0 structural contract + `Gate [08]` per-file SHA-256 parity against `manifest/compounding_manifest.v2.json`):
+Every ADR linked in this catalog is mechanically verified by `scripts/verify_manifest.py --verify` (`Gate [11]` `adr_12_bounded_bijection_and_madr4` structural contract + `Gate [12]` `adr_files_sha256_parity` per-file SHA-256 parity against `manifest/compounding_manifest.v2.json`):
 
 1. **7-Key YAML Frontmatter:** `id`, `layer`, `status: accepted`, `date: 2026-11-26`, `decision-makers`, `consulted`, `informed`.
 2. **9 Ordered MADR 4.0.0 Headings:** `## Context and Problem Statement`, `## Decision Drivers`, `## Considered Options`, `## Decision Outcome`, `### Consequences`, `### Confirmation`, `## Pros and Cons of the Options`, `## Clean Upstream Installation & Adapter Boundary`, and `## More Information`.

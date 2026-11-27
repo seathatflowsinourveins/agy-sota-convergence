@@ -71,4 +71,4 @@ flowchart LR
 | **Delete-to-Add Ratio** | `>= 1.0` net prose removed/escalated per addition | `< 1.0` over 2 sprints triggers doc-gardening PR | Git diff stats on rules/`AGENTS.md` |
 | **Fail-Closed Hook Escapes** | `0` false negatives across adversarial suite | Any escape (`> 0`) fails CI immediately | `tests/test_hooks_and_handoff.py` |
 | **Sunset Lag** | `0` days past cutoff (`2026-11-30` / `2027-07-28`) | Any retiring slug in active slots fails Gate `[04]` | `scripts/verify_manifest.py` |
-| **Manifest & 12-ADR Parity** | `100%` (`15/15` gates + `12/12` ADR SHA-256) | Any mismatch exits `1` fail-closed | `scripts/verify_manifest.py --verify` |
+| **Manifest & 12-ADR Parity** | `100%` (`17/17` gates + `12/12` ADR SHA-256) | Any mismatch exits `1` fail-closed | `scripts/verify_manifest.py --verify` |

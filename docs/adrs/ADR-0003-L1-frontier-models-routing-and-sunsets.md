@@ -75,7 +75,7 @@ agy models | grep -E "gemini-4-(neon|carbon|hydrogen)|claude-(opus|sonnet)-5-5"
 # 3. Verify host non-secret ecosystem hygiene (including zero Nov-30 model refs in user skills/rules)
 python3 scripts/audit_ecosystem_hygiene.py --json >/dev/null
 
-# 4. Run sealed 15-gate Compounding Manifest verifier (enforces RETIRING_NOV30_RE across all active slots)
+# 4. Run sealed 17-gate Compounding Manifest verifier (enforces RETIRING_NOV30_RE across all active slots)
 python3 scripts/verify_manifest.py --verify
 ```
 

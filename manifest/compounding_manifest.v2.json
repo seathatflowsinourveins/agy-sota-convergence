@@ -1145,7 +1145,7 @@
         "status": "accepted",
         "date": "2026-11-26",
         "owner_agent": "sota-ecosystem",
-        "sha256": "ed9252ee5800a9dd60613581d3426aa51bd482d2042f08085caea6630474a653"
+        "sha256": "1ffd2f3f139062e8a3823e4d989cbd3333167cc304c236d771372eaf461ebdd3"
       },
       {
         "id": "ADR-0002",
@@ -1165,7 +1165,7 @@
         "status": "accepted",
         "date": "2026-11-26",
         "owner_agent": "changelogs",
-        "sha256": "812e990ea1d2b926df33a96dd74feafeb5152a4f7085733f4f3854ce4db35adc"
+        "sha256": "c8843a07e6f3b44c5297a8ebbf6b0737ee2084cea7bcee45f2af344fe3c33c47"
       },
       {
         "id": "ADR-0004",
@@ -1255,7 +1255,7 @@
         "status": "accepted",
         "date": "2026-11-26",
         "owner_agent": "best-practices",
-        "sha256": "7df038638e38ff98a9c6e36eed8e59924155482da2cb9b3d430c9a1819b4beb2"
+        "sha256": "63683d763662518f8fabde4db7ba84af513aad691f760310228b0e4ee3782a7d"
       }
     ]
   },
@@ -2068,6 +2068,6 @@
     "algorithm": "sha256",
     "canonicalization": "json-utf8-sort-keys-compact",
     "payload_scope": "root_excluding_integrity_sha256",
-    "sha256": "642ed427ab0eed77a382dd9fc4c9575fb4942310bffe075e4883722501ad8afc"
+    "sha256": "e197071ca4d9ad7b301f7b183b67f2398b2625c593a1aecf624ae472b0aa4ccc"
   }
 }

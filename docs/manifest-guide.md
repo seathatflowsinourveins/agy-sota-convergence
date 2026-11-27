@@ -4,7 +4,7 @@
 - **Manifest Version:** `3.0.0` (`schema_version`: `2.1.0`, JSON Schema Draft 2020-12 strict)
 - **Architecture Doctrine:** `upstream_only_zero_self_invention` (`strict_ratchet_fail_closed`)
 - **Saturation Status:** `saturated` (`0` unresolved contradictions, `0` unverified claims, `61` tracked repository files, `12/12` MADR 4.0.0 ADRs sealed under `docs/adrs/`, `11/11` disjoint `L0`–`L10` layers with `38` exclusive domains and `0` overlaps, `63/63` live-verified clean-install pins synchronized 1:1 with `UPSTREAM.md`, `5/5` runtime `.py` adapters mapped 1:1 in `upstream-map.toml`, `17/17` automated manifest gates passing, `38/38` unit/contract/mutation/scorecard tests passing, `0` host hygiene findings, live `skillevaluator` Tier-1 Grade `A 100.0/100`, live `zensical==0.1.3` strict portal build `24` HTML pages passing, live `ast-grep` + `shellcheck` + `ruff` + `ty` + `gitleaks` + `zizmor` + `syft`/`osv-scanner` passing via `bash scripts/check.sh` `12/12`)
-- **Verified Canonical Root SHA-256 Seal (`100,991` canonical UTF-8 bytes):** `642ed427ab0eed77a382dd9fc4c9575fb4942310bffe075e4883722501ad8afc`
+- **Verified Canonical Root SHA-256 Seal (`100,991` canonical UTF-8 bytes):** `e197071ca4d9ad7b301f7b183b67f2398b2625c593a1aecf624ae472b0aa4ccc`
 
 ---
 
@@ -57,9 +57,9 @@
 
 | ID | Layer | Owner | Repository File | Bytes | Verified File SHA-256 |
 | :--- | :--- | :--- | :--- | ---: | :--- |
-| `ADR-0001` | `META` | `sota-ecosystem` | [`docs/adrs/ADR-0001-meta-adr-convergence-and-zero-self-invention.md`](adrs/ADR-0001-meta-adr-convergence-and-zero-self-invention.md) | `10,477` | `ed9252ee5800a9dd60613581d3426aa51bd482d2042f08085caea6630474a653` |
+| `ADR-0001` | `META` | `sota-ecosystem` | [`docs/adrs/ADR-0001-meta-adr-convergence-and-zero-self-invention.md`](adrs/ADR-0001-meta-adr-convergence-and-zero-self-invention.md) | `10,502` | `1ffd2f3f139062e8a3823e4d989cbd3333167cc304c236d771372eaf461ebdd3` |
 | `ADR-0002` | `L0` | `cross-session` | [`docs/adrs/ADR-0002-L0-execution-isolation-and-sandboxes.md`](adrs/ADR-0002-L0-execution-isolation-and-sandboxes.md) | `9,135` | `bd654bf7ad0db72d6a1c6c48dab5fd3855dc45b5c02bb87cedc8d78c0bf6989d` |
-| `ADR-0003` | `L1` | `changelogs` | [`docs/adrs/ADR-0003-L1-frontier-models-routing-and-sunsets.md`](adrs/ADR-0003-L1-frontier-models-routing-and-sunsets.md) | `12,616` | `812e990ea1d2b926df33a96dd74feafeb5152a4f7085733f4f3854ce4db35adc` |
+| `ADR-0003` | `L1` | `changelogs` | [`docs/adrs/ADR-0003-L1-frontier-models-routing-and-sunsets.md`](adrs/ADR-0003-L1-frontier-models-routing-and-sunsets.md) | `12,616` | `c8843a07e6f3b44c5297a8ebbf6b0737ee2084cea7bcee45f2af344fe3c33c47` |
 | `ADR-0004` | `L2` | `changelogs` | [`docs/adrs/ADR-0004-L2-multi-surface-agy-harness-and-acp.md`](adrs/ADR-0004-L2-multi-surface-agy-harness-and-acp.md) | `13,785` | `206e6557ffd06b7416ea5e765edad0641f286b3a1f3dfd5d1ca8e6dcfb824994` |
 | `ADR-0005` | `L3` | `cross-session` | [`docs/adrs/ADR-0005-L3-intra-session-multi-agent-orchestration.md`](adrs/ADR-0005-L3-intra-session-multi-agent-orchestration.md) | `9,877` | `ce695e707b6995468bde18074893a56ab9c20ca098c4ae1055f2731b63b585e8` |
 | `ADR-0006` | `L4` | `cross-session` | [`docs/adrs/ADR-0006-L4-cross-session-and-federated-messaging.md`](adrs/ADR-0006-L4-cross-session-and-federated-messaging.md) | `11,272` | `1217c589a1dacf0d990a3aaab57ac3220dac587deece6d2827588c28dbb08a4c` |
@@ -68,7 +68,7 @@
 | `ADR-0009` | `L7` | `sota-ecosystem` | [`docs/adrs/ADR-0009-L7-tri-layer-compounding-memory.md`](adrs/ADR-0009-L7-tri-layer-compounding-memory.md) | `12,599` | `6208a36ae3aefb10e10fbd0cec7c89f6dd516c608397a57d40edbe495908136c` |
 | `ADR-0010` | `L8` | `best-practices` | [`docs/adrs/ADR-0010-L8-deterministic-security-and-fail-closed-gates.md`](adrs/ADR-0010-L8-deterministic-security-and-fail-closed-gates.md) | `13,796` | `0983d85ac7f565ada9a9f9d34fb51982362f79d2ad14bdf44a6aa8616a621cb4` |
 | `ADR-0011` | `L9` | `sota-ecosystem` | [`docs/adrs/ADR-0011-L9-adversarial-evals-and-trace-optimization.md`](adrs/ADR-0011-L9-adversarial-evals-and-trace-optimization.md) | `12,439` | `a34d6a140bbb9ed06efb65e25d78c8effb207a233d6be9eb67bd4ec94d0d8d89` |
-| `ADR-0012` | `L10` | `best-practices` | [`docs/adrs/ADR-0012-L10-telemetry-provenance-and-compounding-manifest.md`](adrs/ADR-0012-L10-telemetry-provenance-and-compounding-manifest.md) | `13,264` | `7df038638e38ff98a9c6e36eed8e59924155482da2cb9b3d430c9a1819b4beb2` |
+| `ADR-0012` | `L10` | `best-practices` | [`docs/adrs/ADR-0012-L10-telemetry-provenance-and-compounding-manifest.md`](adrs/ADR-0012-L10-telemetry-provenance-and-compounding-manifest.md) | `13,510` | `63683d763662518f8fabde4db7ba84af513aad691f760310228b0e4ee3782a7d` |
 
 ---
 
@@ -90,7 +90,7 @@ Repo Root : <repo-root>
 [07][PASS] compounding_7_stages_and_ratchets: 7 stages (1..7), promotion gates (T1>=70/0 HIGH+CRIT, T3>=0.50/lift>=0.05), ratchets (24KB/20k/<=3 eager/delete-to-add)
 [08][PASS] security_and_sandbox_invariants: OS sandbox required (Linux namespaces/macOS Seatbelt/Win AppContainer), Deny>Ask>Allow, resolved deny paths, fail-closed hooks, host-verified facts, zero secrets
 [09][PASS] agy_5_surfaces_7_extensions: 5 AGY products, 7 IDE extensions, `agy acp`, standalone IDE enterprise_supported=false
-[10][PASS] sha256_integrity_seal: verified (100991 canonical bytes) sha256=642ed427ab0eed77a382dd9fc4c9575fb4942310bffe075e4883722501ad8afc
+[10][PASS] sha256_integrity_seal: verified (100991 canonical bytes) sha256=e197071ca4d9ad7b301f7b183b67f2398b2625c593a1aecf624ae472b0aa4ccc
 [11][PASS] adr_12_bounded_bijection_and_madr4: 12/12 bounded MADR 4.0.0 ADRs (ADR-0001 META + ADR-0002..0012 <-> L0..L10), frontmatter & 9 headings verified
 [12][PASS] adr_files_sha256_parity: 12/12 ADR markdown files verified byte-for-byte SHA-256 parity
 [13][PASS] clean_install_registry_coverage: 11/11 layers (L0-L10) covered across 63 pinned clean-install upstream entries (0 unpinned/latest)

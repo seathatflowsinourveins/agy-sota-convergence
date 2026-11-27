@@ -21,29 +21,29 @@ How must Layer `L10` standardize distributed agent telemetry, bounded MADR 4.0.0
 - **Standards-Based Distributed Telemetry:** Emit vendor-neutral OpenTelemetry GenAI semantic spans (`invoke_agent`, `execute_tool`, `invoke_workflow`) with W3C `traceparent` propagation across AGY SDK, MCP `params._meta`, and cloud backends rather than proprietary logging schemas.
 - **Two-Level Cryptographic Provenance Seal:** Bind every architectural decision (`docs/adrs/ADR-0001`..`ADR-0012`) and pinned upstream version into a Draft 2020-12 JSON manifest (`manifest/compounding_manifest.v2.json`) sealed with deterministic SHA-256 (`json-utf8-sort-keys-compact`) plus byte-for-byte SHA-256 parity across all 12 ADR markdown files.
 - **Bounded Evolvable Governance & Anti-Bloat Ratchets:** Keep the ADR registry strictly bounded (`1 <= N <= 12`, `1` Meta-ADR + `11` layer ADRs bijected 1:1 to `L0`–`L10`), enforce hard customization budgets (`AGENTS.md <= 45` lines and `<= 1,600` chars, `24,000` B per rule file, `20,000` aggregate rule tokens, `<=1,024` char skill descriptions, `<=3` eager MCP tools), and apply a strict **delete-to-add** GC ratchet.
-- **Zero-Dependency CI Verifiability:** The manifest sealer/verifier (`scripts/verify_manifest.py`) MUST run using Python 3 stdlib only so any developer laptop, container, or CI runner verifies all 15 gates deterministically without third-party package drift.
+- **Zero-Dependency CI Verifiability:** The manifest sealer/verifier (`scripts/verify_manifest.py`) MUST run using Python 3 stdlib only so any developer laptop, container, or CI runner verifies all 17 gates deterministically without third-party package drift.
 - **Disjoint Layer Separation (`L10` vs. `L7` / `L8` / `L9`):** `L10` exclusively owns `otel_genai_distributed_tracing`, `deprecation_and_doc_drift_governance`, and `cryptographic_manifest_sealing_and_gc_ratchets`. Memory storage belongs to `L7`, security/vulnerability enforcement belongs to `L8`, and behavioral evals/optimization belong to `L9`.
 
 ## Considered Options
 
-1. **Option 1 (Adopted): OpenTelemetry GenAI Semantic Conventions + AGY Native SDK/CLI Observability + Bounded MADR 4.0.0 (`zensical` Portal) + Stdlib SHA-256 Compounding Manifest v2 (`15` CI Gates)**
+1. **Option 1 (Adopted): OpenTelemetry GenAI Semantic Conventions + AGY Native SDK/CLI Observability + Bounded MADR 4.0.0 (`zensical` Portal) + Stdlib SHA-256 Compounding Manifest (`17` CI Gates)**
 2. **Option 2 (Rejected): Unsealed Wiki / Freeform Markdown Architecture Docs + Ad-Hoc JSON Log Files**
 3. **Option 3 (Rejected): Proprietary Custom Telemetry SDK & Custom YAML Governance Framework**
 4. **Option 4 (Rejected): Unbounded Append-Only ADR Directory Without Manifest Hashing or Delete-to-Add GC Ratchets**
 
 ## Decision Outcome
 
-Chosen option: **Option 1 — OpenTelemetry GenAI Semantic Conventions + AGY Native SDK/CLI Observability + Bounded MADR 4.0.0 (`zensical` Portal) + Stdlib SHA-256 Compounding Manifest v2 (`15` CI Gates)**, because it unifies industry-standard tracing, live AGY cost/context telemetry, machine-checked ADR provenance, and tamper-evident anti-bloat governance with zero custom telemetry or portal reinvention.
+Chosen option: **Option 1 — OpenTelemetry GenAI Semantic Conventions + AGY Native SDK/CLI Observability + Bounded MADR 4.0.0 (`zensical` Portal) + Stdlib SHA-256 Compounding Manifest (`17` CI Gates)**, because it unifies industry-standard tracing, live AGY cost/context telemetry, machine-checked ADR provenance, and tamper-evident anti-bloat governance with zero custom telemetry or portal reinvention.
 
 Specifically, Layer `L10` mandates:
 1. **OpenTelemetry GenAI Distributed Tracing:** Enable `google-antigravity` SDK (`0.1.24`, native OTel since `0.1.5`) tracing alongside `opentelemetry-sdk==1.45.2`, `opentelemetry-exporter-otlp==1.45.2`, and `opentelemetry-semantic-conventions==0.66b2`, adhering to `open-telemetry/semantic-conventions-genai` (`invoke_agent`, `execute_tool`, `invoke_workflow`, W3C `traceparent` in MCP `params._meta`). Pair with AGY CLI `/context` token-category grid, `/usage` quota monitor, App Project Customizations token breakdown, and Gemini Enterprise Google Cloud Audit logging.
 2. **Bounded MADR 4.0.0 Architectural Provenance (`zensical` Portal):** Maintain exactly 12 accepted MADR 4.0.0 ADRs (`docs/adrs/ADR-0001` `META` + `docs/adrs/ADR-0002`..`ADR-0012` bijected 1:1 to `L0`–`L10`), rendered cleanly via upstream `zensical==0.1.3` (`zensical.toml`) when publishing a static documentation portal. When an architectural choice evolves, supersede or revise the owning layer ADR in-place rather than spawning unbounded duplicate ADRs.
-3. **Cryptographically Sealed Compounding Convergence Manifest (`v2.1.0`):** Govern all pinned surfaces, disjoint `L0`–`L10` layers, 9 cross-session routes, 7 flywheel stages, sunset calendars, security invariants, 12/12 ADR file SHA-256 digests, clean-install registry pins, and saturation proof inside `manifest/compounding_manifest.v2.json`, validated against Draft 2020-12 `manifest/compounding_manifest.v2.schema.json` by stdlib-only `scripts/verify_manifest.py` across 15 deterministic gates (`--verify` exit `0` required in CI, including Gate `[15] repo_hygiene_and_anti_bloat_ratchet`).
+3. **Cryptographically Sealed Compounding Convergence Manifest (`v3.0.0`):** Govern all pinned surfaces, disjoint `L0`–`L10` layers, 9 cross-session routes, 7 flywheel stages, sunset calendars, security invariants, 12/12 ADR file SHA-256 digests, clean-install registry pins (`UPSTREAM.md` + `upstream-map.toml`), and saturation proof inside `manifest/compounding_manifest.v2.json`, validated against Draft 2020-12 `manifest/compounding_manifest.v2.schema.json` by stdlib-only `scripts/verify_manifest.py` across 17 deterministic gates (`--verify` exit `0` required in CI, including Gate `[15] repo_hygiene_and_anti_bloat_ratchet`, Gate `[16] upstream_registry_and_map_parity`, and Gate `[17] repo_scaffolding_and_portal_integrity`).
 4. **Sunset Watchlist & Anti-Bloat GC Ratchet:** Run scheduled audits against every `deprecations_and_sunsets.sunsets[].detection_pattern` (including the imminent `2026-11-30` retiring model cohort and the `2027-07-28` MCP `SEP-2577` window), run `scripts/audit_ecosystem_hygiene.py --json` for read-only non-secret host hygiene checks, reconcile local builtin doc drifts against live `https://antigravity.google/llms.txt` `.md` endpoints, and never raise token/byte/rule caps to accommodate bloat.
 
 ### Consequences
 
-- **Good:** Single deterministic command (`python3 scripts/verify_manifest.py --verify`) proves schema validity, zero layer overlap, zero unpinned stub tokens, zero retiring model pins in active slots, 12/12 MADR 4.0 structural & SHA-256 integrity, 11/11 clean-install layer coverage, repo hygiene ratchets (`AGENTS.md`, skills, rules, hooks), and tamper-evident manifest root hash.
+- **Good:** Single deterministic command (`python3 scripts/verify_manifest.py --verify`) proves schema validity, zero layer overlap, zero unpinned stub tokens, zero retiring model pins in active slots, 12/12 MADR 4.0 structural & SHA-256 integrity, 11/11 clean-install layer coverage, repo hygiene ratchets (`AGENTS.md`, skills, rules, hooks), `UPSTREAM.md`/`upstream-map.toml` parity, repo scaffolding/portal nav integrity, and tamper-evident manifest root hash.
 - **Good:** OpenTelemetry GenAI spans flow cleanly into any OTLP-compatible backend (Cloud Trace, Jaeger, Grafana Tempo, Phoenix, Langfuse OTLP) without vendor lock-in.
 - **Bad:** Any authorized edit to an ADR file or upstream pin requires re-running `python3 scripts/verify_manifest.py --seal` and `--verify` before commit/merge; unsealed edits fail CI immediately by design.
 - **Neutral:** `opentelemetry-semantic-conventions` remains in beta versioning (`0.66b2` on PyPI) as GenAI agent span conventions stabilize upstream, requiring explicit version pinning rather than unpinned ranges.
@@ -53,11 +53,11 @@ Specifically, Layer `L10` mandates:
 Execute the following deterministic fitness functions from the repository root (all commands MUST exit `0`):
 
 ```bash
-# 1. Verify all 15 cryptographic, schema, ADR MADR-4, clean-install, saturation, and repo hygiene gates (twice for determinism)
+# 1. Verify all 17 cryptographic, schema, ADR MADR-4, clean-install, saturation, hygiene, upstream parity, and portal gates (twice for determinism)
 python3 scripts/verify_manifest.py --verify
 python3 scripts/verify_manifest.py --verify
 
-# 2. Execute full manifest + 12 adversarial mutation unit test suite
+# 2. Execute full manifest + 14 adversarial mutation + scorecard unit test suite
 python3 -m unittest tests/test_manifest_v2.py -v
 
 # 3. Run read-only zero-secret host ecosystem hygiene audit
