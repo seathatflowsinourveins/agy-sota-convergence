@@ -115,7 +115,16 @@ REQUIRED_REPO_SCAFFOLDING_FILES = (
     "upstream-map.toml",
     "zensical.toml",
     "docs/adrs/CATALOG.md",
+    ".github/CODEOWNERS",
+    ".github/dependabot.yml",
+    ".github/pull_request_template.md",
+    ".github/workflows/sota-convergence-gates.yml",
+    ".github/workflows/sota-docs-pages.yml",
+    ".github/workflows/reusable-agy-sota-practice-gate.yml",
 )
+WORKFLOW_USES_RE = re.compile(r"^\s*(?:-\s*)?uses:\s*([^\s#]+)")
+WORKFLOW_SHA_PIN_RE = re.compile(r"^[^@\s]+@[0-9a-f]{40}$")
+HARDEN_RUNNER_RE = re.compile(r"step-security/harden-runner@[0-9a-f]{40}\b")
 
 
 def compute_canonical_digest(manifest: dict[str, Any]) -> tuple[str, int]:
@@ -763,14 +772,41 @@ def check_repo_scaffolding_and_portal_integrity(repo_root: Path) -> tuple[str, b
                     if doc_path is None or not doc_path.is_file():
                         errors.append(f"zensical.toml nav target missing on disk: {doc_rel!r}")
 
+    workflow_files: list[Path] = []
+    workflows_dir = repo_root / ".github" / "workflows"
+    if workflows_dir.is_dir():
+        workflow_files = sorted(
+            p for p in workflows_dir.iterdir() if p.is_file() and p.suffix in {".yml", ".yaml"}
+        )
+    if not workflow_files:
+        errors.append("no .github/workflows/*.yml files found")
+    else:
+        for wf_path in workflow_files:
+            wf_rel = wf_path.relative_to(repo_root).as_posix()
+            wf_text = wf_path.read_text(encoding="utf-8")
+            if not HARDEN_RUNNER_RE.search(wf_text):
+                errors.append(f"{wf_rel}: missing 40-char SHA-pinned step-security/harden-runner")
+            for lineno, raw_line in enumerate(wf_text.splitlines(), start=1):
+                match = WORKFLOW_USES_RE.match(raw_line)
+                if not match:
+                    continue
+                target = match.group(1).strip().strip('"').strip("'")
+                if target.startswith("./") or target.startswith("docker://"):
+                    continue
+                if not WORKFLOW_SHA_PIN_RE.match(target):
+                    errors.append(
+                        f"{wf_rel}:{lineno}: unpinned uses target {target!r} (40-char SHA required)"
+                    )
+
     ok = len(errors) == 0
     return (
         "repo_scaffolding_and_portal_integrity",
         ok,
         f"{len(REQUIRED_REPO_SCAFFOLDING_FILES)}/{len(REQUIRED_REPO_SCAFFOLDING_FILES)} "
-        "repo scaffolding files present, scripts/check.sh executable, .gitleaks.toml valid, "
-        f"orca.yaml clean (no defaultTabs), zensical.toml {len(nav_targets)}/{len(nav_targets)} "
-        "nav docs verified"
+        "repo scaffolding & GitHub governance files present, scripts/check.sh executable, "
+        ".gitleaks.toml valid, orca.yaml clean (no defaultTabs), "
+        f"{len(workflow_files)}/{len(workflow_files)} workflows 40-char SHA-pinned + harden-runner, "
+        f"zensical.toml {len(nav_targets)}/{len(nav_targets)} nav docs verified"
         if ok
         else "; ".join(errors),
     )

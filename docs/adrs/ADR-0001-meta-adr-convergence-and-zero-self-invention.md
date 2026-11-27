@@ -24,14 +24,14 @@ AI-native software engineering platforms (such as Google Antigravity spanning Ap
 
 ## Considered Options
 
-* **Option 1 (Chosen): Bounded 12-ADR MADR 4.0.0 Set (`META` + 1:1 `L0`–`L10` Bijection) + 5-Question Zero-Self-Invention Gate + SHA-256 Sealed Convergence Manifest (`v3.0.0`) + Zensical / `codebase-memory-mcp` / `XERJ` Indexing.**
+* **Option 1 (Chosen): Bounded 12-ADR MADR 4.0.0 Set (`META` + 1:1 `L0`–`L10` Bijection) + 5-Question Zero-Self-Invention Gate + SHA-256 Sealed Convergence Manifest (`v3.1.0`) + Zensical / `codebase-memory-mcp` / `XERJ` Indexing.**
 * **Option 2: Unbounded Per-Feature Nygard ADRs in Git without Manifest Sealing or Automated Fitness Gates.**
 * **Option 3: Informal Wiki / Technical Design Docs / Chat Transcripts Only (No Formal ADR Log).**
 * **Option 4: Custom Proprietary Governance Service / Database Portal Built In-House.**
 
 ## Decision Outcome
 
-Chosen option: **"Option 1: Bounded 12-ADR MADR 4.0.0 Set (`META` + 1:1 `L0`–`L10` Bijection) + 5-Question Zero-Self-Invention Gate + SHA-256 Sealed Convergence Manifest (`v3.0.0`)"**, because it is the only option that pairs standardized MADR 4.0.0 human legibility with deterministic 17-gate cryptographic verification (`scripts/verify_manifest.py`), prevents ADR sprawl by capping core platform records at exactly 12 (`ADR-0001` `META` + `ADR-0002`..`ADR-0012` <-> `L0`..`L10`), and enforces zero-self-invention + zero-sunset drift automatically in CI.
+Chosen option: **"Option 1: Bounded 12-ADR MADR 4.0.0 Set (`META` + 1:1 `L0`–`L10` Bijection) + 5-Question Zero-Self-Invention Gate + SHA-256 Sealed Convergence Manifest (`v3.1.0`)"**, because it is the only option that pairs standardized MADR 4.0.0 human legibility with deterministic 17-gate cryptographic verification (`scripts/verify_manifest.py`), prevents ADR sprawl by capping core platform records at exactly 12 (`ADR-0001` `META` + `ADR-0002`..`ADR-0012` <-> `L0`..`L10`), and enforces zero-self-invention + zero-sunset drift automatically in CI.
 
 ### Consequences
 
@@ -65,7 +65,7 @@ zensical --version && zensical build --strict
 
 ## Pros and Cons of the Options
 
-### Option 1: Bounded 12-ADR MADR 4.0.0 Set + Zero-Self-Invention Gate + SHA-256 Sealed Manifest (`v3.0.0`)
+### Option 1: Bounded 12-ADR MADR 4.0.0 Set + Zero-Self-Invention Gate + SHA-256 Sealed Manifest (`v3.1.0`)
 
 * Good, because MADR 4.0.0 ([Sep 17, 2024](https://github.com/adr/madr/releases/tag/4.0.0)) natively supports machine-parseable YAML frontmatter (`status`, `date`, `decision-makers`, `consulted`, `informed`) and executable confirmation sections.
 * Good, because capping the core convergence log at `12` records enforces a strict 1:1 bijection with `L0`–`L10`, eliminating multi-ADR ambiguity and context rot.

@@ -2,7 +2,7 @@
 
 Welcome to the **Google Antigravity (AGY 2.0) SOTA Convergence & Compounding Engineering** documentation portal (`as-of 2026-11-26`).
 
-This portal publishes a strictly disjoint **11-layer upstream-only architecture (`L0`–`L10`)**, governed by **12 bounded MADR 4.0.0 ADRs**, backed by **63 live-verified package pins** (synchronized 1:1 with `UPSTREAM.md` and `upstream-map.toml`), and sealed cryptographically via `manifest/compounding_manifest.v2.json` (`v3.0.0`, 17 automated gates).
+This portal publishes a strictly disjoint **11-layer upstream-only architecture (`L0`–`L10`)**, governed by **12 bounded MADR 4.0.0 ADRs**, backed by **63 live-verified package pins** (synchronized 1:1 with `UPSTREAM.md` and `upstream-map.toml`), hardened by a **3-workflow GitHub SOTA supply-chain suite**, and sealed cryptographically via `manifest/compounding_manifest.v2.json` (`v3.1.0`, 17 automated gates).
 
 ---
 
@@ -18,7 +18,8 @@ This portal publishes a strictly disjoint **11-layer upstream-only architecture 
 | [Compounding Flywheel & KPIs](compounding-flywheel.md) | 2025–2026 compounding & self-improving harness research, 7-stage flywheel, probabilistic-to-deterministic escalation ladder, anti-bloat ratchets, and operational KPIs. |
 | [Clean Upstream Install Registry](clean-install-registry.md) | Exact `2026-11-26` pinned versions, isolated `uv`/`mise`/`npm` install commands, and post-install smoke checks across `L0`–`L10`. |
 | [Context & Manifest Audit](context-manifest-audit.md) | Empirical startup token telemetry, zero-secret `context_manifest_scorecard`, and live workstation parity evidence. |
-| [Sealed Manifest v3.0 Guide](manifest-guide.md) | Canonical SHA-256 seal, 12/12 ADR hash ledger, 17-gate `--verify` instructions, and adversarial negative-guard evidence. |
+| [GitHub SOTA Workflows](github-sota-workflows.md) | Unified 4-repo ecosystem governance, 40-char SHA pins, `harden-runner`, `zizmor`, and reusable `workflow_call` adoption guide. |
+| [Sealed Manifest v3.1 Guide](manifest-guide.md) | Canonical SHA-256 seal, 12/12 ADR hash ledger, 17-gate `--verify` instructions, and adversarial negative-guard evidence. |
 
 ---
 

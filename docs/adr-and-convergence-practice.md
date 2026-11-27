@@ -53,7 +53,7 @@ Bridging **Kitchenham EBSE / PRISMA** systematic reviews ([prisma-statement.org]
 | **C3** | **Zero Unverified Claims / Placeholders** | `unverified_claims == 0`; zero `TBD`, `TODO`, or unpinned version strings in active artifacts. | Gate `[05]` & Gate `[13]` in `scripts/verify_manifest.py`. |
 | **C4** | **Strictly Disjoint Layer Bijection** | `11` layers (`L0`–`L10`), `0` overlaps, `0` gaps, mapped 1:1 to `12` bounded ADRs (`META` + `L0`–`L10`). | Gate `[03]` & Gate `[11]` in `scripts/verify_manifest.py`. |
 | **C5** | **Exhaustive Option Elimination** | Every ADR evaluates `>= 3` concrete options with falsification evidence for rejected alternatives. | MADR 4.0 `Considered Options` & `Pros and Cons` audit across `12/12` ADRs. |
-| **C6** | **Independent Adversarial Verification** | Double `--verify` (`exit 0`) PLUS isolated temp-dir negative-guard mutations (`14/14` exit `1`). | `python3 -m unittest discover -s tests -v`. |
+| **C6** | **Independent Adversarial Verification** | Double `--verify` (`exit 0`) PLUS isolated temp-dir negative-guard mutations (`15/15` exit `1`). | `python3 -m unittest discover -s tests -v`. |
 | **C7** | **Cryptographic Reproducibility** | Canonical UTF-8 sorted-key JSON SHA-256 + `12/12` ADR file SHA-256 parity verified byte-for-byte. | Gate `[10]`, `[12]`, `[14]` in `scripts/verify_manifest.py`. |
 
 ---

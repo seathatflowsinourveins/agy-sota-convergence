@@ -56,7 +56,7 @@ make check
 | **Sunset Models, Live Broker Ports, Legacy Imports & Fail-Open Hook Exits (`ADR-0003`, `ADR-0007`, `ADR-0008`, `ADR-0010`)** | `ast-grep scan && ast-grep scan --no-ignore hidden` |
 | **Multi-Surface Harness & ACP Availability (`ADR-0004`)** | `agy --version && agy acp --help >/dev/null` |
 | **Read-Only Host Ecosystem & Context Scorecard (`ADR-0009`, `ADR-0010`)** | `python3 scripts/audit_ecosystem_hygiene.py --json --strict` |
-| **Static Lint, Type, Shell, Actions, Secret & SBOM/OSV Gates (`ADR-0010`)** | `ruff check . && ruff format --check . && ty check && shellcheck scripts/*.sh && zizmor --offline .github/workflows/sota-convergence-gates.yml && gitleaks detect --no-git --redact --source .` |
+| **Static Lint, Type, Shell, Actions, Secret & SBOM/OSV Gates (`ADR-0010`)** | `ruff check . && ruff format --check . && ty check && shellcheck scripts/*.sh && zizmor --offline .github/workflows/ && gitleaks detect --no-git --redact --source .` |
 | **Keyless SkillEvaluator Tier-1 Gate (`ADR-0011`)** | `make skill-eval` *(runs `skillevaluator tier1 .agents/skills/sota-convergence-audit --no-llm` in a temporary output directory)* |
 | **Strict MADR 4.0.0 Documentation Portal (`ADR-0001`, `ADR-0012`)** | `zensical build --clean --strict` |
 

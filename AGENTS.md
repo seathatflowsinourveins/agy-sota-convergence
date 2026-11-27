@@ -8,4 +8,4 @@
    - `python3 scripts/verify_manifest.py --verify` (`17/17` PASS)
    - `python3 -m unittest discover -s tests -v` (`0` failures)
    - `ruff check . && ruff format --check . && ty check && shellcheck scripts/*.sh` (`0` errors)
-   - `gitleaks detect --no-git --source . && zizmor --offline .github/workflows/sota-convergence-gates.yml`
+   - `gitleaks detect --no-git --source . && zizmor --offline .github/workflows/`

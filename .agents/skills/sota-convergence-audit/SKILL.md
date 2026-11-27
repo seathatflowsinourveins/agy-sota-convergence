@@ -29,7 +29,7 @@ Provide a deterministic, fail-closed verification and cryptographic re-sealing r
    ```bash
    python3 scripts/verify_manifest.py --seal
    ```
-2. **Run the complete stdlib `unittest` suite (hooks, handoff, host-shim contract, live manifest, 14 adversarial mutations, and scorecard):**
+2. **Run the complete stdlib `unittest` suite (hooks, handoff, host-shim contract, live manifest, 15 adversarial mutations, and scorecard):**
    ```bash
    python3 -m unittest discover -s tests -v
    ```
@@ -39,7 +39,7 @@ Provide a deterministic, fail-closed verification and cryptographic re-sealing r
    ty check
    shellcheck scripts/*.sh
    ast-grep scan && ast-grep scan .agents/scripts
-   zizmor --offline .github/workflows/sota-convergence-gates.yml
+   zizmor --offline .github/workflows/
    gitleaks git --redact . && gitleaks detect --no-git --redact --source .
    ```
 4. **Run keyless SkillEvaluator Tier 1, Syft CycloneDX SBOM -> OSV-Scanner, and read-only host context scorecard:**

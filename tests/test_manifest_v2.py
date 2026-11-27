@@ -1,6 +1,6 @@
 """Stdlib unittest suite for the 17-gate SOTA Convergence Manifest sealer & verifier.
 
-Tests live 17/17 verification on the sealed repository manifest plus 14 isolated
+Tests live 17/17 verification on the sealed repository manifest plus 15 isolated
 temp-directory adversarial mutations that must all fail closed (exit code 1),
 and isolated zero-secret host ecosystem hygiene scorecard validation.
 """
@@ -44,7 +44,7 @@ def _run_quiet(fn: Any, *args: Any, **kwargs: Any) -> tuple[int, str]:
 
 
 class TestCompoundingManifestV2(unittest.TestCase):
-    """Verify live 17/17 pass, 14 isolated adversarial mutation rejections, and scorecard."""
+    """Verify live 17/17 pass, 15 isolated adversarial mutation rejections, and scorecard."""
 
     def _copy_repo_to_temp(self) -> tuple[tempfile.TemporaryDirectory[str], Path, Path, Path]:
         td = tempfile.TemporaryDirectory()
@@ -64,6 +64,7 @@ class TestCompoundingManifestV2(unittest.TestCase):
             shutil.copy2(REPO_ROOT / rel_file, troot / rel_file)
         ignore = shutil.ignore_patterns("__pycache__", "*.pyc")
         shutil.copytree(REPO_ROOT / ".agents", troot / ".agents", ignore=ignore)
+        shutil.copytree(REPO_ROOT / ".github", troot / ".github", ignore=ignore)
         shutil.copytree(REPO_ROOT / "docs", troot / "docs", ignore=ignore)
         shutil.copytree(REPO_ROOT / "scripts", troot / "scripts", ignore=ignore)
         shutil.copytree(REPO_ROOT / "workflows", troot / "workflows", ignore=ignore)
@@ -348,6 +349,34 @@ class TestCompoundingManifestV2(unittest.TestCase):
                 orca_yaml.read_text(encoding="utf-8") + "\ndefaultTabs:\n  - name: invalid\n",
                 encoding="utf-8",
             )
+            rc2, out2 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc2, 1, msg=out2)
+            self.assertIn("[17][FAIL] repo_scaffolding_and_portal_integrity", out2)
+        finally:
+            td.cleanup()
+
+    def test_16_unpinned_workflow_uses_or_missing_harden_runner_fails_gate_17(self) -> None:
+        td, troot, tmp_manifest, tmp_schema = self._copy_repo_to_temp()
+        try:
+            wf_path = troot / ".github" / "workflows" / "sota-docs-pages.yml"
+            original_wf = wf_path.read_text(encoding="utf-8")
+
+            # Mutation A: replace 40-char SHA checkout pin with floating @v4 tag
+            unpinned_wf = original_wf.replace(
+                "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1",
+                "actions/checkout@v4",
+            )
+            self.assertNotEqual(unpinned_wf, original_wf)
+            wf_path.write_text(unpinned_wf, encoding="utf-8")
+            rc1, out1 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
+            self.assertEqual(rc1, 1, msg=out1)
+            self.assertIn("[17][FAIL] repo_scaffolding_and_portal_integrity", out1)
+
+            # Mutation B: strip step-security/harden-runner from workflow
+            no_harden = "\n".join(
+                ln for ln in original_wf.splitlines() if "step-security/harden-runner" not in ln
+            )
+            wf_path.write_text(no_harden + "\n", encoding="utf-8")
             rc2, out2 = _run_quiet(vm.run_verify, tmp_manifest, tmp_schema, troot)
             self.assertEqual(rc2, 1, msg=out2)
             self.assertIn("[17][FAIL] repo_scaffolding_and_portal_integrity", out2)

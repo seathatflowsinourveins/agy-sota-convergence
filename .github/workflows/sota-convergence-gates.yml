@@ -4,16 +4,29 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "0 13 * * 1-5"
+  workflow_dispatch:
 
 permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   verify:
     name: 17-Gate Manifest, Unit Tests, Static & Security Checks
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     steps:
+      - name: Harden runner egress telemetry
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        with:
+          egress-policy: audit
+
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -65,18 +78,22 @@ jobs:
           gitleaks detect --no-git --redact --source .
 
       - name: Run SkillEvaluator Tier 1 keyless skill quality & security gate
-        run: uvx --python 3.13 skillevaluator==1.2.1 tier1 .agents/skills/sota-convergence-audit --no-llm
+        run: |
+          tmp_dir="$(mktemp -d)"
+          trap 'rm -rf "$tmp_dir"' EXIT
+          uvx --python 3.13 skillevaluator==1.2.1 tier1 .agents/skills/sota-convergence-audit --no-llm --output-dir "$tmp_dir"
 
       - name: Generate Syft CycloneDX SBOM and scan with OSV-Scanner
         run: |
-          syft dir:. -o cyclonedx-json=/tmp/sbom.cdx.json
-          osv-scanner scan source -L /tmp/sbom.cdx.json
-          rm -f /tmp/sbom.cdx.json
+          tmp_dir="$(mktemp -d)"
+          trap 'rm -rf "$tmp_dir"' EXIT
+          syft dir:. -o cyclonedx-json="$tmp_dir/sbom.cdx.json"
+          osv-scanner scan source -L "$tmp_dir/sbom.cdx.json"
 
-      - name: Run Zizmor GitHub Actions security audit
-        run: uvx zizmor==1.33.1 --offline .github/workflows/sota-convergence-gates.yml
+      - name: Run Zizmor GitHub Actions security audit (all workflows)
+        run: uvx zizmor==1.33.1 --offline .github/workflows/
 
       - name: Validate Zensical TOML and build docs portal strictly
         run: |
           python3 -c "import tomllib, pathlib; tomllib.loads(pathlib.Path('zensical.toml').read_text(encoding='utf-8')); print('ZENSICAL_TOML_OK')"
-          uvx zensical==0.1.3 build --strict
+          uvx zensical==0.1.3 build --clean --strict

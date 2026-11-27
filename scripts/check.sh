@@ -47,7 +47,7 @@ if git rev-parse --verify HEAD >/dev/null 2>&1; then
 fi
 
 echo "=== [9/12] Zizmor GitHub Actions Security Audit ==="
-zizmor --offline .github/workflows/sota-convergence-gates.yml
+zizmor --offline .github/workflows/
 
 echo "=== [10/12] SkillEvaluator Tier 1 Keyless Gate ==="
 skillevaluator tier1 .agents/skills/sota-convergence-audit --no-llm --output-dir "$TMP_DIR/skilleval"

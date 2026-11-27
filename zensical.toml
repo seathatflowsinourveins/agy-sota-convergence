@@ -1,6 +1,6 @@
 [project]
 site_name = "AGY SOTA Convergence Portal"
-site_description = "Bounded 12-ADR MADR 4.0.0 architecture, disjoint L0-L10 upstream-only convergence stack, and SHA-256 sealed compounding manifest (v3.0.0)."
+site_description = "Bounded 12-ADR MADR 4.0.0 architecture, disjoint L0-L10 upstream-only convergence stack, GitHub SOTA workflows, and SHA-256 sealed compounding manifest (v3.1.0)."
 docs_dir = "docs"
 site_dir = "site"
 nav = [
@@ -14,7 +14,8 @@ nav = [
     { "Compounding Flywheel & KPIs" = "compounding-flywheel.md" },
     { "Clean Upstream Install Registry" = "clean-install-registry.md" },
     { "Context & Manifest Audit" = "context-manifest-audit.md" },
-    { "Sealed Manifest v3.0 Guide" = "manifest-guide.md" },
+    { "GitHub SOTA Workflows" = "github-sota-workflows.md" },
+    { "Sealed Manifest v3.1 Guide" = "manifest-guide.md" },
   ] },
   { "Architecture Decision Records (ADRs)" = [
     { "ADR Catalog (12 Bounded ADRs)" = "adrs/CATALOG.md" },

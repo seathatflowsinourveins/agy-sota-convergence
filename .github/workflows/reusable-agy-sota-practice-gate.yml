@@ -1,0 +1,215 @@
+name: Reusable AGY SOTA Practice Gate
+
+on:
+  workflow_call:
+    inputs:
+      check-docs:
+        description: "Run strict Zensical portal build when zensical.toml is present"
+        required: false
+        type: boolean
+        default: false
+      skill-path:
+        description: "Optional explicit path to a skill directory for SkillEvaluator Tier 1"
+        required: false
+        type: string
+        default: ""
+
+permissions: {}
+
+jobs:
+  agy-sota-practice-gate:
+    name: AGY SOTA Practice, Supply-Chain & Hygiene Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Harden runner egress telemetry
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        with:
+          egress-policy: audit
+
+      - name: Checkout calling repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+        with:
+          version: "0.13.10"
+
+      - name: Validate AGENTS.md, .agents/ rules/skills/JSON, Nov-30 sunsets & 40-char SHA workflow pins
+        run: |
+          python3 - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+
+          root = Path(".")
+          errors: list[str] = []
+
+          # 1. AGENTS.md <= 45 lines, <= 1,600 chars, 0 HTML comments
+          agents_md = root / "AGENTS.md"
+          if not agents_md.is_file():
+              errors.append("AGENTS.md missing at repository root")
+          else:
+              text = agents_md.read_text(encoding="utf-8")
+              lines = text.splitlines()
+              if len(lines) > 45:
+                  errors.append(f"AGENTS.md has {len(lines)} lines > 45")
+              if len(text) > 1600:
+                  errors.append(f"AGENTS.md has {len(text)} chars > 1600")
+              if "<!--" in text or "-->" in text:
+                  errors.append("AGENTS.md contains HTML comments (html_comment_chars must be 0)")
+
+          def parse_fm(md: str) -> dict[str, str] | None:
+              ls = md.splitlines()
+              if not ls or ls[0].strip() != "---":
+                  return None
+              end = next((i for i in range(1, len(ls)) if ls[i].strip() == "---"), None)
+              if end is None:
+                  return None
+              out: dict[str, str] = {}
+              for ln in ls[1:end]:
+                  if ":" in ln and not ln.lstrip().startswith("-"):
+                      k, v = ln.split(":", 1)
+                      out[k.strip()] = v.strip().strip('"').strip("'")
+              return out
+
+          # 2. .agents/rules/*.md snake_case trigger: & <= 24,000 B
+          valid_triggers = {"always_on", "glob", "model_decision", "manual"}
+          rules_dir = root / ".agents" / "rules"
+          if rules_dir.is_dir():
+              for rf in sorted(rules_dir.glob("*.md")):
+                  if rf.stat().st_size > 24000:
+                      errors.append(f"{rf}: size {rf.stat().st_size}B > 24000B")
+                  fm = parse_fm(rf.read_text(encoding="utf-8"))
+                  if fm is None or fm.get("trigger") not in valid_triggers:
+                      errors.append(f"{rf}: invalid or missing snake_case trigger:")
+
+          # 3. .agents/skills/*/SKILL.md name==dir & description <= 1,024 chars
+          skills_dir = root / ".agents" / "skills"
+          if skills_dir.is_dir():
+              for sf in sorted(skills_dir.glob("*/SKILL.md")):
+                  fm = parse_fm(sf.read_text(encoding="utf-8"))
+                  if fm is None:
+                      errors.append(f"{sf}: missing YAML frontmatter")
+                      continue
+                  if fm.get("name") != sf.parent.name:
+                      errors.append(f"{sf}: frontmatter name != folder name")
+                  desc = fm.get("description", "")
+                  if not desc or len(desc) > 1024:
+                      errors.append(f"{sf}: description missing or > 1024 chars")
+
+          # 4. Zero unexpanded tilde deny rules in .agents/**/*.json
+          agents_dir = root / ".agents"
+          if agents_dir.is_dir():
+              for jf in sorted(agents_dir.rglob("*.json")):
+                  if "(~/" in jf.read_text(encoding="utf-8"):
+                      errors.append(f"{jf}: contains unexpanded tilde deny rule '(~/'")
+
+          # 5. Zero retiring Nov-30 model slugs in active charter/customization/workflow configs
+          retiring_re = re.compile(
+              r"(?i)(gemini[-_ ]?4[-_ ]?argon|gemini[-_ ]?3[._-]8|gpt[-_ ]?oss[-_ ]?120b|claude[-_ ]?(?:sonnet|opus)?[-_ ]?4[._-]6)"
+          )
+          scan_files: list[Path] = []
+          if agents_md.is_file():
+              scan_files.append(agents_md)
+          if (root / "orca.yaml").is_file():
+              scan_files.append(root / "orca.yaml")
+          if agents_dir.is_dir():
+              scan_files.extend(p for p in sorted(agents_dir.rglob("*")) if p.is_file())
+          wf_dir = root / ".github" / "workflows"
+          if wf_dir.is_dir():
+              for wf in sorted(wf_dir.glob("*.y*ml")):
+                  if wf.name != "reusable-agy-sota-practice-gate.yml":
+                      scan_files.append(wf)
+          for fp in scan_files:
+              txt = fp.read_text(encoding="utf-8", errors="ignore")
+              m = retiring_re.search(txt)
+              if m:
+                  errors.append(f"{fp}: retiring Nov-30 model slug matched {m.group(0)!r}")
+
+          # 6. Every external uses: across .github/workflows/*.yml strictly 40-char SHA-pinned
+          uses_re = re.compile(r"^\s*(?:-\s*)?uses:\s*([^\s#]+)")
+          sha_pin_re = re.compile(r"^[^@\s]+@[0-9a-f]{40}$")
+          if wf_dir.is_dir():
+              for wf in sorted(wf_dir.glob("*.y*ml")):
+                  for lineno, line in enumerate(wf.read_text(encoding="utf-8").splitlines(), start=1):
+                      um = uses_re.match(line)
+                      if not um:
+                          continue
+                      target = um.group(1).strip().strip('"').strip("'")
+                      if target.startswith("./") or target.startswith("docker://"):
+                          continue
+                      if not sha_pin_re.match(target):
+                          errors.append(f"{wf}:{lineno}: unpinned uses target {target!r} (40-char SHA required)")
+
+          if errors:
+              for err in errors:
+                  print(f"FAIL: {err}", file=sys.stderr)
+              sys.exit(1)
+          print("OK: AGY charter, rules, skills, deny paths, Nov-30 sunsets, and 40-char workflow SHA pins passed")
+          PY
+
+      - name: Run SkillEvaluator Tier 1 keyless gate when skills exist
+        env:
+          SKILL_PATH: ${{ inputs.skill-path }}
+        run: |
+          set -euo pipefail
+          tmp_dir="$(mktemp -d)"
+          trap 'rm -rf "$tmp_dir"' EXIT
+          if [ -n "$SKILL_PATH" ]; then
+            uvx --python 3.13 skillevaluator==1.2.1 tier1 "$SKILL_PATH" --no-llm --output-dir "$tmp_dir"
+          elif [ -d .agents/skills ]; then
+            found=0
+            for skill_md in .agents/skills/*/SKILL.md; do
+              [ -f "$skill_md" ] || continue
+              found=1
+              skill_dir="$(dirname "$skill_md")"
+              uvx --python 3.13 skillevaluator==1.2.1 tier1 "$skill_dir" --no-llm --output-dir "$tmp_dir/$(basename "$skill_dir")"
+            done
+            if [ "$found" -eq 0 ]; then
+              echo "No skills found under .agents/skills/*/SKILL.md; skipping SkillEvaluator."
+            fi
+          else
+            echo "No .agents/skills directory present; skipping SkillEvaluator."
+          fi
+
+      - name: Run Gitleaks secret scan (v8.30.1, SHA-256 verified)
+        run: |
+          set -euo pipefail
+          tmp_dir="$(mktemp -d)"
+          trap 'rm -rf "$tmp_dir"' EXIT
+          curl -fsSL "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz" -o "$tmp_dir/gitleaks.tar.gz"
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $tmp_dir/gitleaks.tar.gz" | sha256sum -c -
+          tar -xzf "$tmp_dir/gitleaks.tar.gz" -C "$tmp_dir" gitleaks
+          "$tmp_dir/gitleaks" git --redact .
+          "$tmp_dir/gitleaks" detect --no-git --redact --source .
+
+      - name: Run Zizmor GitHub Actions security audit (v1.33.1)
+        run: |
+          set -euo pipefail
+          if [ -d .github/workflows ]; then
+            uvx zizmor==1.33.1 --offline .github/workflows/
+          else
+            echo "No .github/workflows directory present; skipping Zizmor."
+          fi
+
+      - name: Optional Zensical strict portal build
+        env:
+          CHECK_DOCS: ${{ inputs.check-docs }}
+        run: |
+          set -euo pipefail
+          if [ "$CHECK_DOCS" = "true" ] && [ -f zensical.toml ]; then
+            uvx zensical==0.1.3 build --clean --strict
+          else
+            echo "Skipping Zensical docs build (check-docs=$CHECK_DOCS)."
+          fi
